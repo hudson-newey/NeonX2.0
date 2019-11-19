@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" onkeydown="esc(event);" onmousemove="screensaverTimeout=100;">
+<head>
+  <meta charset="UTF-8">
+  <title>NeonX2.0</title>
+  <link rel="stylesheet" href="./Home/NeonX/sys/style.css">
+
+</head>
+<body>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+
+<div id="desktopBG" class="desktop">
+  <div class="desktop__item" ondblclick="startProgram('', 'https://www.bing.com');">
+    <img class="desktop_icons" src="./Home/Pictures/icons/google.png">Google</img>
+  </div>
+  <div class="desktop__item" ondblclick="startProgram('Notepad', '');">
+    <img class="desktop_icons" src="./Home/applications/Notepad/favicon.png">Notepad</img>
+  </div>
+  <div class="desktop__item" ondblclick="startProgram('', './Home');">
+    <img class="desktop_icons" src="./Home/Pictures/icons/files.png">Files</img>
+  </div>
+
+  <div class="start-menu-fade"></div>
+  <a id="editDesktopBTN" href="#" onclick="desktopContextMenu();">☰</a>
+
+  <ul class="contextMenu" id="desktopContextMenu" style="display:none;">
+    <strong id="contextMenuTitle"><u>NeonX2.0</u></strong><br>
+    <a href="#" onclick="editDesktop();">Edit Desktop</a><br>
+    <a href="#" onclick="addApp();">Instal Apps</a><br>
+    <a href="#" onclick="loadBackground();">New Background</a>
+  </ul>
+
+  <div class="start-menu">
+    <div class="start-menu__list">
+      <div class="media">
+        <a class="user-info menu-toggle" href="#" data-menu="user">
+        <img class="user-info__img media__img" src="https://i.imgur.com/KkCqvK9.png" alt="User image">
+        <div class="user-info__name media__body">
+          <span id="currentUser">Demo Account</span>
+        </div>
+        </a>
+        <div class="menu" data-menu="user">
+          <a href="#">Change account picture</a>
+          <a href="#" onclick="user('lock')">Lock</a>
+          <a href="#" onclick="user('logout')">Sign out</a>
+        </div>
+        <a class="user-info__power menu-toggle" href="#" data-menu="power">
+          <strong>✲</strong>
+
+        </a>
+      </div>
+
+      <div class="menu" data-menu="power">
+        <a onclick="user('sleep');">Sleep</a>
+        <a onclick="window.close();" href="#">Power off</a>
+        <a onclick="location.reload(false);" href="#">Reset</a>
+      </div>
+
+
+      <ul class="start-menu__recent">
+        <li>
+          <a onclick="startProgram('', 'https://www.bing.com');">
+            <i><img class="icons" src="./Home/Pictures/icons/google.png"/>Web Browser</i>
+          </a>
+        </li>
+
+        <li>
+          <a href="javascript:void(0);" onclick="newWindow('./Home/applications/Notepad/index.html');">
+            <i><img class="icons" src="./Home/applications/Notepad/favicon.png"/>Notepad</i>
+          </a>
+        </li>
+        <li class="start-menu__notepad">
+          <a href="startProgram('', './Home');">
+            <i class="fa fa-pencil" style="display:none;"></i><i><img class="icons" src="./Home/Pictures/icons/files.png"/>Files</i>
+          </a>
+        </li>
+      </ul>
+
+      <a class="all-apps" href="#">
+        All apps
+        <i class="fa fa-arrow-right"></i>
+      </a>
+      <input type="text" id="search__input" placeholder="Search Anything Here" onkeydown="navigate(event);" spellcheck="false" autocomplete="off" autofocus></input>
+    </div>
+  </div>
+
+  <div class="taskbar">
+    <a id="superButton" class="taskbar__item taskbar__item--start" href="javascript:void(0)">
+      <b>🞜</b>
+    </a>
+
+    <div class="taskbar__tray">
+      <span class="time"><p id="timeDisplay"></p></span>
+    </div>
+  </div>
+
+</div>
+
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src='https://cdn.rawgit.com/desandro/masonry/master/dist/masonry.pkgd.min.js'></script>
+<script src="./Home/NeonX/sys/desktop.js"></script>
+<script src="./Home/NeonX/sys/script.js"></script>
+
+</body>
+
+</html>
