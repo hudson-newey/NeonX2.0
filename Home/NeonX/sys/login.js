@@ -1,271 +1,139 @@
-let navigate = function(e) {
+usernames = ["Grathium"];
+passwords = ["Admin1234!"];
+
+let login = (usrname, pswd) => {
+  for (var i = 0; i < usernames.length; i++) {
+    if (usrname == usernames[i] && pswd == passwords[i]) {
+      console.log("Logging in:  " + usrname + "...");
+      window.location.href = "desktop.html?usr=" + usrname;
+    }
+  }
+}
+
+function keydown(e) {
   var key=e.keyCode || e.which;
   if (key==13) {
-    if ($("#search__input").val().includes("://")) {
-      startProgram('', $("#search__input").val());
-    } else {
-      startProgram('', 'https://www.bing.com?q=' + $("#search__input").val());
-    }
-    toggleStart();
+    login(document.getElementById('name').value, document.getElementById('pass').value);
   }
 }
-
-function esc(e) {
-  var key=e.keyCode || e.which;
-  if (key==27) {
-    toggleStart();
-  }
-  desktopContextMenu(event.clientX, event.clientY, false);
-}
-
-function user(status) {
-  switch (status) {
-    case "logout":
-      window.location.href = "login.html";
-    case "lock":
-      window.location.href = "login.html";
-    case "sleep":
-      window.location.href= "./Home/sys/screensaver.html?usr=" + $.urlParam('usr');
-    default:
-    console.log("status update failed...");
-  }
-}
-
-
-function addApp(file) {
-  desktopContextMenu(null, null, false); //toggle context menu
-  var text = file[0];
-
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    if (text.name == "package.ini") {
-      // correct file type
-      var appName = e.target.result;
-      console.log("Installing, " + appName);
-
-      let temps = generateRandomString(8);
-      let iconContainer = document.createElement("div");
-      iconContainer.id = temps;
-      iconContainer.className = "desktop__item";
-      iconContainer.ondblclick = function() { startProgram(appName, ''); };
-      $("#desktopBG").append(iconContainer);
-
-      let iconPicture = document.createElement("img");
-      iconPicture.className = "desktop_icons";
-      iconPicture.src = "./Home/applications/" + appName + "/favicon.png";
-      $("#" + temps).append(iconPicture);
-
-      let iconText = document.createElement("text");
-      iconText.innerText = appName;
-      $("#" + temps).append(iconText);
-
-      initializeDesktop();
-    } else {
-
-      console.log("Failed to load, " + text.name);
-    }
-
-  };
-  reader.readAsText(text);
-}
-
-
-$(window).load(function() {
-  var $container = $('.start-screen');
-
-  $container.masonry({
-    itemSelector: '.masonry-item',
-    columnWidth: 128
-  });
-
-
-  $('.start-menu').hide().css('opacity', 1);
-});
-
-$(function() {
-  //$('.start-screen-scroll').jScrollPane();
-});
-
-function resizeStart() {
-    var startWidth = $('.start-screen').outerWidth();
-    var startRound = Math.ceil(startWidth / 128.0) * 128;
-
-  console.log('original: ' + startWidth);
-  console.log('rounded: ' + startRound);
-
-    $('.start-screen').css({
-      'width' : startRound
-    });
-}
-
-//$(window).load(resizeStart);
-//$(window).resize(resizeStart);
-
-
-
-// Unfocus windows when desktop is clicked
-$('.desktop').click(function(e) {
-  if ( $('.desktop').has(e.target).length === 0 ) {
-    $('.window').removeClass('window--active');
-    $('.taskbar__item').removeClass('taskbar__item--active');
-    desktopContextMenu(event.clientX, event.clientY, false);
-  }
-});
-
-
-
 
 
 $(function() {
-  $('.side__list ul').each(function() {
-    if ( $(this).find('ul').is(':visible') ) {
-      $(this).children('li').addClass('side__list--open');
-    }
-  });
+
+   $(".input input").focus(function() {
+
+      $(this).parent(".input").each(function() {
+         $("label", this).css({
+            "line-height": "18px",
+            "font-size": "18px",
+            "font-weight": "100",
+            "top": "0px"
+         })
+         $(".spin", this).css({
+            "width": "100%"
+         })
+      });
+   }).blur(function() {
+      $(".spin").css({
+         "width": "0px"
+      })
+      if ($(this).val() == "") {
+         $(this).parent(".input").each(function() {
+            $("label", this).css({
+               "line-height": "60px",
+               "font-size": "24px",
+               "font-weight": "300",
+               "top": "10px"
+            })
+         });
+
+      }
+   });
+
+   $(".button").click(function(e) {
+      var pX = e.pageX,
+         pY = e.pageY,
+         oX = parseInt($(this).offset().left),
+         oY = parseInt($(this).offset().top);
+
+      $(this).append('<span class="click-efect x-' + oX + ' y-' + oY + '" style="margin-left:' + (pX - oX) + 'px;margin-top:' + (pY - oY) + 'px;"></span>')
+      $('.x-' + oX + '.y-' + oY + '').animate({
+         "width": "500px",
+         "height": "500px",
+         "top": "-250px",
+         "left": "-250px",
+
+      }, 600);
+      $("button", this).addClass('active');
+   })
+
+   $(".alt-2").click(function() {
+      if (!$(this).hasClass('material-button')) {
+         $(".shape").css({
+            "width": "100%",
+            "height": "100%",
+            "transform": "rotate(0deg)"
+         })
+
+         setTimeout(function() {
+            $(".overbox").css({
+               "overflow": "initial"
+            })
+         }, 600)
+
+         $(this).animate({
+            "width": "140px",
+            "height": "140px"
+         }, 500, function() {
+            $(".box").removeClass("back");
+
+            $(this).removeClass('active')
+         });
+
+         $(".overbox .title").fadeOut(300);
+         $(".overbox .input").fadeOut(300);
+         $(".overbox .button").fadeOut(300);
+
+         $(".alt-2").addClass('material-buton');
+      }
+
+   })
+
+   $(".material-button").click(function() {
+
+      if ($(this).hasClass('material-button')) {
+         setTimeout(function() {
+            $(".overbox").css({
+               "overflow": "hidden"
+            })
+            $(".box").addClass("back");
+         }, 200)
+         $(this).addClass('active').animate({
+            "width": "700px",
+            "height": "700px"
+         });
+
+         setTimeout(function() {
+            $(".shape").css({
+               "width": "50%",
+               "height": "50%",
+               "transform": "rotate(45deg)"
+            })
+
+            $(".overbox .title").fadeIn(300);
+            $(".overbox .input").fadeIn(300);
+            $(".overbox .button").fadeIn(300);
+         }, 700)
+
+         $(this).removeClass('material-button');
+
+      }
+
+      if ($(".alt-2").hasClass('material-buton')) {
+         $(".alt-2").removeClass('material-buton');
+         $(".alt-2").addClass('material-button');
+      }
+
+   });
+
 });
-
-
-
-$(function() {
-  $('.side__list li').each(function() {
-    if ( $(this).children('ul').length ) {
-      //$(this).addClass('list__sublist');
-      $(this).children('a').append('<span class="list__toggle"></span>');
-    }
-
-    if ( $(this).children('ul').is(':visible') ) {
-      $(this).addClass('side__list--open');
-    }
-  });
-});
-
-$(document).on('click', '.list__toggle',  function() {
-
- $(this).closest('li').children('ul').animate({
-  'height' : 'toggle',
-  'opacity' : 'toggle'
-}, 250);
-
- $(this).closest('li').toggleClass('side__list--open');
-});
-
-
-
-
-function toggleStart(e) {
-  $('.start-menu-fade').fadeToggle(500);
-  $('.start-menu').fadeToggle(250).toggleClass('start-menu--open');
-  $('.taskbar__item--start').toggleClass('start--open');
-  $('#search__input').val("");
-  $('#search__input').focus();
-}
-
-$('.taskbar__item--start').click(toggleStart);
-$('.start-menu__recent li a').click(toggleStart);
-$('.start-screen__tile').click(toggleStart);
-
-// Prevent "open" class on start
-$(function() {
-  $('.taskbar__item--start').click(function() {
-    $(this).removeClass('taskbar__item--open taskbar__item--active');
-  });
-});
-
-
-$(document).mouseup(function(e) {
-    var start = $('.start-menu');
-    var startToggle = $('.taskbar__item--start');
-
-
-    if (start.is(':visible') && !startToggle.is(e.target) && startToggle.has(e.target).length === 0 && !start.is(e.target) && start.has(e.target).length === 0 ) {
-      toggleStart();
-      //alert('clicked outside start');
-    }
-});
-
-
-// Current time
-let getTime = () => {
-  var a_p = "";
-  var d = new Date();
-
-  var curr_hour = d.getHours();
-  if (curr_hour < 12) { a_p = "AM"; } else { a_p = "PM"; }
-
-  // hours
-  if (curr_hour == 0) {
-    curr_hour = 12;
-  }
-  if (curr_hour > 12) {
-    curr_hour = curr_hour - 12;
-  }
-
-  var curr_min = d.getMinutes();
-  if ( curr_min < 10 ) {
-    curr_min = '0' + curr_min;
-  }
-
-  $('#timeDisplay').html(curr_hour + ':' + curr_min + ' ' + a_p);
-}
-
-$.urlParam = function(name){
-	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-	return results[1] || 0;
-}
-
-
-$('.menu-toggle').each(function() {
-  var menuName = $(this).data('menu');
-  var menu = $('.menu[data-menu="' + menuName + '"]');
-  var pos = $(this).position();
-  var height = $(this).outerHeight();
-
-  if ( !$(menu).hasClass('menu--bottom') ) {
-    $(menu).position({
-      my: 'left top',
-      at: 'left bottom',
-      of: this,
-      collision: 'none'
-    });
-  } else {
-
-  }
-
-  $(menu).hide();
-
-  $(this).click(function(e) {
-    e.preventDefault();
-    $('.menu').not(menu).hide();
-    $(menu).toggle();
-  });
-});
-
-let loadBackground = () => {
-  try {
-    $('#currentUser').text($.urlParam('usr'));
-    document.getElementById('desktopBG').style.backgroundImage ="url('./Home/Pictures/backgrounds/" + Math.ceil(Math.random() * backgroundCount) + ".png')";
-  }
-  catch(err) {
-    console.log(err);
-  }
-}
-loadBackground();
-
-
-$(document).mouseup(function(e) {
-  if ( $('.menu').has(e.target).length === 0 && !$('.menu-toggle').is(e.target) && $('.menu-toggle').has(e.target).length === 0 ) {
-    $('.menu').hide();
-  }
-});
-
-
-
-/* LOOP */
-var screensaverTimeout = 100; // seconds
-function loop() {
-  getTime();
-  setTimeout(loop, 1000);
-  screensaverTimeout -= 1;
-  if (screensaverTimeout < 1) window.location.href= "./Home/NeonX/screensaver.html?usr=" + $.urlParam('usr');
-}
-loop();
