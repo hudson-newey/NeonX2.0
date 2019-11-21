@@ -13,23 +13,26 @@
 
 <div id="desktopBG" class="desktop">
   <div class="desktop__item" ondblclick="startProgram('', 'https://www.bing.com');">
-    <img class="desktop_icons" src="./Home/Pictures/icons/google.png">Google</img>
+    <img class="desktop_icons" src="./Home/Pictures/icons/google.png"></img>
+    <text>Google</text>
   </div>
   <div class="desktop__item" ondblclick="startProgram('Notepad', '');">
-    <img class="desktop_icons" src="./Home/applications/Notepad/favicon.png">Notepad</img>
+    <img class="desktop_icons" src="./Home/applications/Notepad/favicon.png"></img>
+    <text>Notepad</text>
   </div>
   <div class="desktop__item" ondblclick="startProgram('', './Home');">
-    <img class="desktop_icons" src="./Home/Pictures/icons/files.png">Files</img>
+    <img class="desktop_icons" src="./Home/Pictures/icons/files.png"></img>
+    <text>Files</text>
   </div>
 
   <div class="start-menu-fade"></div>
-  <a id="editDesktopBTN" href="#" onclick="desktopContextMenu();">☰</a>
+  <a id="editDesktopBTN" href="#" onclick="desktopContextMenu(window.innerWidth - 200, 0, true);">☰</a>
 
   <ul class="contextMenu" id="desktopContextMenu" style="display:none;">
     <strong id="contextMenuTitle"><u>NeonX2.0</u></strong><br>
-    <a href="#" onclick="editDesktop();">Edit Desktop</a><br>
-    <a href="#" onclick="addApp();">Instal Apps</a><br>
-    <a href="#" onclick="loadBackground();">New Background</a>
+    <a onclick="editDesktop();">Edit Desktop</a><br>
+    <a onclick="document.getElementById('file-input').click();">Install Apps</a><input id="file-input" type="file" name="name" onchange="addApp(this.files)" style="display: none;"/><br>
+    <a onclick="loadBackground();">New Background</a>
   </ul>
 
   <div class="start-menu">
