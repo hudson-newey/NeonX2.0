@@ -15,7 +15,7 @@ function newWindow(appLink) {
 	appContainer.className = "programWindow";
 	appContainer.draggable = "false";
   appContainer.ondblclick = function() { fullscreenProgram(programName); };
-  appContainer.onmousedown = function(event) { closeProgram(event, programName, true); };
+  appContainer.onmousedown = function(event) { taskkill(event, programName, true); };
 	$("#desktopBG").append(appContainer);
 	openApps.push(programName);
   $(".programWindow").draggable();
@@ -24,7 +24,7 @@ function newWindow(appLink) {
   let closeBTN = document.createElement("button");
   closeBTN.className = "menubar";
   closeBTN.innerText = "X";
-  closeBTN.onclick = function() { closeProgram(3, programName, false); };
+  closeBTN.onclick = function() { taskkill(3, programName, false); };
   $("#" + programName).append(closeBTN);
 
   let maxBTN = document.createElement("button");
@@ -53,7 +53,7 @@ let removeProgram = (app) => {
 }
 
 
-function closeProgram(e, app, click) {
+function taskkill(e, app, click) {
   for (var i = 0; i < openApps.length; i++) {
     if (openApps[i] != app) {
       document.getElementById(openApps[i]).style.zIndex -= 1;
@@ -130,11 +130,12 @@ function editDesktop(enabled) {
   }
 }
 
-$(document).ready(function() {
+let initializeDesktop = () => {
   var p = $(".desktop__item").draggable();
   $(".desktop__item").mousedown(function(eventObject){editDesktop(true);});
   $(".desktop__item").mouseup(function(eventObject){editDesktop(false);});
-});
+}
+$(document).ready(function() {initializeDesktop();});
 
 
 // sub FUNCTIONS
