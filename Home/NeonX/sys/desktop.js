@@ -2,6 +2,37 @@ var openApps = [];
 var mouseLocation = [0, 0];
 const backgroundCount = 8;
 
+// icons
+function addIcon(action) {
+  switch (action) {
+    case "folder":
+      newFolder();
+  }
+}
+
+let newFolder = () => {
+  let temps = generateRandomString(8);
+  var fileName = prompt("New Folder,", "untitled");
+  var appName = "Folder"
+  let iconContainer = document.createElement("div");
+  iconContainer.id = temps;
+  iconContainer.className = "desktop__item";
+  iconContainer.ondblclick = function() { startProgram("", './Home/applications/Folder/index.html?file=' + fileName) };
+  $("#desktopBG").append(iconContainer);
+
+  let iconPicture = document.createElement("img");
+  iconPicture.className = "desktop_icons";
+  iconPicture.src = "./Home/applications/Folder/favicon.png";
+  $("#" + temps).append(iconPicture);
+
+  let iconText = document.createElement("text");
+  iconText.innerText = fileName;
+  $("#" + temps).append(iconText);
+
+  initializeDesktop();
+}
+
+// apps
 function startProgram(app, uri) {
   if (uri != "" && uri != null) newWindow(uri); // navigate to website
   if (app != "" && app != null) newWindow("./Home/applications/" + app + "/index.html");
@@ -29,7 +60,7 @@ function newWindow(appLink) {
 
   let maxBTN = document.createElement("button");
   maxBTN.className = "menubar";
-  maxBTN.innerText = "🗖";
+  maxBTN.innerText = "ðŸ—–";
   maxBTN.style.top = "-1px";
   maxBTN.onclick = function() { fullscreenProgram(programName, false); };
   $("#" + programName).append(maxBTN);
