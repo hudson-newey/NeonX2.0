@@ -3,7 +3,7 @@
 ---
 
 #### Compatiable with
-* Electron
+* ElectronJS
 * Chrome
 
 #### To install apps
