@@ -80,10 +80,11 @@ function newWindow(appLink, appName) {
   var taskbarobjID = generateRandomString(8);
   let taskbarobj = document.createElement("p");
   taskbarobj.id = taskbarobjID;
+  taskbarobj.className = "taskbarItem";
   taskbarobj.style.left = (openApps.length * 221) - 220 + "px";
   taskbarobj.setAttribute('app', programName);
   $("#appsTray").append(taskbarobj);
-  
+
   if (!(appName.includes("/"))) {
     taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/applications/" + appName + "/favicon.png'>" + appName);
   } else { // google and file explorer need to be hardcoded (i hate this)
@@ -98,6 +99,9 @@ function newWindow(appLink, appName) {
         taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/applications/" + appName + "/favicon.png'>" + appName);
     }
   }
+
+  initializeDesktop();
+  bringtoFront(programName);
 }
 
 
@@ -114,13 +118,7 @@ let removeProgram = (app) => {
 
 function taskkill(e, app, click) {
   // move to front
-  for (var i = 0; i < openApps.length; i++) {
-    if (openApps[i] != app) {
-      document.getElementById(openApps[i]).style.zIndex -= 1;
-    } else {
-      document.getElementById(openApps[i]).style.zIndex = 128;
-    }
-  }
+  bringtoFront(app);
 
   if (click == true) {
     var close = false;
@@ -136,6 +134,17 @@ function taskkill(e, app, click) {
     removeProgram(app);
     $('p[app="' + app + '"]').remove();
   }
+}
+
+function bringtoFront(app) {
+  for (var i = 0; i < openApps.length; i++) {
+    if (openApps[i] != app) {
+      document.getElementById(openApps[i]).style.zIndex -= 1;
+    } else {
+      document.getElementById(openApps[i]).style.zIndex = 128;
+    }
+  }
+  console.log("brought " + app + " to front");
 }
 
 var $win = $(window);
@@ -195,9 +204,14 @@ let initializeDesktop = () => {
   var p = $(".desktop__item").draggable();
   $(".desktop__item").mousedown(function(eventObject){editDesktop(true);});
   $(".desktop__item").mouseup(function(eventObject){editDesktop(false);});
+
+  // taskbar initilization
+  $(".taskbarItem").click(function(e) {
+    bringtoFront($(this).attr("app"));
+  });
+  console.log("Desktop Refreshed!");
 }
 $(document).ready(function() {initializeDesktop();});
-
 
 // sub FUNCTIONS
 let generateRandomString = (length) => {
