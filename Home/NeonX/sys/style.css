@@ -184,11 +184,53 @@ img.icons {
   background-attachment: fixed;
 }
 #desktopBG {
+  position: fixed;
   background-image: url('');
+  height: 100%;
 }
 
 .window.ui-draggable-dragging, .window.ui-resizable-resizing {
   transition: none;
+}
+
+#appsTray {
+  position: relative;
+  left: 58px;
+  width: 99%;
+}
+
+#appsTray > p {
+  position: absolute;
+  border-right: solid;
+  border-top: solid;
+  border-right-width: thin;
+  border-top-width: medium;
+  border-color: #abb2bf;
+  bottom: 58px;
+  font-size: 18px;
+  width: 220px;
+  animation: iconFadein 1.2s;
+  transition: background-color 400ms cubic-bezier(0.4, 0, 1, 1) 50ms;
+}
+
+.appTrayIcon {
+  position: relative;
+  height: 32px;
+  width: 44px;
+  top: 8px;
+  padding-right: 10px;
+  padding-left: 2px;
+}
+
+#appsTray > p:hover {
+  background-color: #abb2bf;
+  color: #21252b;
+  border-color: #21252b;
+}
+
+@keyframes iconFadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .taskbar {
@@ -248,16 +290,20 @@ img.icons {
 }
 
 .taskbar__tray {
+  position: absolute;
+  bottom: -80px;
   color: white;
   padding: 0 10px;
   float: right;
   line-height: 48px;
+  width: 100%;
 }
 
 .time {
-  position: relative;
+  position: fixed;
   right: 2px;
-  bottom: 65px;
+  bottom: -16px;
+  z-index: 999999;
 }
 .time p{
   font-size: 17px;
