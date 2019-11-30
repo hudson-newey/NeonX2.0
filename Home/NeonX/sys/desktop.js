@@ -130,8 +130,8 @@ function fullscreenProgram(app) {
 		document.getElementById(app).style.top = "100px";
 		document.getElementById(app).style.left = "150px";
     document.getElementById(app).style.opacity = "0.95";
-		$("#" + app).height($win.height() * 0.5);
-		$("#" + app).width($win.width() * 0.4);
+		$("#" + app).height($win.height() * 0.6);
+		$("#" + app).width($win.width() * 0.45);
 		console.log("Minimise " + app);
 	} else {
 		document.getElementById(app).style.top = "0px";
