@@ -13,6 +13,7 @@ function addIcon(action) {
 let newFolder = () => {
   let temps = generateRandomString(8);
   var fileName = prompt("New Folder,", "untitled");
+  if (fileName == null || fileName == "") {return 0;} //if there is no file name 'return 0;'
   var appName = "Folder"
   let iconContainer = document.createElement("div");
   iconContainer.id = temps;
@@ -33,12 +34,15 @@ let newFolder = () => {
 }
 
 // apps
+// start program parsing
 function startProgram(app, uri) {
-  if (uri != "" && uri != null) newWindow(uri); // navigate to website
-  if (app != "" && app != null) newWindow("./Home/applications/" + app + "/index.html");
+  if (uri != "" && uri != null) newWindow(uri, uri); // navigate to website
+  if (app != "" && app != null) newWindow("./Home/applications/" + app + "/index.html", app);
 }
 
-function newWindow(appLink) {
+
+// open window and create taskbar icon
+function newWindow(appLink, appName) {
 	let programName = generateRandomString(8);
 
 	let appContainer = document.createElement("app");
@@ -60,7 +64,7 @@ function newWindow(appLink) {
 
   let maxBTN = document.createElement("button");
   maxBTN.className = "menubar";
-  maxBTN.innerText = "ðŸ—–";
+  maxBTN.innerText = "🗖";
   maxBTN.style.top = "-1px";
   maxBTN.onclick = function() { fullscreenProgram(programName, false); };
   $("#" + programName).append(maxBTN);
@@ -71,7 +75,17 @@ function newWindow(appLink) {
   //vf.scrolling = "no";
   vf.className = "viewFrame";
   $("#" + programName).append(vf);
+
+  // add taskbar object
+  var taskbarobjID = generateRandomString(8);
+  let taskbarobj = document.createElement("p");
+  taskbarobj.id = taskbarobjID;
+  taskbarobj.style.left = (openApps.length * 221) - 220 + "px";
+  taskbarobj.setAttribute('app', programName);
+  $("#appsTray").append(taskbarobj);
+  taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/applications/" + appName + "/favicon.png'>" + appName);
 }
+
 
 
 let removeProgram = (app) => {
@@ -85,6 +99,7 @@ let removeProgram = (app) => {
 
 
 function taskkill(e, app, click) {
+  // move to front
   for (var i = 0; i < openApps.length; i++) {
     if (openApps[i] != app) {
       document.getElementById(openApps[i]).style.zIndex -= 1;
@@ -94,17 +109,18 @@ function taskkill(e, app, click) {
   }
 
   if (click == true) {
+    var close = false;
     var rightclick;
     if (!e) var e = window.event;
     if (e.which) rightclick = (e.which == 3);
     else if (e.button) rightclick = (e.button == 2);
-    if (rightclick == true) {
-      $("#" + app).remove();
-      removeProgram(app);
-    }
-  } else {
+    if (rightclick == true){close = true;}
+  }else{close = true;}
+
+  if (close == true) {
     $("#" + app).remove();
     removeProgram(app);
+    $('p[app="' + app + '"]').remove();
   }
 }
 
