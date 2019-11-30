@@ -83,7 +83,21 @@ function newWindow(appLink, appName) {
   taskbarobj.style.left = (openApps.length * 221) - 220 + "px";
   taskbarobj.setAttribute('app', programName);
   $("#appsTray").append(taskbarobj);
-  taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/applications/" + appName + "/favicon.png'>" + appName);
+  
+  if (!(appName.includes("/"))) {
+    taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/applications/" + appName + "/favicon.png'>" + appName);
+  } else { // google and file explorer need to be hardcoded (i hate this)
+    switch (appName) {
+      case "https://www.bing.com":
+        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/Pictures/icons/google.png'>Google");
+        break;
+      case "./Home":
+        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/Pictures/icons/files.png'>Files");
+        break;
+      default:
+        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/applications/" + appName + "/favicon.png'>" + appName);
+    }
+  }
 }
 
 
