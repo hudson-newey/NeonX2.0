@@ -15,6 +15,4 @@
 >        for NEONX2.0.  
 
 ##### ___"__package.app__"___
-'''css
-Name of application
-'''
+'Name of application'
