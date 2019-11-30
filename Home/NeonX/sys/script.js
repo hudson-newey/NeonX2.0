@@ -1,240 +1,220 @@
-var openApps = [];
-var mouseLocation = [0, 0];
-const backgroundCount = 8;
-
-// icons
-function addIcon(action) {
-  switch (action) {
-    case "folder":
-      newFolder();
-  }
-}
-
-let newFolder = () => {
-  let temps = generateRandomString(8);
-  var fileName = prompt("New Folder,", "untitled");
-  if (fileName == null || fileName == "") {return 0;} //if there is no file name 'return 0;'
-  var appName = "Folder"
-  let iconContainer = document.createElement("div");
-  iconContainer.id = temps;
-  iconContainer.className = "desktop__item";
-  iconContainer.ondblclick = function() { startProgram("", './Home/applications/Folder/index.html?file=' + fileName) };
-  $("#desktopBG").append(iconContainer);
-
-  let iconPicture = document.createElement("img");
-  iconPicture.className = "desktop_icons";
-  iconPicture.src = "./Home/applications/Folder/favicon.png";
-  $("#" + temps).append(iconPicture);
-
-  let iconText = document.createElement("text");
-  iconText.innerText = fileName;
-  $("#" + temps).append(iconText);
-
-  initializeDesktop();
-}
-
-// apps
-// start program parsing
-function startProgram(app, uri) {
-  if (uri != "" && uri != null) newWindow(uri, uri); // navigate to website
-  if (app != "" && app != null) newWindow("./Home/applications/" + app + "/index.html", app);
-}
-
-
-// open window and create taskbar icon
-function newWindow(appLink, appName) {
-	let programName = generateRandomString(8);
-
-	let appContainer = document.createElement("app");
-	appContainer.id = programName;
-	appContainer.className = "programWindow";
-	appContainer.draggable = "false";
-  appContainer.ondblclick = function() { fullscreenProgram(programName); };
-  appContainer.onmousedown = function(event) { taskkill(event, programName, true); };
-	$("#desktopBG").append(appContainer);
-	openApps.push(programName);
-  $(".programWindow").draggable();
-
-  // menubar
-  let closeBTN = document.createElement("button");
-  closeBTN.className = "menubar";
-  closeBTN.innerText = "X";
-  closeBTN.onclick = function() { taskkill(3, programName, false); };
-  $("#" + programName).append(closeBTN);
-
-  let maxBTN = document.createElement("button");
-  maxBTN.className = "menubar";
-  maxBTN.innerText = "🗖";
-  maxBTN.style.top = "-1px";
-  maxBTN.onclick = function() { fullscreenProgram(programName, false); };
-  $("#" + programName).append(maxBTN);
-
-  //vf = viewerframe
-  let vf = document.createElement("iframe");
-  vf.src = appLink;
-  //vf.scrolling = "no";
-  vf.className = "viewFrame";
-  $("#" + programName).append(vf);
-
-  // add taskbar object
-  var taskbarobjID = generateRandomString(8);
-  let taskbarobj = document.createElement("p");
-  taskbarobj.id = taskbarobjID;
-  taskbarobj.className = "taskbarItem";
-  taskbarobj.style.left = (openApps.length * 221) - 220 + "px";
-  taskbarobj.setAttribute('app', programName);
-  $("#appsTray").append(taskbarobj);
-
-  if (!(appName.includes("/"))) {
-    taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/applications/" + appName + "/favicon.png'>" + appName);
-  } else { // google and file explorer need to be hardcoded (i hate this)
-    switch (appName) {
-      case "https://www.bing.com":
-        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/Pictures/icons/google.png'>Google");
-        break;
-      case "./Home":
-        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/Pictures/icons/files.png'>Files");
-        break;
-      default:
-        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/applications/" + appName + "/favicon.png'>" + appName);
-    }
-  }
-
-  initializeDesktop();
-  bringtoFront(programName);
-}
-
-
-
-let removeProgram = (app) => {
-  // remove closing app from app list
-  for( var i = 0; i < openApps.length; i++){
-    if ( openApps[i] === app) {
-      openApps.splice(i, 1);
-    }
-  }
-}
-
-
-function taskkill(e, app, click) {
-  // move to front
-  bringtoFront(app);
-
-  if (click == true) {
-    var close = false;
-    var rightclick;
-    if (!e) var e = window.event;
-    if (e.which) rightclick = (e.which == 3);
-    else if (e.button) rightclick = (e.button == 2);
-    if (rightclick == true){close = true;}
-  }else{close = true;}
-
-  if (close == true) {
-    $("#" + app).remove();
-    removeProgram(app);
-    $('p[app="' + app + '"]').remove();
-  }
-}
-
-function bringtoFront(app) {
-  for (var i = 0; i < openApps.length; i++) {
-    if (openApps[i] != app) {
-      document.getElementById(openApps[i]).style.zIndex -= 1;
+let navigate = function(e) {
+  var key=e.keyCode || e.which;
+  if (key==13) {
+    if ($("#search__input").val().includes("://")) {
+      startProgram('', $("#search__input").val());
     } else {
-      document.getElementById(openApps[i]).style.zIndex = 128;
+      startProgram('', 'https://www.bing.com?q=' + $("#search__input").val());
     }
+    toggleStart();
   }
-  console.log("brought " + app + " to front");
 }
 
-var $win = $(window);
-function fullscreenProgram(app) {
-	if ($("#" + app).width() == $win.width()) {
-		document.getElementById(app).style.top = "100px";
-		document.getElementById(app).style.left = "150px";
-    document.getElementById(app).style.opacity = "0.95";
-		$("#" + app).height($win.height() * 0.6);
-		$("#" + app).width($win.width() * 0.45);
-		console.log("Minimise " + app);
-	} else {
-		document.getElementById(app).style.top = "0px";
-		document.getElementById(app).style.left = "0px";
-		document.getElementById(app).style.opacity = "1";
-		$("#" + app).height($win.height() - 48);
-		$("#" + app).width($win.width());
-		console.log("Maximise " + app);
-	}
+function esc(e) {
+  var key=e.keyCode || e.which;
+  if (key==27) {
+    toggleStart();
+  }
+  desktopContextMenu(event.clientX, event.clientY, false);
 }
 
-function desktopContextMenu(x, y, toggle) {
-  if (toggle == true) {
-    if ($("#desktopContextMenu").css("display") == "block") {
-      $("#desktopContextMenu").css("display", "none");
+function user(status) {
+  switch (status) {
+    case "logout":
+      window.location.href = "login.html";
+    case "lock":
+      window.location.href = "login.html";
+    case "sleep":
+      window.location.href= "./Home/sys/screensaver.html?usr=" + $.urlParam('usr');
+    default:
+    console.log("status update failed...");
+  }
+}
+
+
+function addApp(file) {
+  desktopContextMenu(null, null, false); //toggle context menu
+  var text = file[0];
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    if (text.name == "package.app") {
+      // correct file type
+      var appName = e.target.result;
+      console.log("Installing, " + appName);
+
+      let temps = generateRandomString(8);
+      let iconContainer = document.createElement("div");
+      iconContainer.id = temps;
+      iconContainer.className = "desktop__item";
+      iconContainer.ondblclick = function() { startProgram(appName, ''); };
+      $("#desktopBG").append(iconContainer);
+
+      let iconPicture = document.createElement("img");
+      iconPicture.className = "desktop_icons";
+      iconPicture.src = "./Home/applications/" + appName + "/favicon.png";
+      $("#" + temps).append(iconPicture);
+
+      let iconText = document.createElement("text");
+      iconText.innerText = appName;
+      $("#" + temps).append(iconText);
+
+      initializeDesktop();
     } else {
-      $("#desktopContextMenu").css("left", x);
-      $("#desktopContextMenu").css("top", y - 20);
-      $("#desktopContextMenu").css("display", "block");
+
+      console.log("Failed to load, " + text.name);
     }
-  } else {$("#desktopContextMenu").css("display", "none");}
+
+  };
+  reader.readAsText(text);
 }
 
-function editDesktop(enabled) {
-  var p = $(".desktop__item");
-  if (enabled == true) {
-    p.css("background-color", "rgba(120, 144, 156, 0.8)");
-    p.css("border-style", "dotted");
-  } else if (enabled == false) {
-    p.css("background-color", "");
-    p.css("border-style", "none");
+
+$(window).load(function() {
+  var $container = $('.start-screen');
+
+  $container.masonry({
+    itemSelector: '.masonry-item',
+    columnWidth: 128
+  });
+
+
+  $('.start-menu').hide().css('opacity', 1);
+});
+
+$(function() {
+  //$('.start-screen-scroll').jScrollPane();
+});
+
+function resizeStart() {
+    var startWidth = $('.start-screen').outerWidth();
+    var startRound = Math.ceil(startWidth / 128.0) * 128;
+
+  console.log('original: ' + startWidth);
+  console.log('rounded: ' + startRound);
+
+    $('.start-screen').css({
+      'width' : startRound
+    });
+}
+
+//$(window).load(resizeStart);
+//$(window).resize(resizeStart);
+
+
+
+// Unfocus windows when desktop is clicked
+$('.desktop').click(function(e) {
+  if ($('.desktop').has(e.target).length === 0) {
+    desktopContextMenu(event.clientX, event.clientY, false);
+  }
+});
+
+
+
+
+function toggleStart(e) {
+  $('.start-menu-fade').fadeToggle(500);
+  $('.start-menu').fadeToggle(250).toggleClass('start-menu--open');
+  $('.taskbar__item--start').toggleClass('start--open');
+  $('#search__input').val("");
+  $('#search__input').focus();
+}
+
+$('.taskbar__item--start').click(toggleStart);
+$('.start-menu__recent li a').click(toggleStart);
+$('.start-screen__tile').click(toggleStart);
+
+// Prevent "open" class on start
+$(function() {
+  $('.taskbar__item--start').click(function() {
+    $(this).removeClass('taskbar__item--open taskbar__item--active');
+  });
+});
+
+
+// Current time
+let getTime = () => {
+  var a_p = "";
+  var d = new Date();
+
+  var curr_hour = d.getHours();
+  if (curr_hour < 12) { a_p = "AM"; } else { a_p = "PM"; }
+
+  // hours
+  if (curr_hour == 0) {
+    curr_hour = 12;
+  }
+  if (curr_hour > 12) {
+    curr_hour = curr_hour - 12;
+  }
+
+  var curr_min = d.getMinutes();
+  if ( curr_min < 10 ) {
+    curr_min = '0' + curr_min;
+  }
+
+  $('#timeDisplay').html(curr_hour + ':' + curr_min + ' ' + a_p);
+}
+
+$.urlParam = function(name){
+	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	return results[1] || 0;
+}
+
+
+$('.menu-toggle').each(function() {
+  var menuName = $(this).data('menu');
+  var menu = $('.menu[data-menu="' + menuName + '"]');
+  var pos = $(this).position();
+  var height = $(this).outerHeight();
+
+  if ( !$(menu).hasClass('menu--bottom') ) {
+    $(menu).position({
+      my: 'left top',
+      at: 'left bottom',
+      of: this,
+      collision: 'none'
+    });
   } else {
 
-    // for toggle use no paramiters
-    if (p.css("background-color") == "rgba(120, 144, 156, 0.8)") {
-      p.css("background-color", "");
-      p.css("border-style", "none");
-    } else {
-      p.css("background-color", "rgba(120, 144, 156, 0.8)");
-      p.css("border-style", "dotted");
-    }
+  }
 
+  $(menu).hide();
+
+  $(this).click(function(e) {
+    e.preventDefault();
+    $('.menu').not(menu).hide();
+    $(menu).toggle();
+  });
+});
+
+let loadBackground = () => {
+  try {
+    $('#currentUser').text($.urlParam('usr'));
+    document.getElementById('desktopBG').style.backgroundImage ="url('./Home/Pictures/backgrounds/" + Math.ceil(Math.random() * backgroundCount) + ".png')";
+  }
+  catch(err) {
+    console.log(err);
   }
 }
+loadBackground();
 
-let initializeDesktop = () => {
-  var p = $(".desktop__item").draggable();
-  $(".desktop__item").mousedown(function(eventObject){editDesktop(true);});
-  $(".desktop__item").mouseup(function(eventObject){editDesktop(false);});
 
-  // taskbar initilization
-  $(".taskbarItem").click(function(e) {
-    bringtoFront($(this).attr("app"));
-  });
-  console.log("Desktop Refreshed!");
-}
-$(document).ready(function() {initializeDesktop();});
-
-// sub FUNCTIONS
-let generateRandomString = (length) => {
-	const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let text = "";
-
-  for (var i = 0; i < length; i++)
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  return text;
-}
-
-// get rid of ghosting image
-document.addEventListener("dragstart", function( event ) {
-    var img = new Image();
-    img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
-    event.dataTransfer.setDragImage(img, 0, 0);
-}, false);
-// get rid of context menu
-document.oncontextmenu = function() {
-  return false;
-}
-
-document.addEventListener('contextmenu', event => {
-  event.preventDefault();
-  desktopContextMenu(event.clientX, event.clientY, true);
+$(document).mouseup(function(e) {
+  if ( $('.menu').has(e.target).length === 0 && !$('.menu-toggle').is(e.target) && $('.menu-toggle').has(e.target).length === 0 ) {
+    $('.menu').hide();
+  }
 });
+
+
+
+/* LOOP */
+var screensaverTimeout = 100; // seconds
+function loop() {
+  getTime();
+  setTimeout(loop, 1000);
+  screensaverTimeout -= 1;
+  if (screensaverTimeout < 1) window.location.href= "./Home/NeonX/screensaver.html?usr=" + $.urlParam('usr');
+}
+loop();
