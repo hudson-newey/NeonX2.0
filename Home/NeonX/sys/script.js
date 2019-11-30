@@ -38,7 +38,7 @@ function addApp(file) {
 
   var reader = new FileReader();
   reader.onload = function(e) {
-    if (text.name == "package.ini") {
+    if (text.name == "package.app") {
       // correct file type
       var appName = e.target.result;
       console.log("Installing, " + appName);
