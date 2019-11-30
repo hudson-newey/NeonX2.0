@@ -15,4 +15,4 @@
 >        for NEONX2.0.  
 
 ##### ___"__package.app__"___
->Name of application
+Name of application
