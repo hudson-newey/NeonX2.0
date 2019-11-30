@@ -1,4 +1,5 @@
-# **__NEONX2.0__**
+# ___**__NEONX2.0__**___  
+### by: **__Grathium Industries__**
 ---
 
 #### Compatiable with
@@ -14,4 +15,6 @@
 >        for NEONX2.0.  
 
 ##### ___"__package.app__"___
+'''css
 Name of application
+'''
