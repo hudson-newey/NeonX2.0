@@ -2,7 +2,8 @@
 ---
 
 #### Compatiable with
-* Electron
+*Electron
+*Chrome
 
 #### To install apps
 > **1.** Open up "__Home/applications__"  
