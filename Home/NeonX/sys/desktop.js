@@ -90,7 +90,7 @@ function newWindow(appLink, appName) {
   } else { // google and file explorer need to be hardcoded (i hate this)
     switch (appName) {
       case "https://www.bing.com":
-        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/Pictures/icons/google.png'>Google");
+        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/Pictures/icons/google.png'>Web Browser");
         break;
       case "./Home":
         taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/Pictures/icons/files.png'>Files");
@@ -144,7 +144,6 @@ function bringtoFront(app) {
       document.getElementById(openApps[i]).style.zIndex = 128;
     }
   }
-  console.log("brought " + app + " to front");
 }
 
 var $win = $(window);
@@ -215,7 +214,7 @@ $(document).ready(function() {initializeDesktop();});
 
 // sub FUNCTIONS
 let generateRandomString = (length) => {
-	const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ";
   let text = "";
 
   for (var i = 0; i < length; i++)
