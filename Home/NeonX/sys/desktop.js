@@ -85,7 +85,7 @@ function newWindow(appLink, appName) {
   taskbarobj.setAttribute('app', programName);
   $("#appsTray").append(taskbarobj);
 
-  if (!(appName.includes("/"))) {
+  if (!appName.includes("/")) {
     taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/applications/" + appName + "/favicon.png'>" + appName);
   } else { // google and file explorer need to be hardcoded (i hate this)
     switch (appName) {
@@ -100,7 +100,10 @@ function newWindow(appLink, appName) {
     }
   }
 
-  initializeDesktop();
+  // taskbar initilization
+  $(".taskbarItem").click(function(e) {
+    bringtoFront($(this).attr("app"));
+  });
   bringtoFront(programName);
 }
 
@@ -146,21 +149,20 @@ function bringtoFront(app) {
   }
 }
 
-var $win = $(window);
 function fullscreenProgram(app) {
-	if ($("#" + app).width() == $win.width()) {
+	if ($("#" + app).width() == $(window).width()) {
 		document.getElementById(app).style.top = "100px";
 		document.getElementById(app).style.left = "150px";
     document.getElementById(app).style.opacity = "0.95";
-		$("#" + app).height($win.height() * 0.6);
-		$("#" + app).width($win.width() * 0.45);
+		$("#" + app).height($(window).height() * 0.6);
+		$("#" + app).width($(window).width() * 0.45);
 		console.log("Minimise " + app);
 	} else {
 		document.getElementById(app).style.top = "0px";
 		document.getElementById(app).style.left = "0px";
 		document.getElementById(app).style.opacity = "1";
-		$("#" + app).height($win.height() - 48);
-		$("#" + app).width($win.width());
+		$("#" + app).height($(window).height() - 48);
+		$("#" + app).width($(window).width());
 		console.log("Maximise " + app);
 	}
 }
@@ -220,17 +222,6 @@ let generateRandomString = (length) => {
   for (var i = 0; i < length; i++)
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   return text;
-}
-
-// get rid of ghosting image
-document.addEventListener("dragstart", function( event ) {
-    var img = new Image();
-    img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
-    event.dataTransfer.setDragImage(img, 0, 0);
-}, false);
-// get rid of context menu
-document.oncontextmenu = function() {
-  return false;
 }
 
 document.addEventListener('contextmenu', event => {
