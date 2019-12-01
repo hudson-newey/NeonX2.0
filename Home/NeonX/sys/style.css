@@ -82,7 +82,8 @@ app {
 
 /* DESKTOP */
 .desktop__item {
-  display: block;
+  display: inline-block;
+  position: static;
   margin-right: 4px;
   text-align: center;
   width: 68px;
@@ -93,7 +94,6 @@ app {
   color: white;
   transition: all 100ms;
   text-align: center;
-
 }
 .desktop__item:hover {
   background-color: rgba(120, 144, 156, 0.15);
@@ -187,10 +187,6 @@ img.icons {
   position: fixed;
   background-image: url('');
   height: 100%;
-}
-
-.window.ui-draggable-dragging, .window.ui-resizable-resizing {
-  transition: none;
 }
 
 #appsTray {
