@@ -69,7 +69,6 @@ function addApp(file) {
   reader.readAsText(text);
 }
 
-
 $(window).load(function() {
   var $container = $('.start-screen');
 
@@ -97,9 +96,6 @@ function resizeStart() {
       'width' : startRound
     });
 }
-
-//$(window).load(resizeStart);
-//$(window).resize(resizeStart);
 
 
 
@@ -162,7 +158,6 @@ $.urlParam = function(name){
 	return results[1] || 0;
 }
 
-
 $('.menu-toggle').each(function() {
   var menuName = $(this).data('menu');
   var menu = $('.menu[data-menu="' + menuName + '"]');
@@ -215,6 +210,6 @@ function loop() {
   getTime();
   setTimeout(loop, 1000);
   screensaverTimeout -= 1;
-  if (screensaverTimeout < 1) window.location.href= "./Home/NeonX/screensaver.html?usr=" + $.urlParam('usr');
+  if (screensaverTimeout < 1) window.location.href = "./Home/NeonX/screensaver.html?usr=" + $.urlParam('usr');
 }
 loop();
