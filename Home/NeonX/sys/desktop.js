@@ -101,9 +101,13 @@ function newWindow(appLink, appName) {
   }
 
   // taskbar initilization
-  $(".taskbarItem").click(function(e) {
+  $('.taskbarItem').mousedown(function(event) {
+  if (event.which == 1) {
     bringtoFront($(this).attr("app"));
-  });
+  } else if(event.which == 3) {
+    taskkill(3, $(this).attr("app"), false);
+  }
+});
   bringtoFront(programName);
 }
 
