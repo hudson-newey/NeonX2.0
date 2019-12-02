@@ -25,6 +25,7 @@ a {
 /* PROGRAM WINDOWS */
 .programWindow {
   position: absolute;
+  display: inline;
   left: 150px;
   top: 100px;
   opacity: 0.95;
@@ -41,6 +42,7 @@ a {
 
 .menubar {
   position: relative;
+  display: inline;
   color: #abb2bf;
   background-color: #21252b;
   border-style: none;
@@ -48,11 +50,12 @@ a {
   width: 25px;
   top: 0px;
 }
+
 .menubar:hover {
   background-color: #31353b;
-  border-style: solid;
-  border-width: thin;
-  border-color: #abb2bf;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+  border-bottom-color: #abb2bf;
 }
 
 .viewFrame {
