@@ -1,6 +1,6 @@
 var openApps = [];
 var mouseLocation = [0, 0];
-const backgroundCount = 8;
+const backgroundCount = 9;
 
 // icons
 function addIcon(action) {
@@ -68,6 +68,12 @@ function newWindow(appLink, appName) {
   maxBTN.style.top = "-1px";
   maxBTN.onclick = function() { fullscreenProgram(programName, false); };
   $("#" + programName).append(maxBTN);
+
+  let minBTN = document.createElement("button");
+  minBTN.className = "menubar";
+  minBTN.innerText = "🗕";
+  minBTN.onclick = function() { sendtoBack(programName); };
+  $("#" + programName).append(minBTN);
 
   //vf = viewerframe
   let vf = document.createElement("iframe");
@@ -151,6 +157,11 @@ function bringtoFront(app) {
       document.getElementById(openApps[i]).style.zIndex = 128;
     }
   }
+  $("#" + app).css("display", "inline");
+}
+
+function sendtoBack(app) {
+  $("#" + app).css("display", "none");
 }
 
 function fullscreenProgram(app) {
