@@ -65,13 +65,14 @@ function newWindow(appLink, appName) {
   let maxBTN = document.createElement("button");
   maxBTN.className = "menubar";
   maxBTN.innerText = "🗖";
-  maxBTN.style.top = "-1px";
+  maxBTN.style.top = "-2px";
   maxBTN.onclick = function() { fullscreenProgram(programName, false); };
   $("#" + programName).append(maxBTN);
 
   let minBTN = document.createElement("button");
   minBTN.className = "menubar";
   minBTN.innerText = "🗕";
+  minBTN.style.top = "-2px";
   minBTN.onclick = function() { sendtoBack(programName); };
   $("#" + programName).append(minBTN);
 
