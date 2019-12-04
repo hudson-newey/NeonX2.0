@@ -6,6 +6,9 @@
 * ElectronJS
 * Chromium
 
+#### To use
+> Open file:/// dekstop.html file with paramiter "?usr=[username]"
+
 #### To install apps
 > **1.** Open up "__Home/applications__"  
 > **2.** Create folder with name of the application  
