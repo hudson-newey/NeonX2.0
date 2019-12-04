@@ -4,7 +4,7 @@
 
 #### Compatiable with
 * ElectronJS
-* Chrome
+* Chromium
 
 #### To install apps
 > **1.** Open up "__Home/applications__"  
