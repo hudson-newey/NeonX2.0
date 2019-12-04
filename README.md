@@ -7,7 +7,7 @@
 * Chromium
 
 #### To use
-> Open file:/// dekstop.html file with paramiter "?usr=[username]"
+> Open file:/// dekstop.html file with parameter "?usr=[username]"
 
 #### To install apps
 > **1.** Open up "__Home/applications__"  
