@@ -71,7 +71,7 @@ function newWindow(appLink, appName) {
 
   let minBTN = document.createElement("button");
   minBTN.className = "menubar";
-  minBTN.innerText = "🗕";
+  minBTN.innerText = "_";
   minBTN.style.top = "-2px";
   minBTN.onclick = function() { sendtoBack(programName); };
   $("#" + programName).append(minBTN);
@@ -215,6 +215,43 @@ function editDesktop(enabled) {
     }
 
   }
+}
+
+function addApp(file) {
+  desktopContextMenu(null, null, false); //toggle context menu
+  var text = file[0];
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    if (text.name == "package.app") {
+      // correct file type
+      var appName = e.target.result;
+      console.log("Installing, " + appName);
+
+      let temps = generateRandomString(8);
+      let iconContainer = document.createElement("div");
+      iconContainer.id = temps;
+      iconContainer.className = "desktop__item";
+      iconContainer.ondblclick = function() { startProgram(appName, ''); };
+      $("#desktopBG").append(iconContainer);
+
+      let iconPicture = document.createElement("img");
+      iconPicture.className = "desktop_icons";
+      iconPicture.src = "./Home/applications/" + appName + "/favicon.png";
+      $("#" + temps).append(iconPicture);
+
+      let iconText = document.createElement("text");
+      iconText.innerText = appName;
+      $("#" + temps).append(iconText);
+
+      initializeDesktop();
+    } else {
+
+      console.log("Failed to load, " + text.name);
+    }
+
+  };
+  reader.readAsText(text);
 }
 
 let initializeDesktop = () => {

@@ -31,44 +31,6 @@ function user(status) {
   }
 }
 
-
-function addApp(file) {
-  desktopContextMenu(null, null, false); //toggle context menu
-  var text = file[0];
-
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    if (text.name == "package.app") {
-      // correct file type
-      var appName = e.target.result;
-      console.log("Installing, " + appName);
-
-      let temps = generateRandomString(8);
-      let iconContainer = document.createElement("div");
-      iconContainer.id = temps;
-      iconContainer.className = "desktop__item";
-      iconContainer.ondblclick = function() { startProgram(appName, ''); };
-      $("#desktopBG").append(iconContainer);
-
-      let iconPicture = document.createElement("img");
-      iconPicture.className = "desktop_icons";
-      iconPicture.src = "./Home/applications/" + appName + "/favicon.png";
-      $("#" + temps).append(iconPicture);
-
-      let iconText = document.createElement("text");
-      iconText.innerText = appName;
-      $("#" + temps).append(iconText);
-
-      initializeDesktop();
-    } else {
-
-      console.log("Failed to load, " + text.name);
-    }
-
-  };
-  reader.readAsText(text);
-}
-
 $(window).load(function() {
   var $container = $('.start-screen');
 
@@ -205,7 +167,7 @@ $(document).mouseup(function(e) {
 
 
 /* LOOP */
-var screensaverTimeout = 100; // seconds
+var screensaverTimeout = 480; // seconds (8) miniutes default
 function loop() {
   getTime();
   setTimeout(loop, 1000);
