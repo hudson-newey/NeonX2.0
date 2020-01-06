@@ -25,7 +25,7 @@ function user(status) {
     case "lock":
       window.location.href = "login.html";
     case "sleep":
-      window.location.href= "./NeonX/sys/screensaver.html?usr=" + $.urlParam('usr');
+      window.location.href= "./Home/sys/screensaver.html?usr=" + $.urlParam('usr');
     default:
     console.log("status update failed...");
   }
@@ -147,12 +147,13 @@ $('.menu-toggle').each(function() {
 });
 
 let loadBackground = () => {
-  if ($.urlParam('usr') == null || $.urlParam('usr') == "") {
-    $('#currentUser').text("Demo Account");
-  } else {
+  try {
     $('#currentUser').text($.urlParam('usr'));
+    document.getElementById('desktopBG').style.backgroundImage ="url('./Home/Pictures/backgrounds/" + Math.ceil(Math.random() * backgroundCount) + ".png')";
   }
-  document.getElementById('desktopBG').style.backgroundImage ="url('./Home/Pictures/backgrounds/" + Math.ceil(Math.random() * backgroundCount) + ".png')";
+  catch(err) {
+    console.log(err);
+  }
 }
 loadBackground();
 
@@ -171,6 +172,6 @@ function loop() {
   getTime();
   setTimeout(loop, 1000);
   screensaverTimeout -= 1;
-  if (screensaverTimeout < 1) window.location.href = "./NeonX/screensaver.html?usr=" + $.urlParam('usr');
+  if (screensaverTimeout < 1) window.location.href = "./Home/NeonX/screensaver.html?usr=" + $.urlParam('usr');
 }
 loop();
