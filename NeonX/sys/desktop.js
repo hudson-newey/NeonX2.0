@@ -37,7 +37,7 @@ let newFolder = () => {
 // start program parsing
 function startProgram(app, uri) {
   if (uri != "" && uri != null) newWindow(uri, uri); // navigate to website
-  if (app != "" && app != null) newWindow("./Home/applications/" + app + "/index.html", app);
+  if (app != "" && app != null) newWindow("./applications/" + app + "/index.html", app);
 }
 
 
