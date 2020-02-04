@@ -25,7 +25,7 @@ function user(status) {
     case "lock":
       window.location.href = "login.html";
     case "sleep":
-      window.location.href= "./Home/sys/screensaver.html?usr=" + $.urlParam('usr');
+      window.location.href= "./NeonX/screensaver.html?usr=" + $.urlParam('usr');
     default:
     console.log("status update failed...");
   }
@@ -172,6 +172,6 @@ function loop() {
   getTime();
   setTimeout(loop, 1000);
   screensaverTimeout -= 1;
-  if (screensaverTimeout < 1) window.location.href = "./Home/NeonX/screensaver.html?usr=" + $.urlParam('usr');
+  if (screensaverTimeout < 1) window.location.href = "./NeonX/screensaver.html?usr=" + $.urlParam('usr');
 }
 loop();

@@ -4,7 +4,7 @@ $.urlParam = function(name){
 }
 
 let desktop = function () {
-	window.location.href = '../../desktop.html?usr=' + $.urlParam('usr');
+	window.location.href = '../desktop.html?usr=' + $.urlParam('usr');
 }
 
 var c = document.getElementById("screen");
@@ -134,6 +134,6 @@ function loop() {
 
 	console.clear();
   console.log(screensaverTimeout);
-  if (screensaverTimeout < 1) window.location.href= "./Home/sys/login.html";
+  if (screensaverTimeout < 1) window.location.href= "../login.html";
 }
 loop();

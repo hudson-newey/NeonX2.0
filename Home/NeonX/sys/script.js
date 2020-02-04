@@ -40,11 +40,7 @@ $(window).load(function() {
   });
 
 
-  $('.start-menu').hide().css('opacity', 1);
-});
-
-$(function() {
-  //$('.start-screen-scroll').jScrollPane();
+  $('.start-menu').hide().css('opacity', 0.9);
 });
 
 function resizeStart() {

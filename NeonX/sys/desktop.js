@@ -18,12 +18,12 @@ let newFolder = () => {
   let iconContainer = document.createElement("div");
   iconContainer.id = temps;
   iconContainer.className = "desktop__item";
-  iconContainer.ondblclick = function() { startProgram("", './Home/applications/Folder/index.html?file=' + fileName) };
+  iconContainer.ondblclick = function() { startProgram("", './applications/Folder/index.html?file=' + fileName) };
   $("#desktopBG").append(iconContainer);
 
   let iconPicture = document.createElement("img");
   iconPicture.className = "desktop_icons";
-  iconPicture.src = "./Home/applications/Folder/favicon.png";
+  iconPicture.src = "./applications/Folder/favicon.png";
   $("#" + temps).append(iconPicture);
 
   let iconText = document.createElement("text");
@@ -37,7 +37,7 @@ let newFolder = () => {
 // start program parsing
 function startProgram(app, uri) {
   if (uri != "" && uri != null) newWindow(uri, uri); // navigate to website
-  if (app != "" && app != null) newWindow("./Home/applications/" + app + "/index.html", app);
+  if (app != "" && app != null) newWindow("./applications/" + app + "/index.html", app);
 }
 
 
@@ -93,7 +93,7 @@ function newWindow(appLink, appName) {
   $("#appsTray").append(taskbarobj);
 
   if (!appName.includes("/")) {
-    taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/applications/" + appName + "/favicon.png'>" + appName);
+    taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./applications/" + appName + "/favicon.png'>" + appName);
   } else { // google and file explorer need to be hardcoded (i hate this)
     switch (appName) {
       case "https://www.bing.com":
@@ -103,7 +103,7 @@ function newWindow(appLink, appName) {
         taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/Pictures/icons/files.png'>Files");
         break;
       default:
-        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/applications/" + appName + "/favicon.png'>" + appName);
+        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./applications/" + appName + "/favicon.png'>" + appName);
     }
   }
 
@@ -237,7 +237,7 @@ function addApp(file) {
 
       let iconPicture = document.createElement("img");
       iconPicture.className = "desktop_icons";
-      iconPicture.src = "./Home/applications/" + appName + "/favicon.png";
+      iconPicture.src = "./applications/" + appName + "/favicon.png";
       $("#" + temps).append(iconPicture);
 
       let iconText = document.createElement("text");

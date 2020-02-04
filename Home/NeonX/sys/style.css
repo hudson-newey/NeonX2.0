@@ -319,7 +319,6 @@ img.icons {
 
 .start-menu {
   display: flex;
-  opacity: 0;
   position: absolute;
   left: 0;
   bottom: 48px;
@@ -420,83 +419,6 @@ img.icons {
   font-size: 20px;
 }
 
-.start-menu__recent {
-  overflow: hidden;
-  max-height: 65%;
-  padding: 0;
-  margin: 0;
-  transform: translate(-100%, 0);
-  opacity: 0;
-  transition: all 500ms 100ms, opacity 1000ms 250ms;
-}
-.start-menu--open .start-menu__recent {
-  transform: none;
-  opacity: 1;
-}
-.start-menu__recent li {
-  list-style: none;
-}
-.start-menu__recent li a {
-  display: block;
-  padding: 10px;
-  color: white;
-  transition: all 100ms;
-}
-.start-menu__recent li a:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-}
-.start-menu__recent li a > i {
-  display: inline-block;
-  margin-right: 4px;
-  font-size: 20px;
-  text-align: center;
-}
-
-.all-apps {
-  position: absolute;
-  right: 0;
-  bottom: 40px;
-  display: block;
-  margin-bottom: 10px;
-  color: white;
-  transition: all 100ms;
-}
-.all-apps > i {
-  margin-left: 5px;
-  margin-right: 5px;
-  border: 2px solid white;
-  border-radius: 100px;
-  width: 32px;
-  height: 32px;
-  line-height: 26px;
-  text-align: center;
-}
-.all-apps:hover > i {
-  background-color: #37474F;
-}
-
-.start-screen-scroll {
-  max-height: 85vh;
-  min-height: calc(128px * 3 - 8px);
-  overflow-y: auto;
-  overflow-x: hidden;
-  margin: -8px;
-  padding: 4px;
-  margin-left: 4px;
-  transform: translate(-100%, 0);
-  transition: transform 500ms, opacity 1000ms;
-  opacity: 0;
-}
-.start-menu--open .start-screen-scroll {
-  transform: none;
-  opacity: 1;
-}
-
-.start-screen {
-  position: relative;
-  width: 256px;
-  word-spacing: -1em;
-}
 @media screen and (min-width: 700px) {
   .start-screen {
     min-width: 384px;
