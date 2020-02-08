@@ -21,13 +21,16 @@ function esc(e) {
 function user(status) {
   switch (status) {
     case "logout":
-      window.location.href = "login.html";
+      window.location.href = "./login.html";
+      break;
     case "lock":
-      window.location.href = "login.html";
+      window.location.href = "./login.html";
+      break;
     case "sleep":
       window.location.href= "./NeonX/screensaver.html?usr=" + $.urlParam('usr');
+      break;
     default:
-    console.log("status update failed...");
+      console.log("status update failed...");
   }
 }
 
