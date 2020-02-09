@@ -94,6 +94,7 @@ app {
   color: white;
   transition: all 100ms;
   text-align: center;
+  margin-top: 4px;
 }
 .desktop__item:hover {
   background-color: rgba(120, 144, 156, 0.15);
@@ -304,6 +305,11 @@ img.icons {
 .time p{
   font-size: 17px;
   color: #abb2bf;
+}
+#timeDisplay:hover {
+  cursor: pointer;
+  color: #fff;
+  transition: all 600ms;
 }
 
 .start-menu-fade {
