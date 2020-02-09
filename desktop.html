@@ -25,6 +25,10 @@
     <img class="desktop_icons" src="./Home/Pictures/icons/files.png"></img>
     <text>Files</text>
   </div>
+  <div class="desktop__item" ondblclick="startProgram('Calender', '');">
+    <img class="desktop_icons" src="./applications/Calender/favicon.png"></img>
+    <text>Calender</text>
+  </div>
 
   <div class="start-menu-fade"></div>
   <a id="editDesktopBTN" href="#" onclick="desktopContextMenu(window.innerWidth - 200, 0, true);">☰</a>
@@ -100,7 +104,7 @@
       <span id="appsTray">
       </span>
 
-      <span class="time"><p id="timeDisplay"></p></span>
+      <span class="time" onclick="startProgram('Calender', '');"><p id="timeDisplay"></p></span>
     </div>
   </div>
 
