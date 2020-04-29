@@ -147,6 +147,7 @@ img.icons {
 .contextMenu a:hover {
   background-color: #282c34;
   cursor: pointer;
+  border-left-style: groove;
 }
 
 .contextMenu#contextMenuTitle {
