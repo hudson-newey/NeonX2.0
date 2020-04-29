@@ -237,6 +237,7 @@ img.icons {
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.15);
   background-color: #21252b;
   z-index: 129;
+  opacity: 0.88;
 }
 
 .taskbar__item {
