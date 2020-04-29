@@ -65,9 +65,7 @@ a {
 }
 
 app:active {
-  cursor: grabbing;
-  cursor: -moz-grabbing;
-  cursor: -webkit-grabbing;
+  cursor: move;
 }
 
 app {
