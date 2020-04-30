@@ -6,6 +6,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: url('./cursor.png'), auto;
 }
 
 body {
@@ -16,7 +17,7 @@ body {
 
 a {
   text-decoration: none;
-  cursor: default;
+  cursor: url('./cursor.png'), auto;
 }
 
 /* PROGRAM WINDOWS */
