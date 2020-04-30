@@ -128,8 +128,8 @@ img.icons {
 
 .contextMenu {
   position: absolute;
-  background-color: #21252b;
-  color: #abb2bf;
+  background-color: #f9f9f9;
+  color: #282c34;
   font-size: 20px;
   padding: 8px;
   border-style: outset;
@@ -142,10 +142,10 @@ img.icons {
   opacity: 0.95;
 }
 .contextMenu a:visited {
-  color: #abb2bf;
+  color: #282c34;
 }
 .contextMenu a:hover {
-  background-color: #282c34;
+  background-color: #eee;
   cursor: pointer;
   border-left-style: groove;
 }
