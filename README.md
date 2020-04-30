@@ -13,8 +13,8 @@
 #### To Install Apps for NeonX
 > **1.** Open up "**Home/applications**"  
 > **2.** Drag the application into the "**Home/applications**" directory
-> **3.** Right click on the desktop and click "**Install Apps**" and select the "**package.app**" file from inside the
->        programs directory/folder
+> **3.** Right click on the desktop and click "**Install Apps**" and select the "**package.app**" file from inside the  
+>        programs directory/folder  
 
 #### To Create Apps for NeonX
 > **1.** Open up "**Home/applications**"  
