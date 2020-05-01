@@ -41,7 +41,7 @@ function startProgram(app, uri) {
 }
 
 
-// open window and create taskbar icon
+// CREATE CONTAINER
 function newWindow(appLink, appName) {
 	let programName = generateRandomString(8);
 
@@ -65,7 +65,6 @@ function newWindow(appLink, appName) {
   let maxBTN = document.createElement("button");
   maxBTN.className = "menubar";
   maxBTN.innerText = "🗖";
-  maxBTN.style.top = "-2px";
   maxBTN.onclick = function() { fullscreenProgram(programName, false); };
   $("#" + programName).append(maxBTN);
 
@@ -75,6 +74,12 @@ function newWindow(appLink, appName) {
   minBTN.style.top = "-2px";
   minBTN.onclick = function() { sendtoBack(programName); };
   $("#" + programName).append(minBTN);
+
+  let containerTitle = document.createElement("span");
+  containerTitle.className = "containerTitle";
+  containerTitle.innerText = appName;
+  minBTN.style.top = "-2px";
+  $("#" + programName).append(containerTitle);
 
   //vf = viewerframe
   let vf = document.createElement("iframe");

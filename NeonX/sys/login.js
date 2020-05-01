@@ -2,21 +2,33 @@ usernames = ["Grathium"];
 passwords = ["Admin1234!"];
 
 let login = (usrname, pswd) => {
+  let loggedIn = false;
   for (var i = 0; i < usernames.length; i++) {
     if (usrname == usernames[i] && pswd == passwords[i]) {
       console.log("Logging in:  " + usrname + "...");
       window.location.href = "desktop.html?usr=" + usrname;
+      loggedIn = true;
     }
+  }
+  if (loggedIn == false) { alert("Incorrect Username & Password..."); }
+}
+
+let addAccount = () => {
+  if ($("#regpass").val() == $("#reregpass").val()) {
+    usernames.push($("#regname").val());
+    passwords.push($("#regpass").val());
+  } else {
+    alert("Please Check Both Passwords Match...");
   }
 }
 
 function keydown(e) {
   var key=e.keyCode || e.which;
   if (key==13) {
+    addAccount();
     login(document.getElementById('name').value, document.getElementById('pass').value);
   }
 }
-
 
 $(function() {
 

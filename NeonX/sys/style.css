@@ -24,13 +24,14 @@ a {
 .programWindow {
   position: absolute;
   display: inline;
+  text-align: left;
   left: 150px;
   top: 100px;
   opacity: 0.95;
   width: 45%;
   height: 60%;
-  color: #abb2bf;
-  background-color: #21252b;
+  color: white;
+  background-image: linear-gradient(to bottom right, #21252b, #31353b);
   animation: 0.9s fadein;
   user-select: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -38,12 +39,20 @@ a {
   transform: scale(1);
 }
 
-.menubar {
+.containerTitle {
   position: relative;
+  display: inline;
+  right: calc(-50% + 115px);
+  color: #abb2bf !important;
+  font-size: 18px;
+}
+
+.menubar {
   display: inline;
   color: #abb2bf;
   background-color: #21252b;
   border-style: none;
+  font-size: 20px;
   height: 25px;
   width: 25px;
   top: 0px;
@@ -53,7 +62,7 @@ a {
   background-color: #31353b;
   border-bottom-style: solid;
   border-bottom-width: thin;
-  border-bottom-color: #abb2bf;
+  border-bottom-color: #dbe2ef;
 }
 
 .viewFrame {
