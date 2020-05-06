@@ -40,11 +40,11 @@ a {
 }
 
 .containerTitle {
-  position: relative;
-  display: inline;
-  right: calc(-50% + 115px);
+  position: absolute;
   color: #abb2bf !important;
   font-size: 18px;
+  left: 50%;
+  transform: translate(-50%, 2px);
 }
 
 .menubar {

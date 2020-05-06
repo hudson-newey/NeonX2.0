@@ -224,11 +224,10 @@ function editDesktop(enabled) {
 
 function addApp(file) {
   desktopContextMenu(null, null, false); //toggle context menu
-  var text = file[0];
 
   var reader = new FileReader();
   reader.onload = function(e) {
-    if (text.name == "package.app") {
+    if (file[0].name == "package.app") {
       // correct file type
       var appName = e.target.result;
       console.log("Installing, " + appName);
@@ -256,7 +255,7 @@ function addApp(file) {
     }
 
   };
-  reader.readAsText(text);
+  reader.readAsText(file[0]);
 }
 
 let initializeDesktop = () => {
