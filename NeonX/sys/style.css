@@ -120,6 +120,15 @@ img.icons {
   top: 2.5px;
 }
 
+.waitingInput {
+  position: relative;
+  width: 42px;
+  font-size: 12px;
+  left: -2px;
+  border-style: none;
+  background-color: transparent;
+}
+
 #editDesktopBTN {
   position: absolute;
   right: 5px;

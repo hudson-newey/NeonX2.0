@@ -12,22 +12,20 @@ function addIcon(action) {
 
 let newFolder = () => {
   let temps = generateRandomString(8);
-  var fileName = prompt("New Folder,", "untitled");
-  if (fileName == null || fileName == "") {return 0;} //if there is no file name 'return 0;'
-  var appName = "Folder"
   let iconContainer = document.createElement("div");
   iconContainer.id = temps;
   iconContainer.className = "desktop__item";
-  iconContainer.ondblclick = function() { startProgram("", './applications/Folder/index.html?file=' + fileName) };
+  iconContainer.ondblclick = function() { startProgram("", 'http://localhost:8080/?dir=../../Home') };
   $("#desktopBG").append(iconContainer);
 
   let iconPicture = document.createElement("img");
   iconPicture.className = "desktop_icons";
-  iconPicture.src = "./applications/Folder/favicon.png";
+  iconPicture.src = "./Home/Pictures/icons/folder.png";
   $("#" + temps).append(iconPicture);
 
-  let iconText = document.createElement("text");
-  iconText.innerText = fileName;
+  let iconText = document.createElement("input");
+  iconText.className = "waitingInput";
+  iconText.value = "untitled";
   $("#" + temps).append(iconText);
 
   initializeDesktop();
@@ -267,13 +265,25 @@ let initializeDesktop = () => {
   $(".taskbarItem").click(function(e) {
     bringtoFront($(this).attr("app"));
   });
+
+  $('.waitingInput').bind("enterKey",function(e){
+    this.replaceWith(this.value)
+    this.ondblclick = function() { startProgram("", 'http://localhost:8080/?dir=Home/Documents/'+ this.value) };
+  });
+  $('.waitingInput').keyup(function(e){
+     if(e.keyCode == 13)
+     {
+      $(this).trigger("enterKey");
+     }
+  });
+
   console.log("Desktop Refreshed!");
 }
 $(document).ready(function() {initializeDesktop();});
 
 // sub FUNCTIONS
 let generateRandomString = (length) => {
-	const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ";
+	const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let text = "";
 
   for (var i = 0; i < length; i++)
