@@ -15,7 +15,7 @@ let newFolder = () => {
   let iconContainer = document.createElement("div");
   iconContainer.id = temps;
   iconContainer.className = "desktop__item";
-  iconContainer.ondblclick = function() { startProgram("", 'http://localhost:8080/?dir=../../Home') };
+  iconContainer.ondblclick = function() { startProgram("", 'http://localhost:8080/?dir=Home') };
   $("#desktopBG").append(iconContainer);
 
   let iconPicture = document.createElement("img");
@@ -100,10 +100,7 @@ function newWindow(appLink, appName) {
   } else { // google and file explorer need to be hardcoded (i hate this)
     switch (appName) {
       case "https://www.bing.com":
-        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/Pictures/icons/google.png'>Web Browser");
-        break;
-      case "./Home":
-        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./Home/Pictures/icons/files.png'>Files");
+        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./NeonX/icons/google.png'>Web Browser");
         break;
       default:
         taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./applications/" + appName + "/favicon.png'>" + appName);

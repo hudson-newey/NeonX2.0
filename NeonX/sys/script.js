@@ -152,7 +152,7 @@ $('.menu-toggle').each(function() {
 let loadBackground = () => {
   try {
     $('#currentUser').text($.urlParam('usr'));
-    document.getElementById('desktopBG').style.backgroundImage ="url('./Home/Pictures/backgrounds/" + Math.ceil(Math.random() * backgroundCount) + ".png')";
+    document.getElementById('desktopBG').style.backgroundImage ="url('./NeonX/backgrounds/" + Math.ceil(Math.random() * backgroundCount) + ".png')";
   }
   catch(err) {
     console.log(err);
