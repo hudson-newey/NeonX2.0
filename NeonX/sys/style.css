@@ -1,10 +1,5 @@
 *, *:before, *:after {
   box-sizing: border-box;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   cursor: url('./cursor.png'), auto;
 }
@@ -31,7 +26,8 @@ a {
   width: 45%;
   height: 60%;
   color: white;
-  background-image: linear-gradient(to bottom right, #21252b, #31353b);
+  /* background-image: linear-gradient(to bottom right, #21252b, #31353b); */ /* DEPRICATED */
+  background-color: #202340;
   animation: 0.9s fadein;
   user-select: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -50,7 +46,7 @@ a {
 .menubar {
   display: inline;
   color: #abb2bf;
-  background-color: #21252b;
+  background-color: #202340;
   border-style: none;
   font-size: 20px;
   height: 25px;
