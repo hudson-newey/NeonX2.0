@@ -3,6 +3,7 @@ import socketserver
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
 import glob
+import files.py
 
 class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):

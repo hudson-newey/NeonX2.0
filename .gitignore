@@ -1,1 +1,8 @@
+# gitignore for Grathium Industries
+# NeonX2.0
+
 node_modules/
+NeonX/sys/__pycache__/
+TODO
+NeonX/sys/explorer.js
+NeonX/sys/desktop.js
