@@ -3,4 +3,5 @@
 
 node_modules/
 NeonX/sys/__pycache__/
+NeonX/sys/*.js
 TODO
