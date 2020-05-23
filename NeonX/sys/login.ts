@@ -1,32 +1,32 @@
-usernames = ["Grathium"];
-passwords = ["Admin1234!"];
+var usernames: Array<> = ["Grathium"]
+var passwords: Array<> = ["Admin1234!"]
 
 let login = (usrname, pswd) => {
-  let loggedIn = false;
+  let loggedIn = false
   for (var i = 0; i < usernames.length; i++) {
     if (usrname == usernames[i] && pswd == passwords[i]) {
-      console.log("Logging in:  " + usrname + "...");
-      window.location.href = "desktop.html?usr=" + usrname;
-      loggedIn = true;
+      console.log("Logging in:  " + usrname + "...")
+      window.location.href = "desktop.html?usr=" + usrname
+      loggedIn = true
     }
   }
-  if (loggedIn == false) { alert("Incorrect Username & Password..."); }
+  if (loggedIn == false) { alert("Incorrect Username & Password...") }
 }
 
 let addAccount = () => {
   if ($("#regpass").val() == $("#reregpass").val()) {
-    usernames.push($("#regname").val());
-    passwords.push($("#regpass").val());
+    usernames.push($("#regname").val())
+    passwords.push($("#regpass").val())
   } else {
-    alert("Please Check Both Passwords Match...");
+    alert("Please Check Both Passwords Match...")
   }
 }
 
 function keydown(e) {
-  var key=e.keyCode || e.which;
+  var key=e.keyCode || e.which
   if (key==13) {
-    addAccount();
-    login(document.getElementById('name').value, document.getElementById('pass').value);
+    addAccount()
+    login(document.getElementById('name').value, document.getElementById('pass').value)
   }
 }
 
@@ -44,7 +44,7 @@ $(function() {
          $(".spin", this).css({
             "width": "100%"
          })
-      });
+      })
    }).blur(function() {
       $(".spin").css({
          "width": "0px"
@@ -57,16 +57,16 @@ $(function() {
                "font-weight": "300",
                "top": "10px"
             })
-         });
+         })
 
       }
-   });
+   })
 
    $(".button").click(function(e) {
       var pX = e.pageX,
          pY = e.pageY,
          oX = parseInt($(this).offset().left),
-         oY = parseInt($(this).offset().top);
+         oY = parseInt($(this).offset().top)
 
       $(this).append('<span class="click-efect x-' + oX + ' y-' + oY + '" style="margin-left:' + (pX - oX) + 'px;margin-top:' + (pY - oY) + 'px;"></span>')
       $('.x-' + oX + '.y-' + oY + '').animate({
@@ -75,8 +75,8 @@ $(function() {
          "top": "-250px",
          "left": "-250px",
 
-      }, 600);
-      $("button", this).addClass('active');
+      }, 600)
+      $("button", this).addClass('active')
    })
 
    $(".alt-2").click(function() {
@@ -97,16 +97,16 @@ $(function() {
             "width": "140px",
             "height": "140px"
          }, 500, function() {
-            $(".box").removeClass("back");
+            $(".box").removeClass("back")
 
             $(this).removeClass('active')
-         });
+         })
 
-         $(".overbox .title").fadeOut(300);
-         $(".overbox .input").fadeOut(300);
-         $(".overbox .button").fadeOut(300);
+         $(".overbox .title").fadeOut(300)
+         $(".overbox .input").fadeOut(300)
+         $(".overbox .button").fadeOut(300)
 
-         $(".alt-2").addClass('material-buton');
+         $(".alt-2").addClass('material-buton')
       }
 
    })
@@ -118,12 +118,12 @@ $(function() {
             $(".overbox").css({
                "overflow": "hidden"
             })
-            $(".box").addClass("back");
+            $(".box").addClass("back")
          }, 200)
          $(this).addClass('active').animate({
             "width": "700px",
             "height": "700px"
-         });
+         })
 
          setTimeout(function() {
             $(".shape").css({
@@ -132,20 +132,20 @@ $(function() {
                "transform": "rotate(45deg)"
             })
 
-            $(".overbox .title").fadeIn(300);
-            $(".overbox .input").fadeIn(300);
-            $(".overbox .button").fadeIn(300);
+            $(".overbox .title").fadeIn(300)
+            $(".overbox .input").fadeIn(300)
+            $(".overbox .button").fadeIn(300)
          }, 700)
 
-         $(this).removeClass('material-button');
+         $(this).removeClass('material-button')
 
       }
 
       if ($(".alt-2").hasClass('material-buton')) {
-         $(".alt-2").removeClass('material-buton');
-         $(".alt-2").addClass('material-button');
+         $(".alt-2").removeClass('material-buton')
+         $(".alt-2").addClass('material-button')
       }
 
-   });
+   })
 
-});
+})

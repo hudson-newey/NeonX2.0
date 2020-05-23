@@ -265,7 +265,7 @@ let initializeDesktop = () => {
 
   $('.waitingInput').bind("enterKey",function(e){
     this.replaceWith(this.value)
-    this.ondblclick = function() { startProgram("", 'http://localhost:8080/?dir=Home/Documents/'+ this.value) };
+    this.ondblclick = function() { startProgram("", 'http://localhost:8080/?dir=Home/Documents/'+ this.value); };
   });
   $('.waitingInput').keyup(function(e){
      if(e.keyCode == 13)

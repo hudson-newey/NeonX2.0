@@ -1,53 +1,53 @@
 $.urlParam = function(name){
-	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-	return results[1] || 0;
+	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href)
+	return results[1] || 0
 }
 
 let desktop = function () {
-	window.location.href = '../desktop.html?usr=' + $.urlParam('usr');
+	window.location.href = '../desktop.html?usr=' + $.urlParam('usr')
 }
 
-var c = document.getElementById("screen");
-var ctx = c.getContext("2d");
+var c = document.getElementById("screen")
+var ctx = c.getContext("2d")
 
-c.height = window.innerHeight;
-c.width = window.innerWidth;
+c.height = window.innerHeight
+c.width = window.innerWidth
 
-ctx.fillStyle = "rgb(0, 0, 30)";
-	ctx.fillRect(0, 0, c.width, c.height);
+ctx.fillStyle = "rgb(0, 0, 30)"
+	ctx.fillRect(0, 0, c.width, c.height)
 
-var payload = "абвгдеёжзийклмнопрстуфхцчщъыэюя   ";
-chinese = payload.split("");
+var payload = "абвгдеёжзийклмнопрстуфхцчщъыэюя   "
+chinese = payload.split("")
 
-var font_size = 10;
-var columns = c.width/font_size;
-var drops = [];
+var font_size = 10
+var columns = c.width/font_size
+var drops = []
 for(var x = 0; x < columns; x++)
-	drops[x] = 1;
+	drops[x] = 1
 
 function draw()
 {
-	ctx.fillStyle = "rgba(0, 0, 20, 0.05)";
-	ctx.fillRect(0, 0, c.width, c.height);
-	let rn = Math.floor(Math.random() * 255);
-	ctx.fillStyle = "rgb(0,"+ rn+20 +"," + rn+90 + ")";
-	ctx.font = font_size + "px sans-serif";
+	ctx.fillStyle = "rgba(0, 0, 20, 0.05)"
+	ctx.fillRect(0, 0, c.width, c.height)
+	let rn = Math.floor(Math.random() * 255)
+	ctx.fillStyle = "rgb(0,"+ rn+20 +"," + rn+90 + ")"
+	ctx.font = font_size + "px sans-serif"
 	for(var i = 0; i < drops.length; i++)
 	{
 
-		var text = payload[Math.floor(Math.random()*payload.length)];
+		var text = payload[Math.floor(Math.random()*payload.length)]
 
-		ctx.fillText(text, i*font_size, drops[i]*font_size);
+		ctx.fillText(text, i*font_size, drops[i]*font_size)
 
 		if(drops[i]*font_size > c.height && Math.random() > 0.975)
-			drops[i] = 0;
+			drops[i] = 0
 
 		//incrementing Y coordinate
-		drops[i]++;
+		drops[i]++
 	}
 }
 
-setInterval(draw, 60);
+setInterval(draw, 60)
 
 
 
@@ -127,13 +127,13 @@ doc.ready(() => inject())
 
 
 /* complete lockout */
-var screensaverTimeout = 900; // 15 minutes
+var screensaverTimeout = 900 // 15 minutes
 function loop() {
-  setTimeout(loop, 1000);
-  screensaverTimeout -= 1;
+  setTimeout(loop, 1000)
+  screensaverTimeout -= 1
 
-	console.clear();
-  console.log(screensaverTimeout);
-  if (screensaverTimeout < 1) window.location.href= "../login.html";
+	console.clear()
+  console.log(screensaverTimeout)
+  if (screensaverTimeout < 1) window.location.href= "../login.html"
 }
-loop();
+loop()

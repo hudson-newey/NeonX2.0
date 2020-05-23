@@ -3,7 +3,6 @@ import socketserver
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
 import glob
-import files.py
 
 class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
@@ -26,7 +25,7 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
         files = getFiles(directory)
 
         html = f"""<html><head><div><button id='backBTN' onclick='window.history.back();'><b><</b></button><h3 class='heading'><u>{directory}</u></h3></div>
-        <input id='directory-search' class='searchbar' value='{directory}' onkeyup='fileNavigate(event);'></input>
+        <input id='directory-search' class='searchbar' value='{directory}'></input>
         </head>
         <body><p>"""
         # display directory sidebar
@@ -57,7 +56,7 @@ def getFiles(dir):
     return glob.glob(dir)
 
 def rf(filename):
-    return open(filename, 'r').read()
+    return open(filename, "r").read()
 
 # Create an object of the above class
 handler_object = MyHttpRequestHandler

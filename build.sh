@@ -1,6 +1,6 @@
 # build NeonX2.0 ./build.sh
 
-coffeeBuild="./NeonX/sys/explorer"
+coffeeBuild=("./NeonX/sys/explorer" "./applications/Notepad/script")
 typescriptBuild=("./NeonX/sys/desktop" "./NeonX/sys/screensaver" "./NeonX/sys/script" "./NeonX/sys/login")
 
 # build coffeescript files
