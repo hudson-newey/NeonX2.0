@@ -1,5 +1,5 @@
-let navigate = function(e) {
-  var key=e.keyCode || e.which
+let navigate = function(e: any): void {
+  let key: number = e.keyCode || e.which
   if (key==13) {
     if ($("#search__input").val().includes("://")) {
       startProgram('', $("#search__input").val())
@@ -10,15 +10,15 @@ let navigate = function(e) {
   }
 }
 
-function esc(e) {
-  var key=e.keyCode || e.which
+function esc(e: any): void {
+  let key: number = e.keyCode || e.which
   if (key==27) {
     toggleStart()
   }
   desktopContextMenu(event.clientX, event.clientY, false)
 }
 
-function user(status) {
+function user(status: string): void {
   switch (status) {
     case "logout":
       window.location.href = "./login.html"
@@ -35,7 +35,7 @@ function user(status) {
 }
 
 $(window).load(function() {
-  var $container = $('.start-screen')
+  let $container: object = $('.start-screen')
 
   $container.masonry({
     itemSelector: '.masonry-item',
@@ -50,9 +50,9 @@ $(function() {
   //$('.start-screen-scroll').jScrollPane();
 })
 
-function resizeStart() {
-    var startWidth = $('.start-screen').outerWidth()
-    var startRound = Math.ceil(startWidth / 128.0) * 128
+function resizeStart(): void {
+    let startWidth: number = $('.start-screen').outerWidth()
+    let startRound: number = Math.ceil(startWidth / 128.0) * 128
 
   console.log('original: ' + startWidth)
   console.log('rounded: ' + startRound)
@@ -65,7 +65,7 @@ function resizeStart() {
 
 
 // Unfocus windows when desktop is clicked
-$('.desktop').click(function(e) {
+$('.desktop').click(function(e: any) {
   if ($('.desktop').has(e.target).length === 0) {
     desktopContextMenu(event.clientX, event.clientY, false)
   }
@@ -74,7 +74,7 @@ $('.desktop').click(function(e) {
 
 
 
-function toggleStart(e) {
+function toggleStart(e: any): void {
   $('.start-menu-fade').fadeToggle(500)
   $('.start-menu').fadeToggle(250).toggleClass('start-menu--open')
   $('.taskbar__item--start').toggleClass('start--open')
@@ -96,10 +96,10 @@ $(function() {
 
 // Current time
 let getTime = () => {
-  var a_p = ""
-  var d = new Date()
+  let a_p: string = ""
+  let d = new Date()
 
-  var curr_hour = d.getHours()
+  let curr_hour: number = d.getHours()
   if (curr_hour < 12) { a_p = "AM" } else { a_p = "PM" }
 
   // hours
@@ -110,24 +110,24 @@ let getTime = () => {
     curr_hour = curr_hour - 12
   }
 
-  var curr_min = d.getMinutes()
+  let curr_min: number = d.getMinutes()
   if ( curr_min < 10 ) {
-    curr_min = '0' + curr_min
+    curr_min = '0' + curr_min.toString()
   }
 
-  $('#timeDisplay').html(curr_hour + ':' + curr_min + ' ' + a_p)
+  $('#timeDisplay').html(curr_hour.toString() + ':' + curr_min.toString() + ' ' + a_p)
 }
 
-$.urlParam = function(name){
-	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href)
+$.urlParam = function(name: string) {
+	let results: string = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href)
 	return results[1] || 0
 }
 
 $('.menu-toggle').each(function() {
-  var menuName = $(this).data('menu')
-  var menu = $('.menu[data-menu="' + menuName + '"]')
-  var pos = $(this).position()
-  var height = $(this).outerHeight()
+  let menuName = $(this).data('menu')
+  let menu = $('.menu[data-menu="' + menuName + '"]')
+  let pos = $(this).position()
+  let height = $(this).outerHeight()
 
   if ( !$(menu).hasClass('menu--bottom') ) {
     $(menu).position({
@@ -170,8 +170,8 @@ $(document).mouseup(function(e) {
 
 
 /* LOOP */
-var screensaverTimeout = 480 // seconds (8) miniutes default
-function loop() {
+let screensaverTimeout: number = 480 // seconds (8) miniutes default
+function loop(): void {
   getTime()
   setTimeout(loop, 1000)
   screensaverTimeout -= 1

@@ -1,9 +1,9 @@
-var usernames: Array<> = ["Grathium"]
-var passwords: Array<> = ["Admin1234!"]
+let usernames: Array<> = ["Grathium"]
+let passwords: Array<> = ["Admin1234!"]
 
-let login = (usrname, pswd) => {
-  let loggedIn = false
-  for (var i = 0; i < usernames.length; i++) {
+let login = (usrname: string, pswd: string) => {
+  let loggedIn: boolean = false
+  for (let i = 0; i < usernames.length; i++) {
     if (usrname == usernames[i] && pswd == passwords[i]) {
       console.log("Logging in:  " + usrname + "...")
       window.location.href = "desktop.html?usr=" + usrname
@@ -22,8 +22,8 @@ let addAccount = () => {
   }
 }
 
-function keydown(e) {
-  var key=e.keyCode || e.which
+function keydown(e: any) {
+  let key=e.keyCode || e.which
   if (key==13) {
     addAccount()
     login(document.getElementById('name').value, document.getElementById('pass').value)
@@ -63,7 +63,7 @@ $(function() {
    })
 
    $(".button").click(function(e) {
-      var pX = e.pageX,
+      let pX = e.pageX,
          pY = e.pageY,
          oX = parseInt($(this).offset().left),
          oY = parseInt($(this).offset().top)

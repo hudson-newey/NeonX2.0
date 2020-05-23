@@ -1,5 +1,5 @@
 $.urlParam = function(name){
-	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href)
+	let results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href)
 	return results[1] || 0
 }
 
@@ -7,8 +7,8 @@ let desktop = function () {
 	window.location.href = '../desktop.html?usr=' + $.urlParam('usr')
 }
 
-var c = document.getElementById("screen")
-var ctx = c.getContext("2d")
+let c = document.getElementById("screen")
+let ctx = c.getContext("2d")
 
 c.height = window.innerHeight
 c.width = window.innerWidth
@@ -16,13 +16,13 @@ c.width = window.innerWidth
 ctx.fillStyle = "rgb(0, 0, 30)"
 	ctx.fillRect(0, 0, c.width, c.height)
 
-var payload = "абвгдеёжзийклмнопрстуфхцчщъыэюя   "
+const payload: string = "абвгдеёжзийклмнопрстуфхцчщъыэюя   "
 chinese = payload.split("")
 
-var font_size = 10
-var columns = c.width/font_size
-var drops = []
-for(var x = 0; x < columns; x++)
+let font_size: number = 10
+let columns: number = c.width/font_size
+let drops: Array<> = []
+for(let x = 0; x < columns; x++)
 	drops[x] = 1
 
 function draw()
@@ -32,10 +32,10 @@ function draw()
 	let rn = Math.floor(Math.random() * 255)
 	ctx.fillStyle = "rgb(0,"+ rn+20 +"," + rn+90 + ")"
 	ctx.font = font_size + "px sans-serif"
-	for(var i = 0; i < drops.length; i++)
+	for(let i = 0; i < drops.length; i++)
 	{
 
-		var text = payload[Math.floor(Math.random()*payload.length)]
+		let text = payload[Math.floor(Math.random()*payload.length)]
 
 		ctx.fillText(text, i*font_size, drops[i]*font_size)
 
@@ -127,8 +127,8 @@ doc.ready(() => inject())
 
 
 /* complete lockout */
-var screensaverTimeout = 900 // 15 minutes
-function loop() {
+let screensaverTimeout: number = 900 // 15 minutes
+function loop(): void {
   setTimeout(loop, 1000)
   screensaverTimeout -= 1
 
