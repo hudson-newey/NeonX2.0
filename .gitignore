@@ -4,4 +4,6 @@
 node_modules/
 NeonX/sys/__pycache__/
 NeonX/sys/*.js
+applications/Calender/script.js
+applications/Notepad/script.js
 TODO
