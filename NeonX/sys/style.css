@@ -221,6 +221,11 @@ img.icons {
   left: 10px;
 }
 
+.draw__item {
+  position: relative;
+  padding: 40px;
+}
+
 /* SIDEBAR */
 #appsTray {
   position: relative;

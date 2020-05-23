@@ -130,7 +130,7 @@ let removeProgram = (app: string) => {
 }
 
 
-function taskkill(e: any, app: string, click: boolean): void {
+function taskkill(e, app: string, click: boolean): void {
   // move to front
   bringtoFront(app)
 
@@ -183,7 +183,7 @@ function fullscreenProgram(app: string): void {
 	}
 }
 
-function desktopContextMenu(x: string, y: string, toggle: boolean): void {
+function desktopContextMenu(x, y, toggle: boolean): void {
   if (toggle == true) {
     if ($("#desktopContextMenu").css("display") == "block") {
       $("#desktopContextMenu").css("display", "none")
@@ -233,6 +233,10 @@ function addApp(file: any) {
       iconContainer.className = "desktop__item";
       iconContainer.ondblclick = function() { startProgram(appName, ''); };
       $("#desktopBG").append(iconContainer)
+
+      iconContainer.className = "draw__item";
+      iconContainer.onclick = function() { startProgram(appName, ''); $("#all-apps").hide(); };
+      $("#all-apps").append(iconContainer)
 
       let iconPicture = document.createElement("img")
       iconPicture.className = "desktop_icons"
@@ -295,5 +299,5 @@ let generateRandomString = (length: number) => {
 
 document.addEventListener('contextmenu', event => {
   event.preventDefault()
-  desktopContextMenu((event.clientX).toString(), (event.clientY).toString(), true)
+  desktopContextMenu(event.clientX, event.clientY, true)
 });
