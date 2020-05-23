@@ -107,29 +107,41 @@
   <ul id="all-apps">
     <button id="allAppsCloseBTN" type="button">x</button>
 
-    <div class="draw__item" ondblclick="startProgram('', 'https://www.bing.com');">
+    <div class="draw__item" onclick="startProgram('', 'https://www.bing.com'); $('#all-apps').hide();">
       <img class="desktop_icons" src="./NeonX/icons/google.png"></img>
       <text>Google</text>
     </div>
-    <div class="draw__item" ondblclick="startProgram('Notepad', '');">
+    <div class="draw__item" onclick="startProgram('Notepad', ''); $('#all-apps').hide();">
       <img class="desktop_icons" src="./applications/Notepad/favicon.png"></img>
       <text>Notepad</text>
     </div>
-    <div class="draw__item" ondblclick="startProgram('', 'http://localhost:8080/?dir=Home');">
+    <div class="draw__item" onclick="startProgram('', 'http://localhost:8080/?dir=Home'); $('#all-apps').hide();">
       <img class="desktop_icons" src="./NeonX/icons/files.png"></img>
       <text>Files</text>
     </div>
-    <div class="draw__item" ondblclick="startProgram('Google Docs', '');">
+    <div class="draw__item" onclick="startProgram('Google Docs', ''); $('#all-apps').hide();">
       <img class="desktop_icons" src="./applications/Google Docs/favicon.png"></img>
       <text>Docs</text>
     </div>
-    <div class="draw__item" ondblclick="startProgram('Google Slides', '');">
+    <div class="draw__item" onclick="startProgram('Google Slides', ''); $('#all-apps').hide();">
       <img class="desktop_icons" src="./applications/Google Slides/favicon.png"></img>
       <text>Slides</text>
     </div>
-    <div class="draw__item" ondblclick="startProgram('Google Sheets', '');">
+    <div class="draw__item" onclick="startProgram('Google Sheets', ''); $('#all-apps').hide();">
       <img class="desktop_icons" src="./applications/Google Sheets/favicon.png"></img>
       <text>Sheets</text>
+    </div>
+    <div class="draw__item" onclick="startProgram('Calculator', ''); $('#all-apps').hide();">
+      <img class="desktop_icons" src="./applications/Calculator/favicon.png"></img>
+      <text>Calculator</text>
+    </div>
+    <div class="draw__item" onclick="startProgram('Camera', ''); $('#all-apps').hide();">
+      <img class="desktop_icons" src="./applications/Camera/favicon.png"></img>
+      <text>Camera</text>
+    </div>
+    <div class="draw__item" onclick="startProgram('Calender', ''); $('#all-apps').hide();">
+      <img class="desktop_icons" src="./applications/Calender/favicon.png"></img>
+      <text>Calender</text>
     </div>
   </ul>
 
