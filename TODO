@@ -1,13 +1,7 @@
-convert all server side file to coffeescript
-convert all application script files to coffeescript
-convert all desktop scripting files to typescript
-optimise desktop scripting files to take advantage of typescript
-
-moudulize desktop scripting files
+add trashcan
+add delete button in explorer
 add support for images & pdf in explorer
 
 add support to create custom files
-add lua scripting support
 
 if the esc key is held down for >6 seconds -> turn off
-create build.sh file

@@ -24,7 +24,7 @@ function user(status: string): void {
       window.location.href = "./login.html"
       break
     case "lock":
-      window.location.href = "./login.html"
+      document.location.replace("./login.html")
       break
     case "sleep":
       window.location.href= "./NeonX/screensaver.html?usr=" + $.urlParam('usr')
@@ -149,6 +149,11 @@ $('.menu-toggle').each(function() {
   })
 })
 
+// APPS DRAW
+document.getElementById('all-appsBTN').onclick = function(){ $("#all-apps").show() }
+document.getElementById('allAppsCloseBTN').onclick = function(){ $("#all-apps").hide() }
+
+// load background
 let loadBackground = () => {
   try {
     $('#currentUser').text($.urlParam('usr'))

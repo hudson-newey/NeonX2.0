@@ -61,7 +61,7 @@
         <div class="menu" data-menu="user">
           <a href="#">Change account picture</a>
           <a href="#" onclick="user('lock')">Lock</a>
-          <a href="#" onclick="user('logout')">Sign out</a>
+          <a href="#" onclick="user('logout')">Switch User</a>
         </div>
         <a class="user-info__power menu-toggle" href="#" data-menu="power">
           <strong>✲</strong>
@@ -95,13 +95,18 @@
         </li>
       </ul>
 
-      <a class="all-apps" href="#">
+      <a id="all-appsBTN" href="#">
         All apps
         <i class="fa fa-arrow-right"></i>
       </a>
       <input type="text" id="search__input" placeholder="Search Anything Here" onkeydown="navigate(event);" spellcheck="false" autocomplete="off" autofocus></input>
     </div>
   </div>
+
+  <!--all apps traybar-->
+  <ul id="all-apps">
+    <button id="allAppsCloseBTN" type="button">x</button>
+  </ul>
 
   <div class="taskbar">
     <a id="superButton" class="taskbar__item taskbar__item--start" href="javascript:void(0)">

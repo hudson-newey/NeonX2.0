@@ -204,6 +204,24 @@ img.icons {
   height: 100%;
 }
 
+/* ALL APPS */
+#all-apps {
+  position: absolute;
+  color: #EFF0F1;
+  background: rgba(1, 1, 1, 0.7);
+  left: 0px;
+  top: -48px;
+  width: 100%;
+  height: calc(100% - 15px);
+}
+
+#allAppsCloseBTN {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+}
+
+/* SIDEBAR */
 #appsTray {
   position: relative;
   left: 58px;
@@ -473,7 +491,7 @@ img.icons {
   text-align: center;
 }
 
-.all-apps {
+#all-appsBTN {
   position: absolute;
   right: 0;
   bottom: 40px;
@@ -482,7 +500,7 @@ img.icons {
   color: white;
   transition: all 100ms;
 }
-.all-apps > i {
+#all-appsBTN > i {
   margin-left: 5px;
   margin-right: 5px;
   border: 2px solid white;
@@ -492,7 +510,7 @@ img.icons {
   line-height: 26px;
   text-align: center;
 }
-.all-apps:hover > i {
+#all-appsBTN:hover > i {
   background-color: #37474F;
 }
 

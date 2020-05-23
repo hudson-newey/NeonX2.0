@@ -254,6 +254,7 @@ function addApp(file: any) {
 }
 
 let initializeDesktop = () => {
+  // desktop icons
   let p = $(".desktop__item").draggable()
   $(".desktop__item").mousedown(function(eventObject){editDesktop(true);});
   $(".desktop__item").mouseup(function(eventObject){editDesktop(false);});
@@ -263,6 +264,10 @@ let initializeDesktop = () => {
     bringtoFront($(this).attr("app"))
   });
 
+  // all apps grid
+  $('#all-apps').hide()
+
+  // icon renaming
   $('.waitingInput').bind("enterKey",function(e){
     this.replaceWith(this.value)
     this.ondblclick = function() { startProgram("", 'http://localhost:8080/?dir=Home/Documents/'+ this.value); };
@@ -290,5 +295,5 @@ let generateRandomString = (length: number) => {
 
 document.addEventListener('contextmenu', event => {
   event.preventDefault()
-  desktopContextMenu(event.clientX, event.clientY, true)
+  desktopContextMenu((event.clientX).toString(), (event.clientY).toString(), true)
 });
