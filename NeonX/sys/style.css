@@ -213,7 +213,9 @@ img.icons {
   top: -48px;
   width: 100%;
   height: calc(100% - 15px);
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  overflow: auto;
 }
 
 #allAppsCloseBTN {
@@ -226,6 +228,12 @@ img.icons {
   position: relative;
   padding: 40px;
   height: 150px;
+}
+
+.draw__item:hover {
+  background: rgba(200, 200, 200, 0.9);
+  border-style: dashed;
+  border-color: black;
 }
 
 /* SIDEBAR */

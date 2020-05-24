@@ -1,4 +1,4 @@
-let openApps: string[] = new Array()
+let openApps: string[] = new Array()z
 let mouseLocation: number[] = new Array(0, 0)
 const backgroundCount: number = 9
 
@@ -135,18 +135,18 @@ function taskkill(e, app: string, click: boolean): void {
   bringtoFront(app)
 
   if (click == true) {
-    let close: boolean = false
-    let rightclick
+    let closeApp: boolean = false
+    var rightclick
     if (!e) let e = window.event
     if (e.which) rightclick = (e.which == 3);
     else if (e.button) rightclick = (e.button == 2);
-    if (rightclick == true){close = true;}
-  }else{close = true;}
+    if (rightclick == true){closeApp = true;}
+  }else{closeApp = true;}
 
-  if (close == true) {
-    $("#" + app).remove()
-    removeProgram(app)
-    $('p[app="' + app + '"]').remove()
+  if (closeApp == true) {
+    $("#" + app).remove() // frontend
+    removeProgram(app) // backend
+    $('p[app="' + app + '"]').remove() // taskbar
   }
 }
 
@@ -229,14 +229,16 @@ function addApp(file: any) {
 
       let temps = generateRandomString(8);
       let iconContainer = document.createElement("div")
-      iconContainer.id = temps;
-      iconContainer.className = "desktop__item";
+      iconContainer.id = temps
+      iconContainer.className = "desktop__item"
       iconContainer.ondblclick = function() { startProgram(appName, ''); };
       $("#desktopBG").append(iconContainer)
 
-      iconContainer.className = "draw__item";
-      iconContainer.onclick = function() { startProgram(appName, ''); $("#all-apps").hide(); };
-      $("#all-apps").append(iconContainer)
+      let drawIcon = document.createElement("div")
+      drawIcon.id = temps
+      drawIcon.className = "draw__item"
+      drawIcon.onclick = function() { startProgram(appName, ''); };
+      $("#all-apps").append(drawIcon)
 
       let iconPicture = document.createElement("img")
       iconPicture.className = "desktop_icons"
