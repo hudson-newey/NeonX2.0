@@ -1,7 +1,7 @@
 let usernames: Array<> = ["Grathium"]
 let passwords: Array<> = ["Admin1234!"]
 
-let login = (usrname: string, pswd: string) => {
+let login = (usrname: string, pswd: string): void => {
   let loggedIn: boolean = false
   for (let i = 0; i < usernames.length; i++) {
     if (usrname == usernames[i] && pswd == passwords[i]) {
@@ -13,7 +13,7 @@ let login = (usrname: string, pswd: string) => {
   if (loggedIn == false) { alert("Incorrect Username & Password...") }
 }
 
-let addAccount = () => {
+let addAccount = (): void => {
   if ($("#regpass").val() == $("#reregpass").val()) {
     usernames.push($("#regname").val())
     passwords.push($("#regpass").val())
@@ -22,7 +22,7 @@ let addAccount = () => {
   }
 }
 
-function keydown(e: any) {
+function keydown(e: any): void {
   let key=e.keyCode || e.which
   if (key==13) {
     addAccount()

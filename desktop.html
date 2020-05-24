@@ -5,11 +5,8 @@
   <title>NeonX</title>
   <link rel="stylesheet" href="./NeonX/sys/style.css">
   <link rel="shortcut icon" href="./NeonX/icons/favicon.png">
-
 </head>
 <body>
-
-
 
 <div id="desktopBG" class="desktop">
   <div class="desktop__item" ondblclick="startProgram('', 'https://www.bing.com');">
@@ -46,6 +43,7 @@
     <a onclick="initializeDesktop();">Refresh Desktop</a><br>
     <a onclick="addIcon('folder');">New Folder</a><br>
     <a onclick="document.getElementById('file-input').click();">Install Apps</a><input id="file-input" type="file" name="name" onchange="addApp(this.files)" style="display: none;"/><br>
+    <a onclick="$('#all-apps').show()">All Apps</a><br>
     <a onclick="loadBackground();">New Background</a>
   </ul>
 
@@ -53,7 +51,7 @@
     <div class="start-menu__list">
       <div class="media">
         <a class="user-info menu-toggle" href="#" data-menu="user">
-        <img class="user-info__img media__img" src="https://i.imgur.com/KkCqvK9.png" alt="User image">
+        <img class="user-info__img media__img" src="./NeonX/icons/profile.png">
         <div class="user-info__name media__body">
           <span id="currentUser">Demo Account</span>
         </div>
@@ -104,7 +102,7 @@
   </div>
 
   <!--all apps traybar-->
-  <ul id="all-apps">
+  <ul id="all-apps" style="display: none;">
     <button id="allAppsCloseBTN" type="button">x</button>
 
     <div class="draw__item" onclick="startProgram('', 'https://www.bing.com'); $('#all-apps').hide();">
@@ -155,6 +153,7 @@
       </span>
 
       <span class="time" onclick="startProgram('Calender', '');"><p id="timeDisplay"></p></span>
+      <button id="showdesktopBTN" type="button" onclick="showDesktop();"></button>
     </div>
   </div>
 

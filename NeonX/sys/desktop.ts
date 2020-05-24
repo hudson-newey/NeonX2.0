@@ -1,4 +1,4 @@
-let openApps: string[] = new Array()z
+let openApps: string[] = new Array()
 let mouseLocation: number[] = new Array(0, 0)
 const backgroundCount: number = 9
 
@@ -10,7 +10,7 @@ function addIcon(action: string): void {
   }
 }
 
-let newFolder = () => {
+let newFolder = (): void => {
   let temps: string = generateRandomString(8)
   let iconContainer = document.createElement("div")
   iconContainer.id = temps
@@ -20,7 +20,7 @@ let newFolder = () => {
 
   let iconPicture = document.createElement("img")
   iconPicture.className = "desktop_icons"
-  iconPicture.src = "./Home/Pictures/icons/folder.png"
+  iconPicture.src = "./NeonX/icons/folder.png"
   $("#" + temps).append(iconPicture)
 
   let iconText = document.createElement("input")
@@ -70,7 +70,7 @@ function newWindow(appLink: string, appName: string): void {
   minBTN.className = "menubar"
   minBTN.innerText = "_"
   minBTN.style.top = "-2px"
-  minBTN.onclick = function() { sendtoBack(programName); };
+  minBTN.onclick = function() { minimise(programName); };
   $("#" + programName).append(minBTN)
 
   let containerTitle = document.createElement("span")
@@ -120,7 +120,7 @@ function newWindow(appLink: string, appName: string): void {
 
 
 
-let removeProgram = (app: string) => {
+let removeProgram = (app: string): void => {
   // remove closing app from app list
   for( let i = 0; i < openApps.length; i++){
     if ( openApps[i] === app) {
@@ -161,7 +161,7 @@ function bringtoFront(app: string): void {
   $("#" + app).css("display", "inline")
 }
 
-function sendtoBack(app): void {
+function minimise(app): void {
   $("#" + app).css("display", "none")
 }
 
@@ -172,7 +172,7 @@ function fullscreenProgram(app: string): void {
     document.getElementById(app).style.opacity = "0.95"
 		$("#" + app).height($(window).height() * 0.6)
 		$("#" + app).width($(window).width() * 0.45)
-		console.log("Minimise " + app)
+		console.log("Windowed " + app)
 	} else {
 		document.getElementById(app).style.top = "0px"
 		document.getElementById(app).style.left = "0px"
@@ -181,6 +181,13 @@ function fullscreenProgram(app: string): void {
 		$("#" + app).width($(window).width())
 		console.log("Maximise " + app)
 	}
+}
+
+let showDesktop = (): void => {
+  $("#all-apps").hide()
+  for (let i = 0; i < openApps.length; i++) {
+    minimise(openApps[i])
+  }
 }
 
 function desktopContextMenu(x, y, toggle: boolean): void {
@@ -259,7 +266,7 @@ function addApp(file: any) {
   reader.readAsText(file[0])
 }
 
-let initializeDesktop = () => {
+let initializeDesktop = (): void => {
   // desktop icons
   let p = $(".desktop__item").draggable()
   $(".desktop__item").mousedown(function(eventObject){editDesktop(true);});
@@ -290,7 +297,7 @@ let initializeDesktop = () => {
 $(document).ready(function() {initializeDesktop();});
 
 // sub FUNCTIONS
-let generateRandomString = (length: number) => {
+let generateRandomString = (length: number): string => {
 	const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
   let text = ""
 

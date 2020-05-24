@@ -155,6 +155,7 @@ img.icons {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 1px rgba(0, 0, 0, 0.1);
   filter: grayscale(0.1) drop-shadow(16px 16px 20px #21252b);
   opacity: 0.95;
+  z-index: 2;
 }
 .contextMenu a:visited {
   color: #282c34;
@@ -216,6 +217,7 @@ img.icons {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   overflow: auto;
+  z-index: 9997;
 }
 
 #allAppsCloseBTN {
@@ -277,6 +279,7 @@ img.icons {
     to   { opacity: 1; }
 }
 
+/* TASKBAR */
 .taskbar {
   position: absolute;
   left: 0;
@@ -346,7 +349,7 @@ img.icons {
 
 .time {
   position: fixed;
-  right: 2px;
+  right: 8px;
   bottom: -16px;
   z-index: 999999;
 }
@@ -357,6 +360,21 @@ img.icons {
 #timeDisplay:hover {
   cursor: pointer;
   color: #fff;
+  transition: all 600ms;
+}
+
+#showdesktopBTN {
+  position: absolute;
+  background-color: rgba(120, 144, 156, 0.5);
+  top: -128px;
+  width: 1px;
+  height: 48px;
+  right: -9px;
+  border: none;
+}
+#showdesktopBTN:hover {
+  cursor: pointer;
+  background-color: rgba(120, 144, 156, 0.8);
   transition: all 600ms;
 }
 

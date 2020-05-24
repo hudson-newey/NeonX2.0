@@ -95,7 +95,7 @@ $(function() {
 
 
 // Current time
-let getTime = () => {
+let getTime = (): void => {
   let a_p: string = ""
   let d = new Date()
 
@@ -154,7 +154,7 @@ document.getElementById('all-appsBTN').onclick = function(){ $("#all-apps").show
 document.getElementById('allAppsCloseBTN').onclick = function(){ $("#all-apps").hide() }
 
 // load background
-let loadBackground = () => {
+let loadBackground = (): void => {
   try {
     $('#currentUser').text($.urlParam('usr'))
     document.getElementById('desktopBG').style.backgroundImage ="url('./NeonX/backgrounds/" + Math.ceil(Math.random() * backgroundCount) + ".png')"
