@@ -224,6 +224,22 @@ img.icons {
   position: absolute;
   top: 50px;
   left: 10px;
+  width: 60px;
+  height: 60px;
+  font-size: 26px;
+  padding: 0px;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-style: none;
+  border-radius: 25px;
+  z-index: 12;
+}
+
+#allAppsCloseBTN:hover {
+  animation: 0.5s fadein;
+  background-color: #c9c9cf;
+  color: #333;
+  border-radius: 25px;
 }
 
 .draw__item {
