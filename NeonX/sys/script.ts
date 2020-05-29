@@ -1,6 +1,5 @@
 let navigate = function(e: any): void {
-  let key: number = e.keyCode || e.which
-  if (key==13) {
+  if (e.keyCode==13) {
     if ($("#search__input").val().includes("://")) {
       startProgram('', $("#search__input").val())
     } else {
@@ -12,9 +11,7 @@ let navigate = function(e: any): void {
 
 function esc(e: any): void {
   let key: number = e.keyCode || e.which
-  if (key==27) {
-    toggleStart()
-  }
+  if (key==27) toggleStart()
   desktopContextMenu(event.clientX, event.clientY, false)
 }
 
@@ -47,7 +44,7 @@ $(window).load(function() {
 })
 
 $(function() {
-  //$('.start-screen-scroll').jScrollPane();
+  //$('.start-screen-scroll').jScrollPane()
 })
 
 function resizeStart(): void {
@@ -66,9 +63,7 @@ function resizeStart(): void {
 
 // Unfocus windows when desktop is clicked
 $('.desktop').click(function(e: any) {
-  if ($('.desktop').has(e.target).length === 0) {
-    desktopContextMenu(event.clientX, event.clientY, false)
-  }
+  if ($('.desktop').has(e.target).length === 0) desktopContextMenu(event.clientX, event.clientY, false)
 })
 
 
@@ -97,24 +92,19 @@ $(function() {
 // Current time
 let getTime = (): void => {
   let a_p: string = ""
-  let d = new Date()
+  let dateOBJ = new Date()
 
-  let curr_hour: number = d.getHours()
+  let curr_hour: number = dateOBJ.getHours()
   if (curr_hour < 12) { a_p = "AM" } else { a_p = "PM" }
 
-  // hours
-  if (curr_hour == 0) {
-    curr_hour = 12
-  }
-  if (curr_hour > 12) {
-    curr_hour = curr_hour - 12
-  }
+  // adjust PM times by -12 hours
+  if (curr_hour > 12) curr_hour = curr_hour - 12
 
-  let curr_min: number = d.getMinutes()
-  if ( curr_min < 10 ) {
-    curr_min = '0' + curr_min.toString()
-  }
+  // add "zero" to start of minutes if <10
+  let curr_min: number = dateOBJ.getMinutes()
+  if (curr_min < 10) curr_min = '0' + curr_min.toString()
 
+  // display time on taskbar
   $('#timeDisplay').html(curr_hour.toString() + ':' + curr_min.toString() + ' ' + a_p)
 }
 
@@ -129,15 +119,13 @@ $('.menu-toggle').each(function() {
   let pos = $(this).position()
   let height = $(this).outerHeight()
 
-  if ( !$(menu).hasClass('menu--bottom') ) {
+  if (!$(menu).hasClass('menu--bottom')) {
     $(menu).position({
       my: 'left top',
       at: 'left bottom',
       of: this,
       collision: 'none'
     })
-  } else {
-    // menu hide?
   }
 
   $(menu).hide()
@@ -155,26 +143,20 @@ document.getElementById('allAppsCloseBTN').onclick = function(){ $("#all-apps").
 
 // load background
 let loadBackground = (): void => {
-  try {
-    $('#currentUser').text($.urlParam('usr'))
-    document.getElementById('desktopBG').style.backgroundImage ="url('./NeonX/backgrounds/" + Math.ceil(Math.random() * backgroundCount) + ".png')"
-  }
-  catch(err) {
-    console.log(err)
-  }
+  $('#currentUser').text($.urlParam('usr'))
+  document.getElementById('desktopBG').style.backgroundImage ="url('./NeonX/backgrounds/" + Math.ceil(Math.random() * backgroundCount) + ".png')"
 }
 loadBackground()
 
-
+// hide menu when clicking off the menu
 $(document).mouseup(function(e) {
-  if ( $('.menu').has(e.target).length === 0 && !$('.menu-toggle').is(e.target) && $('.menu-toggle').has(e.target).length === 0 ) {
+  if ($('.menu').has(e.target).length == 0 && !$('.menu-toggle').is(e.target) && $('.menu-toggle').has(e.target).length == 0)
     $('.menu').hide()
-  }
 })
 
 
-
 /* LOOP */
+// countdown timer till screensaver will be activated
 let screensaverTimeout: number = 480 // seconds (8) miniutes default
 function loop(): void {
   getTime()

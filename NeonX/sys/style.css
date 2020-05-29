@@ -382,10 +382,10 @@ img.icons {
 #showdesktopBTN {
   position: absolute;
   background-color: rgba(120, 144, 156, 0.5);
-  top: -128px;
+  bottom: 80px;
   width: 1px;
   height: 48px;
-  right: -9px;
+  right: -6px;
   border: none;
 }
 #showdesktopBTN:hover {

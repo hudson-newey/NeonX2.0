@@ -1,6 +1,7 @@
 let usernames: Array<> = ["Grathium"]
 let passwords: Array<> = ["Admin1234!"]
 
+// credentials checking function
 let login = (usrname: string, pswd: string): void => {
   let loggedIn: boolean = false
   for (let i = 0; i < usernames.length; i++) {
@@ -10,18 +11,24 @@ let login = (usrname: string, pswd: string): void => {
       loggedIn = true
     }
   }
-  if (loggedIn == false) { alert("Incorrect Username & Password...") }
+
+  // alert the user if login attempt failed
+  if (!loggedIn) alert("Incorrect Username & Password...")
 }
 
+
+// push new account to login arrays
 let addAccount = (): void => {
   if ($("#regpass").val() == $("#reregpass").val()) {
     usernames.push($("#regname").val())
     passwords.push($("#regpass").val())
-  } else {
-    alert("Please Check Both Passwords Match...")
+    return
   }
+
+  alert("Please Check Both Passwords Match...")
 }
 
+// enter keydown to login temp event
 function keydown(e: any): void {
   let key=e.keyCode || e.which
   if (key==13) {
