@@ -101,16 +101,16 @@ function newWindow(appLink: string, appName: string): void {
   $("#appsTray").append(taskbarobj)
 
   // traskbar object and icon
-  if (!appName.includes("/")) {
+  if (!appName.includes("://")) {
     taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./applications/" + appName + "/favicon.png'>" + appName)
-  } else { // google and file explorer need to be hardcoded (i hate this)
-    switch (appName) {
-      case "https://www.bing.com":
-        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./NeonX/icons/google.png'>Web Browser")
-        break
-      default:
-        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./applications/" + appName + "/favicon.png'>" + appName)
+  } else { // web app frame
+
+    if (appName.includes("localhost:8080")) { // file explorer
+      taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./NeonX/icons/folder.png'>File Explorer")
+    } else { // web frame
+      taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./NeonX/icons/google.png'>Web Browser")
     }
+
   }
 
   // init taskbar item with click events
