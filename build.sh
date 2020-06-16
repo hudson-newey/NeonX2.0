@@ -2,7 +2,8 @@
 
 coffeeBuild=("./NeonX/sys/explorer")
 typescriptBuild=("./NeonX/sys/desktop" "./NeonX/sys/screensaver" "./NeonX/sys/script"
-		"./NeonX/sys/login" "./applications/Notepad/script" "./applications/Calender/script")
+		"./NeonX/sys/login" "./applications/Notepad/script" "./applications/Calender/script"
+		"./applications/PDF Viewer/script")
 
 # build coffeescript files
 for c in ${coffeeBuild[@]}; do
