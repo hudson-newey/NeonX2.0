@@ -162,14 +162,13 @@ function taskkill(e, app: string, click: boolean): void {
 
 // brings app to front of desktop
 function bringtoFront(app: string): void {
-  for (let i = 0; i < openApps.length; i++) {
-    if (openApps[i] != app) {
-      document.getElementById(openApps[i]).style.zIndex -= 1
+    for (var i = 0; i < openApps.length; i++) {
+        if (openApps[i] != app) {
+          document.getElementById(openApps[i]).style.zIndex -= 1
+        } else {
+          document.getElementById(openApps[i]).style.zIndex = 128
+        }
     }
-
-    // bring the selected app to front
-    document.getElementById(openApps[i]).style.zIndex = 128
-  }
   $("#" + app).css("display", "inline")
 } // end of bring to front
 
