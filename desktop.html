@@ -6,6 +6,11 @@
   <link rel="stylesheet" href="./NeonX/sys/style.css">
   <link rel="stylesheet" href="./NeonX/sys/desktop.css">
   <link rel="shortcut icon" href="./NeonX/icons/favicon.png">
+
+  <!--JS Librarys-->>
+  <script src='./NeonX/lib/jquery.js'></script>
+  <script src="./NeonX/lib/jquery-ui.js"></script>
+  <script src='./NeonX/lib/masonry.min.js'></script>
 </head>
 <body>
 
@@ -154,7 +159,7 @@
     </a>
 
     <div class="taskbar__tray">
-      <span id="appsTray">
+      <span class="wrapper-taskbar" id="appsTray">
       </span>
 
       <span class="time" onclick="startProgram('Calender', '');"><p id="timeDisplay"></p></span>
@@ -167,9 +172,6 @@
 </body>
 
 <footer>
-  <script src='./NeonX/lib/jquery.js'></script>
-  <script src="./NeonX/lib/jquery-ui.js"></script>
-  <script src='./NeonX/lib/masonry.min.js'></script>
   <script src="./NeonX/sys/desktop.js"></script>
   <script src="./NeonX/sys/script.js"></script>
 </footer>
