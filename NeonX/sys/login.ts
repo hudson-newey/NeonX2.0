@@ -1,5 +1,5 @@
-let usernames: Array<> = ["Grathium"]
-let passwords: Array<> = ["Admin1234!"]
+let usernames: Array<> = ["admin"]
+let passwords: Array<> = ["admin"]
 
 // credentials checking function
 let login = (usrname: string, pswd: string): void => {
