@@ -1,3 +1,7 @@
+$baseColor: #000;
+$keyColor: white;
+$accentColor: #202340;
+
 /* DESKTOP */
 .desktop__item {
   display: inline-block;
@@ -9,14 +13,16 @@
   font-size: 16px;
   font-family: Arial, sans-serif;
   font-style: normal;
-  color: white;
+  color: $keyColor;
   transition: all 100ms;
   text-align: center;
   margin-top: 4px;
+
+  &:hover {
+    background-color: rgba(120, 144, 156, 0.15);
+  }
 }
-.desktop__item:hover {
-  background-color: rgba(120, 144, 156, 0.15);
-}
+
 .desktop_icons {
   position: relative;
   height: 56px;
@@ -44,10 +50,11 @@ img.icons {
   right: 5px;
   top: 2.5px;
   font-size: 22px;
-  color: #abb2bf;
-}
-#editDesktopBTN:hover {
-  color: #fffff0;
+  color: $keyColor;
+
+  &:hover {
+    color: red;
+  }
 }
 
 #superButton {
@@ -63,33 +70,36 @@ img.icons {
   padding: 8px;
   border-style: outset;
   border-width: thin;
-  border-color: #abb2bf;
+  border-color: $keyColor;
   animation: fadein 0.45s;
   user-select: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 1px rgba(0, 0, 0, 0.1);
   filter: grayscale(0.1) drop-shadow(16px 16px 20px #21252b);
   opacity: 0.95;
   z-index: 2;
-}
-.contextMenu a:visited {
-  color: #282c34;
-}
-.contextMenu a:hover {
-  background-color: #eee;
-  cursor: pointer;
-  border-left-style: groove;
-}
 
-.contextMenu#contextMenuTitle {
-  font-size: 32px;
+  a {
+    &:visited {
+      color: #282c34;
+    }
+
+    &:hover {
+      background-color: #eee;
+      cursor: pointer;
+      border-left-style: groove;
+    }
+  }
+
+  #contextMenuTitle {
+    font-size: 20px;
+  }
 }
 
 .media {
   display: flex;
 }
 
-.media__img,
-.media__body {
+.media__img, .media__body {
   flex: 0 1 auto;
 }
 
@@ -97,7 +107,15 @@ img.icons {
   padding-left: 10px;
 }
 
+.window__titlebar:after {
+  background-size: cover;
+  background-position: 50%;
+  background-attachment: fixed;
+}
+
 .desktop {
+  @extend .window__titlebar:after;
+
   position: absolute;
   overflow: hidden;
   top: 0;
@@ -107,21 +125,8 @@ img.icons {
   transform: translate3d(0, 0, 0);
 }
 
-.desktop,
-.window__titlebar:after {
-  background-size: cover;
-  background-position: 50%;
-  background-attachment: fixed;
-}
 #desktopBG {
   position: fixed;
   background-image: url('');
   height: 100%;
-}
-
-.selectBox {
-  position: absolute;
-  z-index: 9999999;
-  background-color: blue;
-  border-color: darkblue;
 }

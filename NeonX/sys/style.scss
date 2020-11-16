@@ -1,4 +1,10 @@
-*, *:before, *:after {
+$baseColor: #000;
+$keyColor: white;
+$accentColor: #202340;
+
+*,
+*:before,
+*:after {
   box-sizing: border-box;
   user-select: none;
   cursor: url('./cursor.png'), auto;
@@ -25,9 +31,10 @@ a {
   opacity: 0.95;
   width: 45%;
   height: 60%;
-  color: white;
-  /* background-image: linear-gradient(to bottom right, #21252b, #31353b); */ /* DEPRICATED */
-  background-color: #202340;
+  color: $keyColor;
+  /* background-image: linear-gradient(to bottom right, #21252b, #31353b); */
+  /* DEPRICATED */
+  background-color: $accentColor;
   animation: 0.9s fadein;
   user-select: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -37,7 +44,7 @@ a {
 
 .containerTitle {
   position: absolute;
-  color: #abb2bf !important;
+  color: $keyColor !important;
   font-size: 18px;
   left: 50%;
   transform: translate(-50%, 2px);
@@ -45,43 +52,49 @@ a {
 
 .menubar {
   display: inline;
-  color: #abb2bf;
+  color: $keyColor;
   background-color: #202340;
   border-style: none;
   font-size: 20px;
   height: 25px;
   width: 25px;
   top: 0px;
-}
 
-.menubar:hover {
-  background-color: #31353b;
-  border-bottom-style: solid;
-  border-bottom-width: thin;
-  border-bottom-color: #dbe2ef;
+  &:hover {
+    background-color: #31353b;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: #dbe2ef;
+  }
 }
 
 .viewFrame {
   position: relative;
   height: 99.8%;
   width: 99.8%;
-  color: #abb2bf;
+  color: $keyColor;
   border-style: none;
   overflow: hidden;
-}
-
-app:active {
-  cursor: move;
 }
 
 app {
   border-style: none;
   overflow: hidden;
+
+  // when dragging
+  &:active {
+    cursor: move;
+  }
 }
 
 @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 0.95; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.95;
+  }
 }
 
 /* ALL APPS */
@@ -107,30 +120,30 @@ app {
   height: 60px;
   font-size: 26px;
   padding: 0px;
-  color: white;
+  color: $keyColor;
   background-color: rgba(255, 255, 255, 0.15);
   border-style: none;
   border-radius: 25px;
   z-index: 12;
-}
 
-#allAppsCloseBTN:hover {
-  animation: 0.5s fadein;
-  background-color: #c9c9cf;
-  color: #333;
-  border-radius: 25px;
+  &:hover {
+    animation: 0.5s fadein;
+    background-color: #c9c9cf;
+    color: #333;
+    border-radius: 25px;
+  }
 }
 
 .draw__item {
   position: relative;
   padding: 40px;
   height: 150px;
-}
 
-.draw__item:hover {
-  background: rgba(200, 200, 200, 0.9);
-  border-style: dashed;
-  border-color: black;
+  &:hover {
+    background: rgba(200, 200, 200, 0.9);
+    border-style: dashed;
+    border-color: black;
+  }
 }
 
 /* SIDEBAR */
@@ -138,20 +151,26 @@ app {
   position: relative;
   left: 58px;
   width: 99%;
-}
 
-#appsTray > p {
-  position: absolute;
-  border-right: solid;
-  border-top: solid;
-  border-right-width: thin;
-  border-top-width: medium;
-  border-color: #abb2bf;
-  bottom: 58px;
-  font-size: 18px;
-  width: 220px;
-  animation: iconFadein 1.2s;
-  transition: background-color 200ms cubic-bezier(0.4, 0, 1, 1) 50ms;
+  &>p {
+    position: absolute;
+    border-right: solid;
+    border-top: solid;
+    border-right-width: thin;
+    border-top-width: medium;
+    border-color: $keyColor;
+    bottom: 58px;
+    font-size: 18px;
+    width: 220px;
+    animation: iconFadein 1.2s;
+    transition: background-color 200ms cubic-bezier(0.4, 0, 1, 1) 50ms;
+
+    &:hover {
+      background-color: $keyColor;
+      color: #21252b;
+      border-color: #21252b;
+    }
+  }
 }
 
 .appTrayIcon {
@@ -163,15 +182,14 @@ app {
   padding-left: 2px;
 }
 
-#appsTray > p:hover {
-  background-color: #abb2bf;
-  color: #21252b;
-  border-color: #21252b;
-}
-
 @keyframes iconFadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 /* TASKBAR */
@@ -185,23 +203,35 @@ app {
   background-color: #21252b;
   z-index: 129;
   opacity: 0.88;
+
+  &__item {
+    display: inline-block;
+    margin-right: 4px;
+    text-align: center;
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+    color: $keyColor;
+    border: 1px solid transparent;
+    transition: all 100ms;
+
+    &:hover {
+      background-color: rgba(120, 144, 156, 0.15);
+    }
+  }
+
+  &__tray {
+    position: absolute;
+    bottom: -80px;
+    color: $keyColor;
+    padding: 0 10px;
+    float: right;
+    line-height: 48px;
+    width: 100%;
+  }
 }
 
-.taskbar__item {
-  display: inline-block;
-  margin-right: 4px;
-  text-align: center;
-  width: 48px;
-  height: 48px;
-  font-size: 22px;
-  color: white;
-  border: 1px solid transparent;
-  transition: all 100ms;
-}
-.taskbar__item:hover {
-  background-color: rgba(120, 144, 156, 0.15);
-}
-.taskbar__item > i {
+.taskbar__item>i {
   display: inline-block;
   vertical-align: middle;
   margin-top: 6px;
@@ -210,48 +240,18 @@ app {
   line-height: 32px;
 }
 
-.taskbar__item--active.taskbar__item--explorer {
-  background-color: #0097A7;
-}
-.taskbar__item--active.taskbar__item--mail {
-  background-color: #5C6BC0;
-}
-.taskbar__item--active.taskbar__item--notepad {
-  background-color: #EC407A;
-}
-
-.taskbar__item--open {
-  box-shadow: inset 0 -2px 0 rgba(255, 255, 255, 0.35);
-}
-
-.taskbar__item--start {
-  color: #378fe7;
-  transition: background-color 250ms;
-}
-.taskbar__item--start.start--open {
-  color: white;
-}
-
-.taskbar__tray {
-  position: absolute;
-  bottom: -80px;
-  color: white;
-  padding: 0 10px;
-  float: right;
-  line-height: 48px;
-  width: 100%;
-}
-
 .time {
   position: fixed;
   right: 8px;
   bottom: -16px;
   z-index: 999999;
+
+  p {
+    font-size: 17px;
+    color: $keyColor;
+  }
 }
-.time p{
-  font-size: 17px;
-  color: #abb2bf;
-}
+
 #timeDisplay:hover {
   cursor: pointer;
   color: #fff;
@@ -266,22 +266,12 @@ app {
   height: 48px;
   right: -6px;
   border: none;
-}
-#showdesktopBTN:hover {
-  cursor: pointer;
-  background-color: rgba(120, 144, 156, 0.8);
-  transition: all 600ms;
-}
 
-.start-menu-fade {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9998;
-  background-color: rgba(0, 0, 0, 0.5);
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(120, 144, 156, 0.8);
+    transition: all 600ms;
+  }
 }
 
 .start-menu {
@@ -294,8 +284,19 @@ app {
   height: 85vh;
   min-height: 512px;
   z-index: 9999;
-  color: white;
+  color: $keyColor;
   background-color: #282c34;
+
+  &-fade {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9998;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 }
 
 .start--open {
@@ -308,8 +309,9 @@ app {
   bottom: 0px;
   width: 100%;
   height: 36px;
-  background-color: white;
+  background-color: $keyColor;
 }
+
 #search__input {
   display: block;
   width: 100%;
@@ -325,7 +327,6 @@ app {
   appearance: none;
 }
 
-
 .start-menu__list,
 .start-screen {
   flex: 0 1 auto;
@@ -337,6 +338,7 @@ app {
   opacity: 0;
   transition: all 500ms;
 }
+
 .start-menu--open .start-menu__list {
   transform: none;
   opacity: 1;
@@ -346,39 +348,44 @@ app {
   display: flex;
   margin-bottom: 10px;
   padding: 10px;
-  color: white;
+  color: $keyColor;
   transition: all 100ms, transform 500ms;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
 }
-.user-info:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-}
+
 .start-menu--open .user-info {
   transform: none;
 }
 
-.user-info__img {
-  display: block;
-  width: 40px;
-  height: 40px;
-}
+.user-info {
+  &__img {
+    display: block;
+    width: 40px;
+    height: 40px;
+  }
 
-.user-info__name {
-  font-size: 20px;
-  font-weight: 200;
-  align-self: center;
-}
+  &__name {
+    font-size: 20px;
+    font-weight: 200;
+    align-self: center;
+  }
 
-.user-info__power {
-  margin-left: auto;
-  width: 60px;
-  height: 60px;
-  line-height: 60px;
-  text-align: center;
-  font-size: 20px;
-  color: white;
-}
-.user-info__power:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  &__power {
+    margin-left: auto;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 20px;
+    color: $keyColor;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
 }
 
 .start-menu__label {
@@ -396,23 +403,28 @@ app {
   opacity: 0;
   transition: all 500ms 100ms, opacity 1000ms 250ms;
 }
+
 .start-menu--open .start-menu__recent {
   transform: none;
   opacity: 1;
 }
+
 .start-menu__recent li {
   list-style: none;
 }
+
 .start-menu__recent li a {
   display: block;
   padding: 10px;
-  color: white;
+  color: $keyColor;
   transition: all 100ms;
 }
+
 .start-menu__recent li a:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
-.start-menu__recent li a > i {
+
+.start-menu__recent li a>i {
   display: inline-block;
   margin-right: 4px;
   font-size: 20px;
@@ -425,21 +437,23 @@ app {
   bottom: 40px;
   display: block;
   margin-bottom: 10px;
-  color: white;
+  color: $keyColor;
   transition: all 100ms;
 }
-#all-appsBTN > i {
+
+#all-appsBTN>i {
   margin-left: 5px;
   margin-right: 5px;
-  border: 2px solid white;
+  border: 2px solid $keyColor;
   border-radius: 100px;
   width: 32px;
   height: 32px;
   line-height: 26px;
   text-align: center;
-}
-#all-appsBTN:hover > i {
-  background-color: #37474F;
+
+  &:hover {
+    background-color: #37474F;
+  }
 }
 
 .start-screen-scroll {
@@ -454,6 +468,7 @@ app {
   transition: transform 500ms, opacity 1000ms;
   opacity: 0;
 }
+
 .start-menu--open .start-screen-scroll {
   transform: none;
   opacity: 1;
@@ -464,16 +479,19 @@ app {
   width: 256px;
   word-spacing: -1em;
 }
+
 @media screen and (min-width: 700px) {
   .start-screen {
     min-width: 384px;
   }
 }
+
 @media screen and (min-width: 800px) {
   .start-screen {
     min-width: 512px;
   }
 }
+
 @media screen and (min-width: 960px) {
   .start-screen {
     min-width: 640px;
@@ -495,21 +513,24 @@ app {
 .menu {
   position: absolute;
   z-index: 10000;
-  background: white;
+  background: $keyColor;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   transition: all 800ms;
-}
-.menu:hover {
-  background-color: #abb2bf;
-}
-.menu > a {
-  display: block;
-  width: 200px;
-  padding: 10px 15px;
-  font-size: 16px;
-  color: #455A64;
-  transition: all 100ms;
-}
-.menu > a:hover {
-  background-color: #ECEFF1;
+
+  &:hover {
+    background-color: $keyColor;
+  }
+
+  &>a {
+    display: block;
+    width: 200px;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #455A64;
+    transition: all 100ms;
+
+    &:hover {
+      background-color: #ECEFF1;
+    }
+  }
 }

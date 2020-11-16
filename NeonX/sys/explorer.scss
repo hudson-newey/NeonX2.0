@@ -2,6 +2,7 @@ html {
     color: #EFF0F1;
     background-color: #31363B;
 }
+
 .preview {
     position: absolute;
     left: 255px;
@@ -16,6 +17,7 @@ html {
     font-size: 15px;
     padding-top: 32px;
 }
+
 #backBTN {
     position: fixed;
     background-color: transparent;
@@ -23,15 +25,18 @@ html {
     border-style: double;
     border-color: #ccc;
     top: 22px;
+
+    &:hover {
+        background-color: #4f4f60;
+    }
 }
-#backBTN:hover {
-    background-color: #4f4f60;
-}
+
 .heading {
     position: relative;
     left: 40px;
     width: max-content;
 }
+
 .searchbar {
     position: absolute;
     top: 45px;
@@ -40,11 +45,16 @@ html {
     z-index: 10;
 }
 
-a, a:link, a:visited, a:active {
-    color: #ccc;
-    text-decoration: none;
-    font-size: 13px;
-}
-a:hover {
-    color: white;
+a {
+    &:link,
+    &:visited,
+    &:active {
+        color: #ccc;
+        text-decoration: none;
+        font-size: 13px;
+    }
+
+    &:hover {
+        color: white;
+    }
 }
