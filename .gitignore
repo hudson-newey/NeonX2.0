@@ -3,7 +3,8 @@
 
 node_modules/
 NeonX/sys/__pycache__/
-NeonX/sys/*.js
+
+NeonX/sys/dist/
 applications/Calender/script.js
 applications/Notepad/script.js
 applications/PDF Viewer/script.js
