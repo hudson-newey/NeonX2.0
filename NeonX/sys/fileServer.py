@@ -37,7 +37,9 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
             # determain what type of file it is, and how it should render it
             if (".png" in directory or ".jpeg" in directory or ".jpg" in directory or ".gif" in directory):
                 # the file is a picture, render within <img> tag
-                html += "<div class='preview'><img class='image' src='data:image/png;base64," + decodeImage(directory) + "'/></div>"
+                html += "<div class='preview'><img class='image' src='data:image/png;base64," + decodeFile(directory) + "'/></div>"
+            elif (".pdf" in directory):
+                html += "<div class='preview'><embed class='pdf' style='position:absolute;width:99%;height:calc(100% - 32px);' src='data:application/pdf;base64," + decodeFile(directory) + "'/></div>"
             else:
                 # default to previewing file as plain text
                 html += "<div class='preview'>"+rf(directory)+"</div>"
@@ -67,9 +69,9 @@ def rf(filename):
 
 # returns a byte array of file.
 # this is typically used to render images as a base64 byte array
-def decodeImage(filename):
-    with open(filename, "rb") as image_file:
-        encoded_string = base64.b64encode(image_file.read())
+def decodeFile(filename):
+    with open(filename, "rb") as file_object:
+        encoded_string = base64.b64encode(file_object.read())
 
     return encoded_string.decode('utf-8')
 
