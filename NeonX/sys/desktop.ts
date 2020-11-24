@@ -26,8 +26,9 @@ let addFile = (): void => {
   let iconText = document.createElement("input")
   iconText.className = "waitingInput"
   iconText.id = uniqueLinkID + "__name"
+  iconText.setAttribute("file_id", uniqueLinkID)
   iconText.value = "untitled"
-  $("#" + uniqueLinkID).dblclick(function(){ startProgram("", "http://localhost:8080?dir=./Home/Documents/" + $("#" + uniqueLinkID).text()) }) 
+  $("#" + uniqueLinkID).dblclick(function(){ startProgram("", "http://localhost:8080?dir=Home/Documents/" + $("#" + uniqueLinkID).text()) }) 
   // $("#" + uniqueLinkID).ondblclick = function(){startProgram("", "http://localhost:8080?dir=./Home/Documents/" + $("#" + uniqueLinkID).text())}
   $("#" + uniqueLinkID).append(iconText)
 
@@ -314,6 +315,28 @@ let initializeDesktop = (): void => {
      if(e.keyCode == 13)
      {
       this.replaceWith(this.value)
+
+      // find what desktop icon it should use
+      let uniqueFileID: String = this.getAttribute("file_id")
+      if (this.value.includes(".")) {
+        // the icon should be a file icon
+
+        // test if the file is a picture
+        if (this.value.includes(".png") || this.value.includes(".jpg") || this.value.includes(".jpeg") || this.value.includes(".gif")) {
+          $("#" + uniqueFileID + "__icon").attr("src", "./Home/Documents/" + this.value)
+        } else if (this.value.includes(".pdf")) {
+          // pdf files
+          $("#" + uniqueFileID + "__icon").attr("src", "./NeonX/icons/pdf_icon.png")
+        }else {
+          // default to text icon
+          $("#" + uniqueFileID + "__icon").attr("src", "./NeonX/icons/file_icon.png")
+        }
+
+      } else {
+        // it is a folder, and should use a folder icon
+        $("#" + uniqueFileID + "__icon").attr("src", "./NeonX/icons/folder.png")
+      }
+
      }
   })
 
