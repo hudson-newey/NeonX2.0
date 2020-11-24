@@ -5,30 +5,31 @@ const backgroundCount: number = 9
 // icons
 function addIcon(action: string): void {
   switch (action) {
-    case "folder":
-      newFolder()
-      break
+    case "file":
+      addFile()
   }
 }
 
-let newFolder = (): void => {
-  let uniqueFolderID: string = generateRandomString(8)
+let addFile = (): void => {
+  let uniqueLinkID: string = generateRandomString(8)
   let iconContainer = document.createElement("div")
-  iconContainer.id = uniqueFolderID
+  iconContainer.id = uniqueLinkID
   iconContainer.className = "desktop__item"
-  iconContainer.ondblclick = function() { startProgram("", 'http://localhost:8080/?dir=Home') }
   $("#desktopBG").append(iconContainer)
 
   let iconPicture = document.createElement("img")
   iconPicture.className = "desktop_icons"
-  iconPicture.src = "./NeonX/icons/folder.png"
-  $("#" + uniqueFolderID).append(iconPicture)
+  iconPicture.id = uniqueLinkID + "__icon"
+  iconPicture.src = "./NeonX/icons/file_icon.png"
+  $("#" + uniqueLinkID).append(iconPicture)
 
   let iconText = document.createElement("input")
   iconText.className = "waitingInput"
-  iconText.id = uniqueFolderID + "__name"
+  iconText.id = uniqueLinkID + "__name"
   iconText.value = "untitled"
-  $("#" + uniqueFolderID).append(iconText)
+  $("#" + uniqueLinkID).dblclick(function(){ startProgram("", "http://localhost:8080?dir=./Home/Documents/" + $("#" + uniqueLinkID).text()) }) 
+  // $("#" + uniqueLinkID).ondblclick = function(){startProgram("", "http://localhost:8080?dir=./Home/Documents/" + $("#" + uniqueLinkID).text())}
+  $("#" + uniqueLinkID).append(iconText)
 
   // refresh desktop to add folder visualization
   initializeDesktop()
@@ -309,14 +310,10 @@ let initializeDesktop = (): void => {
   $('#all-apps').hide()
 
   // icon renaming
-  $('.waitingInput').bind("enterKey",function(e){
-    this.replaceWith(this.value)
-    this.ondblclick = function() { startProgram("", 'http://localhost:8080/?dir=Home/Documents/'+ this.value) }
-  })
   $('.waitingInput').keyup(function(e){
      if(e.keyCode == 13)
      {
-      $(this).trigger("enterKey")
+      this.replaceWith(this.value)
      }
   })
 
