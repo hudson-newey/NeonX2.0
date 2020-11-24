@@ -3,6 +3,7 @@ import socketserver
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
 import glob
+import base64
 
 class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
@@ -30,14 +31,20 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
         <body><p>"""
         # display directory sidebar
         for i in range(len(files)):
-            html += "<h4><a href='http://localhost:8080/?dir="+files[i]+"'>"+files[i]+"</a></h4>"
+            if ("." not in directory): html += "<h4><a href='http://localhost:8080/?dir="+files[i]+"'>"+files[i]+"</a></h4>"
+            
         if ("." in directory):
-            # preview file
-            html += "<div class='preview'>"+rf(directory)+"</div>"
+            # determain what type of file it is, and how it should render it
+            if (".png" in directory or ".jpeg" in directory or ".jpg" in directory or ".gif" in directory):
+                # the file is a picture, render within <img> tag
+                html += "<div class='preview'><img class='image' src='data:image/png;base64," + decodeImage(directory) + "'/></div>"
+            else:
+                # default to previewing file as plain text
+                html += "<div class='preview'>"+rf(directory)+"</div>"
         else:
             html += "<div class='preview'/>"
 
-        html += "</p></body></html><style>"+rf("./NeonX/sys/explorer.css")+"</style><script>"+rf("./NeonX/sys/explorer.js")+"</script>"
+        html += "</p></body></html><style>"+rf("./NeonX/sys/dist/explorer.css")+"</style><script>"+rf("./NeonX/sys/dist/explorer.js")+"</script>"
 
 
 
@@ -57,6 +64,14 @@ def getFiles(dir):
 
 def rf(filename):
     return open(filename, "r").read()
+
+# returns a byte array of file.
+# this is typically used to render images as a base64 byte array
+def decodeImage(filename):
+    with open(filename, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read())
+
+    return encoded_string.decode('utf-8')
 
 # Create an object of the above class
 handler_object = MyHttpRequestHandler
