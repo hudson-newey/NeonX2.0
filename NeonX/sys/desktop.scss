@@ -39,6 +39,7 @@ img.icons {
 .waitingInput {
   position: relative;
   width: 42px;
+  color: white;
   font-size: 12px;
   left: -2px;
   border-style: none;
@@ -114,7 +115,7 @@ img.icons {
 }
 
 .desktop {
-  @extend .window__titlebar:after;
+  @extend .window__titlebar, :after;
 
   position: absolute;
   overflow: hidden;

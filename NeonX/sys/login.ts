@@ -1,5 +1,5 @@
-let usernames: Array<> = ["admin"]
-let passwords: Array<> = ["admin"]
+let usernames: string[] = new  Array("admin")
+let passwords: string[] = new  Array("admin")
 
 // credentials checking function
 let login = (usrname: string, pswd: string): void => {
@@ -37,7 +37,21 @@ function keydown(e: any): void {
   }
 }
 
+// sub functions
+$.urlParam = function (name: string) {
+   let results: RegExpExecArray = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href)
+   return results[1] || 0
+ }
+
 $(function() {
+   
+   // if the user logged out instead of locked, it should display a prompt for the login username
+   // if locked, it will not have any navigation or prompts avalible
+   $( document ).ready(function() {
+      $("#name").trigger('focus')
+      $("#name").val($.urlParam('usr'))
+      $("#pass").trigger('focus')
+   });
 
    $(".input input").focus(function() {
 

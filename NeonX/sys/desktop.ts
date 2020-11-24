@@ -26,6 +26,7 @@ let newFolder = (): void => {
 
   let iconText = document.createElement("input")
   iconText.className = "waitingInput"
+  iconText.id = uniqueFolderID + "__name"
   iconText.value = "untitled"
   $("#" + uniqueFolderID).append(iconText)
 
