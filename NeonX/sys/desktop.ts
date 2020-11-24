@@ -11,6 +11,8 @@ function addIcon(action: string): void {
 }
 
 let addFile = (): void => {
+
+  // brand new file
   let uniqueLinkID: string = generateRandomString(8)
   let iconContainer = document.createElement("div")
   iconContainer.id = uniqueLinkID
@@ -28,8 +30,7 @@ let addFile = (): void => {
   iconText.id = uniqueLinkID + "__name"
   iconText.setAttribute("file_id", uniqueLinkID)
   iconText.value = "untitled"
-  $("#" + uniqueLinkID).dblclick(function(){ startProgram("", "http://localhost:8080?dir=Home/Documents/" + $("#" + uniqueLinkID).text()) }) 
-  // $("#" + uniqueLinkID).ondblclick = function(){startProgram("", "http://localhost:8080?dir=./Home/Documents/" + $("#" + uniqueLinkID).text())}
+  $("#" + uniqueLinkID).dblclick(function () { startProgram("", "http://localhost:8080?dir=Home/Documents/" + $("#" + uniqueLinkID).text()) })
   $("#" + uniqueLinkID).append(iconText)
 
   // refresh desktop to add folder visualization
@@ -46,30 +47,30 @@ let startProgram = (app: string, uri: string): void => {
 
 // CREATE CONTAINER
 function newWindow(appLink: string, appName: string): void {
-	let containerID: string = generateRandomString(8)
+  let containerID: string = generateRandomString(8)
 
-	let appContainer = document.createElement("app")
-	appContainer.id = containerID
-	appContainer.className = "programWindow"
-	appContainer.draggable = "false"
-  appContainer.ondblclick = function() { fullscreenProgram(containerID) }
-  appContainer.onmousedown = function(event) { taskkill(event, containerID, true) }
-	$("#desktopBG").append(appContainer)
-	openApps.push(containerID)
+  let appContainer = document.createElement("app")
+  appContainer.id = containerID
+  appContainer.className = "programWindow"
+  appContainer.draggable = "false"
+  appContainer.ondblclick = function () { fullscreenProgram(containerID) }
+  appContainer.onmousedown = function (event) { taskkill(event, containerID, true) }
+  $("#desktopBG").append(appContainer)
+  openApps.push(containerID)
   $(".programWindow").draggable()
 
   /* GLOBAL MENU BUTTONS */
   let closeBTN = document.createElement("button")
   closeBTN.className = "menubar"
   closeBTN.innerText = "X"
-  closeBTN.onclick = function() { taskkill(3, containerID, false) }
+  closeBTN.onclick = function () { taskkill(3, containerID, false) }
   $("#" + containerID).append(closeBTN)
 
   // maximise button
   let maxBTN = document.createElement("button")
   maxBTN.className = "menubar"
   maxBTN.innerText = "🗖"
-  maxBTN.onclick = function() { fullscreenProgram(containerID, false) }
+  maxBTN.onclick = function () { fullscreenProgram(containerID, false) }
   $("#" + containerID).append(maxBTN)
 
   // minimise button
@@ -77,7 +78,7 @@ function newWindow(appLink: string, appName: string): void {
   minBTN.className = "menubar"
   minBTN.innerText = "_"
   minBTN.style.top = "-2px"
-  minBTN.onclick = function() { minimise(containerID) }
+  minBTN.onclick = function () { minimise(containerID) }
   $("#" + containerID).append(minBTN)
 
   // container header
@@ -117,10 +118,10 @@ function newWindow(appLink: string, appName: string): void {
   }
 
   // init taskbar item with click events
-  $('.taskbarItem').mousedown(function(event) {
+  $('.taskbarItem').mousedown(function (event) {
     if (event.which == 1) {
       bringtoFront($(this).attr("app"))
-    } else if(event.which == 3) {
+    } else if (event.which == 3) {
       taskkill(3, $(this).attr("app"), false)
     }
   })
@@ -130,8 +131,8 @@ function newWindow(appLink: string, appName: string): void {
 
 // remove program from backend list of open apps
 let removeProgram = (app: string): void => {
-  for( let i = 0; i < openApps.length; i++){
-    if ( openApps[i] === app) openApps.splice(i, 1)
+  for (let i = 0; i < openApps.length; i++) {
+    if (openApps[i] === app) openApps.splice(i, 1)
   }
 }
 
@@ -165,13 +166,13 @@ function taskkill(e, app: string, click: boolean): void {
 
 // brings app to front of desktop
 function bringtoFront(app: string): void {
-    for (var i = 0; i < openApps.length; i++) {
-        if (openApps[i] != app) {
-          document.getElementById(openApps[i]).style.zIndex -= 1
-        } else {
-          document.getElementById(openApps[i]).style.zIndex = 128
-        }
+  for (var i = 0; i < openApps.length; i++) {
+    if (openApps[i] != app) {
+      document.getElementById(openApps[i]).style.zIndex -= 1
+    } else {
+      document.getElementById(openApps[i]).style.zIndex = 128
     }
+  }
   $("#" + app).css("display", "inline")
 } // end of bring to front
 
@@ -184,21 +185,21 @@ function minimise(app): void {
 
 // fullscreens container window
 function fullscreenProgram(app: string): void {
-	if ($("#" + app).width() == $(window).width()) {
-		document.getElementById(app).style.top = "100px"
-		document.getElementById(app).style.left = "150px"
+  if ($("#" + app).width() == $(window).width()) {
+    document.getElementById(app).style.top = "100px"
+    document.getElementById(app).style.left = "150px"
     document.getElementById(app).style.opacity = "0.95"
-		$("#" + app).height($(window).height() * 0.6)
-		$("#" + app).width($(window).width() * 0.45)
-		console.log("Windowed " + app)
-	} else {
-		document.getElementById(app).style.top = "0px"
-		document.getElementById(app).style.left = "0px"
-		document.getElementById(app).style.opacity = "1"
-		$("#" + app).height($(window).height() - 45)
-		$("#" + app).width($(window).width())
-		console.log("Maximised " + app)
-	}
+    $("#" + app).height($(window).height() * 0.6)
+    $("#" + app).width($(window).width() * 0.45)
+    console.log("Windowed " + app)
+  } else {
+    document.getElementById(app).style.top = "0px"
+    document.getElementById(app).style.left = "0px"
+    document.getElementById(app).style.opacity = "1"
+    $("#" + app).height($(window).height() - 45)
+    $("#" + app).width($(window).width())
+    console.log("Maximised " + app)
+  }
 }
 
 
@@ -221,7 +222,7 @@ function desktopContextMenu(x, y, toggle: boolean): void {
       $("#desktopContextMenu").css("top", y - 20)
       $("#desktopContextMenu").css("display", "block")
     }
-  } else {$("#desktopContextMenu").css("display", "none")}
+  } else { $("#desktopContextMenu").css("display", "none") }
 }
 
 
@@ -256,7 +257,7 @@ function addApp(file: any) {
   desktopContextMenu(null, null, false) //toggle context menu
 
   let reader = new FileReader()
-  reader.onload = function(e) {
+  reader.onload = function (e) {
     if (file[0].name == "package.app") {
       // correct file type
       let appName = e.target.result
@@ -266,13 +267,13 @@ function addApp(file: any) {
       let iconContainer = document.createElement("div")
       iconContainer.id = iconID
       iconContainer.className = "desktop__item"
-      iconContainer.ondblclick = function() { startProgram(appName, '') }
+      iconContainer.ondblclick = function () { startProgram(appName, '') }
       $("#desktopBG").append(iconContainer)
 
       let drawIcon = document.createElement("div")
       drawIcon.id = iconID
       drawIcon.className = "draw__item"
-      drawIcon.onclick = function() { startProgram(appName, '') }
+      drawIcon.onclick = function () { startProgram(appName, '') }
       $("#all-apps").append(drawIcon)
 
       let iconPicture = document.createElement("img")
@@ -299,11 +300,11 @@ function addApp(file: any) {
 let initializeDesktop = (): void => {
   // desktop icons init
   let p = $(".desktop__item").draggable()
-  $(".desktop__item").mousedown(function(eventObject){editDesktop(true)})
-  $(".desktop__item").mouseup(function(eventObject){editDesktop(false)})
+  $(".desktop__item").mousedown(function (eventObject) { editDesktop(true) })
+  $(".desktop__item").mouseup(function (eventObject) { editDesktop(false) })
 
   // taskbar initilization
-  $(".taskbarItem").click(function(e) {
+  $(".taskbarItem").click(function (e) {
     bringtoFront($(this).attr("app"))
   })
 
@@ -311,9 +312,8 @@ let initializeDesktop = (): void => {
   $('#all-apps').hide()
 
   // icon renaming
-  $('.waitingInput').keyup(function(e){
-     if(e.keyCode == 13)
-     {
+  $('.waitingInput').keyup(function (e) {
+    if (e.keyCode == 13) {
       this.replaceWith(this.value)
 
       // find what desktop icon it should use
@@ -327,7 +327,7 @@ let initializeDesktop = (): void => {
         } else if (this.value.includes(".pdf")) {
           // pdf files
           $("#" + uniqueFileID + "__icon").attr("src", "./NeonX/icons/pdf_icon.png")
-        }else {
+        } else {
           // default to text icon
           $("#" + uniqueFileID + "__icon").attr("src", "./NeonX/icons/file_icon.png")
         }
@@ -336,17 +336,17 @@ let initializeDesktop = (): void => {
         // it is a folder, and should use a folder icon
         $("#" + uniqueFileID + "__icon").attr("src", "./NeonX/icons/folder.png")
       }
-
-     }
+    }
   })
 
   console.log("Desktop refreshed")
 }
-$(document).ready(function() {initializeDesktop()})
+
+$(document).ready(function () { initializeDesktop() })
 
 // sub FUNCTIONS
 let generateRandomString = (length: number): string => {
-	const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+  const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
   let text = ""
 
   for (let i = 0; i < length; i++)
