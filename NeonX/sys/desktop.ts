@@ -193,7 +193,7 @@ function fullscreenProgram(app: string): void {
 		document.getElementById(app).style.top = "0px"
 		document.getElementById(app).style.left = "0px"
 		document.getElementById(app).style.opacity = "1"
-		$("#" + app).height($(window).height() - 48)
+		$("#" + app).height($(window).height() - 45)
 		$("#" + app).width($(window).width())
 		console.log("Maximised " + app)
 	}
