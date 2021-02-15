@@ -69,6 +69,7 @@ img.icons {
   color: #282c34;
   font-size: 20px;
   padding: 8px;
+  width: 172px;
   border-style: outset;
   border-width: thin;
   border-color: $keyColor;
@@ -100,7 +101,8 @@ img.icons {
   display: flex;
 }
 
-.media__img, .media__body {
+.media__img,
+.media__body {
   flex: 0 1 auto;
 }
 
@@ -115,7 +117,8 @@ img.icons {
 }
 
 .desktop {
-  @extend .window__titlebar, :after;
+  @extend .window__titlebar,
+  :after;
 
   position: absolute;
   overflow: hidden;
@@ -130,4 +133,18 @@ img.icons {
   position: fixed;
   background-image: url('');
   height: 100%;
+}
+
+// SUPER KEY MENU
+#search__input {
+  position: relative;
+  top: 15px;
+  left: 12px;
+  border-color: $accentColor;
+  color: $keyColor;
+  background-color: $baseColor;
+  font-size: large;
+  padding: 9px;
+  cursor: text;
+  opacity: 0.95;
 }

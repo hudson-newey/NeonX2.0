@@ -104,52 +104,62 @@
         All apps
         <i class="fa fa-arrow-right"></i>
       </a>
-      <input type="text" id="search__input" placeholder="Search Anything Here" onkeydown="navigate(event);" spellcheck="false" autocomplete="off" autofocus></input>
+      <input type="text" id="search__input" placeholder="search" onkeydown="navigate(event);" spellcheck="false" autocomplete="off" autofocus></input>
     </div>
   </div>
 
   <!--all apps traybar-->
   <ul id="all-apps" style="display: none;">
-    <button id="allAppsCloseBTN" type="button">x</button>
+    <button id="allAppsCloseBTN" type="button">exit</button>
 
     <div class="draw__item" onclick="startProgram('', 'https://www.bing.com'); $('#all-apps').hide();">
-      <img class="desktop_icons" src="./NeonX/icons/google.png"></img>
+      <button class="deleteBTN">x</button>
+      <img class="desktop_icons" src="./NeonX/icons/google.png"></img><br>
       <text>Web Browser</text>
     </div>
     <div class="draw__item" onclick="startProgram('Notepad', ''); $('#all-apps').hide();">
-      <img class="desktop_icons" src="./applications/Notepad/favicon.png"></img>
+      <button class="deleteBTN">x</button>
+      <img class="desktop_icons" src="./applications/Notepad/favicon.png"></img><br>
       <text>Notepad</text>
     </div>
     <div class="draw__item" onclick="startProgram('', 'http://localhost:8080/?dir=Home'); $('#all-apps').hide();">
-      <img class="desktop_icons" src="./NeonX/icons/files.png"></img>
+      <button class="deleteBTN">x</button>
+      <img class="desktop_icons" src="./NeonX/icons/files.png"></img><br>
       <text>Files</text>
     </div>
     <div class="draw__item" onclick="startProgram('Google Docs', ''); $('#all-apps').hide();">
-      <img class="desktop_icons" src="./applications/Google Docs/favicon.png"></img>
+      <button class="deleteBTN">x</button>
+      <img class="desktop_icons" src="./applications/Google Docs/favicon.png"></img><br>
       <text>Docs</text>
     </div>
     <div class="draw__item" onclick="startProgram('Google Slides', ''); $('#all-apps').hide();">
-      <img class="desktop_icons" src="./applications/Google Slides/favicon.png"></img>
+      <button class="deleteBTN">x</button>
+      <img class="desktop_icons" src="./applications/Google Slides/favicon.png"></img><br>
       <text>Slides</text>
     </div>
     <div class="draw__item" onclick="startProgram('Google Sheets', ''); $('#all-apps').hide();">
-      <img class="desktop_icons" src="./applications/Google Sheets/favicon.png"></img>
+      <button class="deleteBTN">x</button>
+      <img class="desktop_icons" src="./applications/Google Sheets/favicon.png"></img><br>
       <text>Sheets</text>
     </div>
     <div class="draw__item" onclick="startProgram('PDF Viewer', ''); $('#all-apps').hide();">
-      <img class="desktop_icons" src="./applications/PDF Viewer/favicon.png"></img>
+      <button class="deleteBTN">x</button>
+      <img class="desktop_icons" src="./applications/PDF Viewer/favicon.png"></img><br>
       <text>PDF Viewer</text>
     </div>
     <div class="draw__item" onclick="startProgram('Calculator', ''); $('#all-apps').hide();">
-      <img class="desktop_icons" src="./applications/Calculator/favicon.png"></img>
+      <button class="deleteBTN">x</button>
+      <img class="desktop_icons" src="./applications/Calculator/favicon.png"></img><br>
       <text>Calculator</text>
     </div>
     <div class="draw__item" onclick="startProgram('Camera', ''); $('#all-apps').hide();">
-      <img class="desktop_icons" src="./applications/Camera/favicon.png"></img>
+      <button class="deleteBTN">x</button>
+      <img class="desktop_icons" src="./applications/Camera/favicon.png"></img><br>
       <text>Camera</text>
     </div>
     <div class="draw__item" onclick="startProgram('Calender', ''); $('#all-apps').hide();">
-      <img class="desktop_icons" src="./applications/Calender/favicon.png"></img>
+      <button class="deleteBTN">x</button>
+      <img class="desktop_icons" src="./applications/Calender/favicon.png"></img><br>
       <text>Calender</text>
     </div>
   </ul>

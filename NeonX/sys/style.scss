@@ -105,10 +105,11 @@ app {
   left: 0px;
   top: -48px;
   width: 100%;
-  height: calc(100% - 15px);
+  height: calc(100% - 11px);
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  overflow: auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  overflow-wrap: normal;
+  overflow-y: visible;
   z-index: 9997;
 }
 
@@ -116,10 +117,10 @@ app {
   position: absolute;
   top: 50px;
   left: 10px;
-  width: 60px;
+  width: auto;
   height: 60px;
   font-size: 26px;
-  padding: 0px;
+  padding: 20px;
   color: $keyColor;
   background-color: rgba(255, 255, 255, 0.15);
   border-style: none;
@@ -127,7 +128,7 @@ app {
   z-index: 12;
 
   &:hover {
-    animation: 0.5s fadein;
+    animation: 0.2s fadein;
     background-color: #c9c9cf;
     color: #333;
     border-radius: 25px;
@@ -136,13 +137,29 @@ app {
 
 .draw__item {
   position: relative;
+  top: 100px;
   padding: 40px;
   height: 150px;
+  width: 190px;
+  text-align: center;
+
+  .deleteBTN {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    color: $accentColor;
+    font-size: large;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: rgba(120, 120, 120, 0.6);
+    }
+  }
 
   &:hover {
-    background: rgba(200, 200, 200, 0.9);
-    border-style: dashed;
-    border-color: black;
+    background: rgba(200, 200, 200, 0.08);
   }
 }
 
@@ -232,11 +249,9 @@ app {
   }
 }
 
-/*
-.taskbarItem {
-  position: relative !important;
-}
-*/
+// .taskbarItem {
+//   position: relative !important;
+// }
 
 .taskbar__item>i {
   display: inline-block;
