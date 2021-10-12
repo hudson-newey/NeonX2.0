@@ -719,6 +719,6 @@
   },
   "devDependencies": {
     "coffeescript": "^2.5.1",
-    "electron": "^9.4.0"
+    "electron": "^11.5.0"
   }
 }
