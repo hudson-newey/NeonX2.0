@@ -1,5 +1,5 @@
 # **_NEONX2.0_**  
-### by: **_Hudson Newey_**
+### by: **_Grathium Industries_**
 ---
 
 #### Compatiable with
