@@ -1,0 +1,6 @@
+# gitignore for Grathium Industries
+# NeonX2.0
+
+.vscode/
+node_modules/
+NeonX/sys/__pycache__/
