@@ -94,7 +94,7 @@ var getTime = function () {
     $('#timeDisplay').html(curr_hour.toString() + ':' + curr_min.toString() + ' ' + a_p);
 };
 $.urlParam = function (name) {
-    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    var results = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.href);
     return results[1] || 0;
 };
 $('.menu-toggle').each(function () {
