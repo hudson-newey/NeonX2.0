@@ -18,7 +18,7 @@
         "fs-extra": "8.1.0",
         "global-agent": "2.1.5",
         "global-tunnel-ng": "2.7.1",
-        "got": "9.6.0",
+        "got": "11.8.5",
         "sanitize-filename": "1.6.3",
         "sumchecker": "3.0.0"
       },
