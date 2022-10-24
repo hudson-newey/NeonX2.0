@@ -6,7 +6,7 @@
     "icons": [
         {
             "src": "./NeonX/icons/favicon.png",
-            "sizes": "192x192",
+            "sizes": "600x523",
             "type": "image/png"
         }
     ],
