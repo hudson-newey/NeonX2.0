@@ -39,7 +39,7 @@ function keydown(e: any): void {
 
 // sub functions
 $.urlParam = function (name: string) {
-   let results: RegExpExecArray = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href)
+   let results: RegExpExecArray = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.href)
    return results[1] || 0
  }
 
