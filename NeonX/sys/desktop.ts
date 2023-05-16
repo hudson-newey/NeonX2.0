@@ -112,7 +112,7 @@ function newWindow(appLink: string, appName: string): void {
     if (appName.includes("localhost:8080")) { // file explorer
       taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./NeonX/icons/folder.png'>File Explorer")
     } else { // web frame
-      taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./NeonX/icons/google.png'>Web Browser")
+      taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./NeonX/icons/internet.png'>Web Browser")
     }
 
   }

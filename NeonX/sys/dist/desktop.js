@@ -98,7 +98,7 @@ function newWindow(appLink, appName) {
             taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./NeonX/icons/folder.png'>File Explorer");
         }
         else { // web frame
-            taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./NeonX/icons/google.png'>Web Browser");
+            taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./NeonX/icons/internet.png'>Web Browser");
         }
     }
     // init taskbar item with click events
