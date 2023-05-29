@@ -4,3 +4,9 @@
 .vscode/
 node_modules/
 NeonX/sys/__pycache__/
+
+NeonX/sys/dist/
+NeonX/sys/desktop.js
+NeonX/sys/login.js
+NeonX/sys/screensaver.js
+NeonX/sys/script.js

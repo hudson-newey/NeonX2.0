@@ -86,7 +86,6 @@ function newWindow(appLink, appName) {
     var taskbarobj = document.createElement("p");
     taskbarobj.id = taskbarobjID;
     taskbarobj.className = "taskbarItem";
-    taskbarobj.style.left = (openApps.length * 221) - 220 + "px";
     taskbarobj.setAttribute('app', containerID);
     $("#appsTray").append(taskbarobj);
     // traskbar object and icon
