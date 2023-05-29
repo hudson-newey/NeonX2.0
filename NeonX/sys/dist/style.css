@@ -256,11 +256,13 @@ app:active {
 }
 
 #showdesktopBTN {
+  position: relative;
   background-color: rgba(120, 144, 156, 0.5);
   bottom: 80px;
   width: 1px;
   height: 48px;
-  right: -6px;
+  right: -20px;
+  top: -1px;
   border: none;
 }
 #showdesktopBTN:hover {
