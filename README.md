@@ -2,7 +2,7 @@
 
 ## by: **_Hudson Newey_**
 
----
+![a screenshot of the NeonX desktop environment](Home/Pictures/demoImage.png "Screenshot of Desktop Environment")
 
 ### Compatiable with
 
