@@ -17,6 +17,10 @@ a {
   cursor: url("../cursor.png"), auto;
 }
 
+.hiddenFrame {
+  display: hidden !important;
+}
+
 /* PROGRAM WINDOWS */
 .programWindow {
   position: absolute;

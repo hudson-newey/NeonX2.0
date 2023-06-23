@@ -46,7 +46,6 @@ function newWindow(appLink, appName) {
     appContainer.className = "programWindow";
     appContainer.draggable = "false";
     appContainer.ondblclick = function () { fullscreenProgram(containerID); };
-    appContainer.onmousedown = function (event) { taskkill(event, containerID, true); };
     $("#desktopBG").append(appContainer);
     openApps.push(containerID);
     $(".programWindow").draggable();
@@ -81,6 +80,8 @@ function newWindow(appLink, appName) {
     //vf.scrolling = "no"
     vf.className = "viewFrame";
     $("#" + containerID).append(vf);
+    appContainer.onmouseup = function () { vf.style.display = "block"; };
+    appContainer.onmousedown = function (event) { taskkill(event, containerID, true, vf); };
     // add taskbar object
     var taskbarobjID = generateRandomString(8);
     var taskbarobj = document.createElement("p");
@@ -120,9 +121,13 @@ var removeProgram = function (app) {
 };
 // TASKKILL (event, app, false)
 // taskkill function
-function taskkill(e, app, click) {
+function taskkill(e, app, click, innerFrame) {
     // bring to front
     bringtoFront(app);
+    // hide the inner frame so that the draggable hitbox is as big as possible
+    if (innerFrame) {
+        innerFrame.style.display = "none";
+    }
     // if the user right clicked on either the taskbar item or container
     if (click) {
         var closeApp = false;

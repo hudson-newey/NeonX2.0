@@ -54,7 +54,6 @@ function newWindow(appLink: string, appName: string): void {
   appContainer.className = "programWindow"
   appContainer.draggable = "false"
   appContainer.ondblclick = function () { fullscreenProgram(containerID) }
-  appContainer.onmousedown = function (event) { taskkill(event, containerID, true) }
   $("#desktopBG").append(appContainer)
   openApps.push(containerID)
   $(".programWindow").draggable()
@@ -94,6 +93,9 @@ function newWindow(appLink: string, appName: string): void {
   //vf.scrolling = "no"
   vf.className = "viewFrame"
   $("#" + containerID).append(vf)
+
+  appContainer.onmouseup = function () { vf.style.display = "block" }
+  appContainer.onmousedown = function (event) { taskkill(event, containerID, true, vf) }
 
   // add taskbar object
   let taskbarobjID: string = generateRandomString(8)
@@ -138,9 +140,14 @@ let removeProgram = (app: string): void => {
 
 // TASKKILL (event, app, false)
 // taskkill function
-function taskkill(e, app: string, click: boolean): void {
+function taskkill(e, app: string, click: boolean, innerFrame?: HTMLIFrameElement): void {
   // bring to front
   bringtoFront(app)
+
+  // hide the inner frame so that the draggable hitbox is as big as possible
+  if (innerFrame) {
+    innerFrame.style.display = "none"
+  }
 
   // if the user right clicked on either the taskbar item or container
   if (click) {

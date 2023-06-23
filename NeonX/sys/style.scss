@@ -21,6 +21,12 @@ a {
   cursor: url('../cursor.png'), auto;
 }
 
+// this is used when dragging a window so that the program window hitbox covers the entire chrome
+// TODO: this is a tempoary fix and not ideal
+.hiddenFrame {
+  display: hidden !important;
+}
+
 /* PROGRAM WINDOWS */
 .programWindow {
   position: absolute;
