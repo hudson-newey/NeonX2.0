@@ -215,6 +215,7 @@ function editDesktop(enabled) {
     if (enabled == true) {
         desktopItem.css("background-color", "rgba(120, 144, 156, 0.8)");
         desktopItem.css("border-style", "dotted");
+        desktopItem.css("border-width", "1px");
     }
     else if (enabled == false) {
         desktopItem.css("background-color", "");
@@ -230,6 +231,7 @@ function editDesktop(enabled) {
         else {
             desktopItem.css("background-color", "rgba(120, 144, 156, 0.8)");
             desktopItem.css("border-style", "dotted");
+            desktopItem.css("border-width", "1px");
         }
     }
 } // end of 'edit desktop' function

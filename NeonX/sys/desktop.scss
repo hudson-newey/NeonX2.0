@@ -17,6 +17,7 @@ $accentColor: #202340;
   transition: all 100ms;
   text-align: center;
   margin-top: 4px;
+  border-width: thin;
 
   &:hover {
     background-color: rgba(120, 144, 156, 0.15);
@@ -69,7 +70,7 @@ img.icons {
   color: #282c34;
   font-size: 20px;
   padding: 8px;
-  width: 172px;
+  width: 176px;
   border-style: outset;
   border-width: thin;
   border-color: $keyColor;

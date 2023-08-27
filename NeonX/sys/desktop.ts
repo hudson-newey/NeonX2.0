@@ -239,6 +239,7 @@ function editDesktop(enabled: boolean): void {
   if (enabled == true) {
     desktopItem.css("background-color", "rgba(120, 144, 156, 0.8)")
     desktopItem.css("border-style", "dotted")
+    desktopItem.css("border-width", "1px")
   } else if (enabled == false) {
     desktopItem.css("background-color", "")
     desktopItem.css("border-style", "none")
@@ -252,6 +253,7 @@ function editDesktop(enabled: boolean): void {
     } else {
       desktopItem.css("background-color", "rgba(120, 144, 156, 0.8)")
       desktopItem.css("border-style", "dotted")
+      desktopItem.css("border-width", "1px")
     }
 
   }
