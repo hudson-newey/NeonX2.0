@@ -124,11 +124,12 @@ app {
   top: 50px;
   left: 10px;
   width: auto;
-  height: 60px;
   font-size: 26px;
   padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   color: $keyColor;
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.2);
   border-style: none;
   border-radius: 25px;
   z-index: 12;
@@ -153,18 +154,26 @@ app {
     position: absolute;
     right: 8px;
     top: 8px;
-    color: $accentColor;
+    color: transparent;
     font-size: large;
     background-color: transparent;
     border-color: transparent;
     border-radius: 5px;
+    padding: 0.2rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
 
     &:hover {
-      background-color: rgba(120, 120, 120, 0.6);
+      background-color: rgba(80, 80, 80, 0.9) !important;
     }
   }
-
+  
   &:hover {
+    .deleteBTN {
+      background-color: rgba(80, 80, 80, 0.6);
+      color: white;
+    }
+
     background: rgba(200, 200, 200, 0.08);
   }
 }
@@ -465,6 +474,7 @@ app {
   margin-bottom: 10px;
   color: $keyColor;
   transition: all 100ms;
+  cursor: pointer;
 }
 
 #all-appsBTN>i {

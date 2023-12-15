@@ -221,32 +221,31 @@ function minimise(app): void {
 
 // fullscreens container window
 function fullscreenProgram(app: string): void {
-  if ($("#" + app).width() == $(window).width()) {
+  const appElement = $(`#${app}`);
+  
+  if (appElement.width() === $(window).width()) {
     document.getElementById(app).style.top = "100px";
     document.getElementById(app).style.left = "150px";
     document.getElementById(app).style.opacity = "0.95";
-    $("#" + app).height($(window).height() * 0.6);
-    $("#" + app).width($(window).width() * 0.45);
+    appElement.height($(window).height() * 0.6);
+    appElement.width($(window).width() * 0.45);
   } else {
     document.getElementById(app).style.top = "0px";
     document.getElementById(app).style.left = "0px";
     document.getElementById(app).style.opacity = "1";
-    $("#" + app).height($(window).height() - 45);
-    $("#" + app).width($(window).width());
+    appElement.height($(window).height() - 45);
+    appElement.width($(window).width());
   }
 }
 
-// minimise all windows and 'show desktop'
-let showDesktop = (): void => {
-  $("#all-apps").hide(); // hide all apps draw
-
-  // close all container windows
-  for (let i = 0; i < openApps.length; i++) minimise(openApps[i]);
+function showDesktop(): void {
+  $("#all-apps").hide();
+  openApps.forEach((app: string) => minimise(app));
 };
 
 // desktop context menu toggling
 function desktopContextMenu(x, y, toggle: boolean): void {
-  if (toggle == true) {
+  if (toggle) {
     if ($("#desktopContextMenu").css("display") == "block") {
       $("#desktopContextMenu").css("display", "none");
     } else {
@@ -260,8 +259,8 @@ function desktopContextMenu(x, y, toggle: boolean): void {
 }
 
 // 'edit desktop' feedback highlighting
-function editDesktop(enabled: boolean): void {
-  let desktopItem = $(".desktop__item");
+function editDesktop(desktopItem, enabled: boolean): void {
+  desktopItem = $(desktopItem);
 
   if (enabled == true) {
     desktopItem.css("background-color", "rgba(120, 144, 156, 0.8)");
@@ -328,15 +327,15 @@ function addApp(file: any) {
   reader.readAsText(file[0]);
 }
 
-// used for initilization of desktop and refreshes
+// used for initialization of desktop and refreshes
 let initializeDesktop = (): void => {
   // desktop icons init
   let p = $(".desktop__item").draggable();
-  $(".desktop__item").mousedown(function (eventObject) {
-    editDesktop(true);
-  });
-  $(".desktop__item").mouseup(function (eventObject) {
-    editDesktop(false);
+
+  const desktopItems = $(".desktop__item");
+  desktopItems.each((i) => {
+    desktopItems[i].onmousedown = () => editDesktop(desktopItems[i], true);
+    desktopItems[i].onmouseup = () => editDesktop(desktopItems[i], false);
   });
 
   // taskbar initilization

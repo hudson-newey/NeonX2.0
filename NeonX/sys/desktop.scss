@@ -117,6 +117,10 @@ img.icons {
   background-attachment: fixed;
 }
 
+.ui-draggable-dragging {
+  cursor: move;
+}
+
 .desktop {
   @extend .window__titlebar,
   :after;
