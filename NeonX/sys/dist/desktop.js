@@ -1,6 +1,6 @@
 var openApps = new Array();
 var mouseLocation = new Array(0, 0);
-var backgroundCount = 9;
+var backgroundCount = 8;
 // icons
 function addIcon(action) {
     switch (action) {
@@ -25,7 +25,9 @@ var addFile = function () {
     iconText.id = uniqueLinkID + "__name";
     iconText.setAttribute("file_id", uniqueLinkID);
     iconText.value = "untitled";
-    $("#" + uniqueLinkID).dblclick(function () { startProgram("", "http://localhost:8080?dir=Home/Documents/" + $("#" + uniqueLinkID).text()); });
+    $("#" + uniqueLinkID).dblclick(function () {
+        startProgram("", "http://localhost:8080?dir=Home/Documents/" + $("#" + uniqueLinkID).text());
+    });
     $("#" + uniqueLinkID).append(iconText);
     // refresh desktop to add folder visualization
     initializeDesktop();
@@ -45,7 +47,9 @@ function newWindow(appLink, appName) {
     appContainer.id = containerID;
     appContainer.className = "programWindow";
     appContainer.draggable = "false";
-    appContainer.ondblclick = function () { fullscreenProgram(containerID); };
+    appContainer.ondblclick = function () {
+        fullscreenProgram(containerID);
+    };
     $("#desktopBG").append(appContainer);
     openApps.push(containerID);
     $(".programWindow").draggable();
@@ -53,20 +57,26 @@ function newWindow(appLink, appName) {
     var closeBTN = document.createElement("button");
     closeBTN.className = "menubar";
     closeBTN.innerText = "X";
-    closeBTN.onclick = function () { taskkill(3, containerID, false); };
+    closeBTN.onclick = function () {
+        taskkill(3, containerID, false);
+    };
     $("#" + containerID).append(closeBTN);
     // maximise button
     var maxBTN = document.createElement("button");
     maxBTN.className = "menubar";
     maxBTN.innerText = "🗖";
-    maxBTN.onclick = function () { fullscreenProgram(containerID, false); };
+    maxBTN.onclick = function () {
+        fullscreenProgram(containerID, false);
+    };
     $("#" + containerID).append(maxBTN);
     // minimise button
     var minBTN = document.createElement("button");
     minBTN.className = "menubar";
     minBTN.innerText = "_";
     minBTN.style.top = "-2px";
-    minBTN.onclick = function () { minimise(containerID); };
+    minBTN.onclick = function () {
+        minimise(containerID);
+    };
     $("#" + containerID).append(minBTN);
     // container header
     var containerTitle = document.createElement("span");
@@ -80,29 +90,39 @@ function newWindow(appLink, appName) {
     //vf.scrolling = "no"
     vf.className = "viewFrame";
     $("#" + containerID).append(vf);
-    appContainer.onmouseup = function () { vf.style.display = "block"; };
-    appContainer.onmousedown = function (event) { taskkill(event, containerID, true, vf); };
+    appContainer.onmouseup = function () {
+        vf.style.display = "block";
+    };
+    appContainer.onmousedown = function (event) {
+        taskkill(event, containerID, true, vf);
+    };
     // add taskbar object
     var taskbarobjID = generateRandomString(8);
     var taskbarobj = document.createElement("p");
     taskbarobj.id = taskbarobjID;
     taskbarobj.className = "taskbarItem";
-    taskbarobj.setAttribute('app', containerID);
+    taskbarobj.setAttribute("app", containerID);
     $("#appsTray").append(taskbarobj);
     // traskbar object and icon
     if (!appName.includes("://")) {
-        taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./applications/" + appName + "/favicon.png'>" + appName);
+        taskbarobj.insertAdjacentHTML("afterbegin", "<img class='appTrayIcon' src='./applications/" +
+            appName +
+            "/favicon.png'>" +
+            appName);
     }
-    else { // web app frame
-        if (appName.includes("localhost:8080")) { // file explorer
-            taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./NeonX/icons/folder.png'>File Explorer");
+    else {
+        // web app frame
+        if (appName.includes("localhost:8080")) {
+            // file explorer
+            taskbarobj.insertAdjacentHTML("afterbegin", "<img class='appTrayIcon' src='./NeonX/icons/folder.png'>File Explorer");
         }
-        else { // web frame
-            taskbarobj.insertAdjacentHTML('afterbegin', "<img class='appTrayIcon' src='./NeonX/icons/internet.png'>Web Browser");
+        else {
+            // web frame
+            taskbarobj.insertAdjacentHTML("afterbegin", "<img class='appTrayIcon' src='./NeonX/icons/internet.png'>Web Browser");
         }
     }
     // init taskbar item with click events
-    $('.taskbarItem').mousedown(function (event) {
+    $(".taskbarItem").mousedown(function (event) {
         if (event.which == 1) {
             bringtoFront($(this).attr("app"));
         }
@@ -129,20 +149,20 @@ function taskkill(e, app, click, innerFrame) {
         innerFrame.style.display = "none";
     }
     // if the user right clicked on either the taskbar item or container
+    var closeApp = false;
     if (click) {
-        var closeApp = false;
         var rightclick;
         if (!e_1)
             var e_1 = window.event;
         if (e_1.which)
-            rightclick = (e_1.which == 3);
+            rightclick = e_1.which == 3;
         else if (e_1.button)
-            rightclick = (e_1.button == 2);
+            rightclick = e_1.button == 2;
         if (rightclick)
             closeApp = true;
     }
     else {
-        // false paramiter skips to kill sequence
+        // false parameter skips to kill sequence
         closeApp = true;
     }
     if (closeApp == true) {
@@ -175,7 +195,6 @@ function fullscreenProgram(app) {
         document.getElementById(app).style.opacity = "0.95";
         $("#" + app).height($(window).height() * 0.6);
         $("#" + app).width($(window).width() * 0.45);
-        console.log("Windowed " + app);
     }
     else {
         document.getElementById(app).style.top = "0px";
@@ -183,7 +202,6 @@ function fullscreenProgram(app) {
         document.getElementById(app).style.opacity = "1";
         $("#" + app).height($(window).height() - 45);
         $("#" + app).width($(window).width());
-        console.log("Maximised " + app);
     }
 }
 // minimise all windows and 'show desktop'
@@ -243,17 +261,20 @@ function addApp(file) {
         if (file[0].name == "package.app") {
             // correct file type
             var appName_1 = e.target.result;
-            console.log("Installing, " + appName_1);
             var iconID = generateRandomString(8);
             var iconContainer = document.createElement("div");
             iconContainer.id = iconID;
             iconContainer.className = "desktop__item";
-            iconContainer.ondblclick = function () { startProgram(appName_1, ''); };
+            iconContainer.ondblclick = function () {
+                startProgram(appName_1, "");
+            };
             $("#desktopBG").append(iconContainer);
             var drawIcon = document.createElement("div");
             drawIcon.id = iconID;
             drawIcon.className = "draw__item";
-            drawIcon.onclick = function () { startProgram(appName_1, ''); };
+            drawIcon.onclick = function () {
+                startProgram(appName_1, "");
+            };
             $("#all-apps").append(drawIcon);
             var iconPicture = document.createElement("img");
             iconPicture.className = "desktop_icons";
@@ -265,7 +286,7 @@ function addApp(file) {
             initializeDesktop();
         }
         else {
-            console.log("Failed to install app: " + text.name);
+            console.error("Failed to install app: " + text.name);
         }
     };
     reader.readAsText(file[0]);
@@ -274,16 +295,20 @@ function addApp(file) {
 var initializeDesktop = function () {
     // desktop icons init
     var p = $(".desktop__item").draggable();
-    $(".desktop__item").mousedown(function (eventObject) { editDesktop(true); });
-    $(".desktop__item").mouseup(function (eventObject) { editDesktop(false); });
+    $(".desktop__item").mousedown(function (eventObject) {
+        editDesktop(true);
+    });
+    $(".desktop__item").mouseup(function (eventObject) {
+        editDesktop(false);
+    });
     // taskbar initilization
     $(".taskbarItem").click(function (e) {
         bringtoFront($(this).attr("app"));
     });
     // all apps grid
-    $('#all-apps').hide();
+    $("#all-apps").hide();
     // icon renaming
-    $('.waitingInput').keyup(function (e) {
+    $(".waitingInput").keyup(function (e) {
         if (e.keyCode == 13) {
             this.replaceWith(this.value);
             // find what desktop icon it should use
@@ -291,7 +316,10 @@ var initializeDesktop = function () {
             if (this.value.includes(".")) {
                 // the icon should be a file icon
                 // test if the file is a picture
-                if (this.value.includes(".png") || this.value.includes(".jpg") || this.value.includes(".jpeg") || this.value.includes(".gif")) {
+                if (this.value.includes(".png") ||
+                    this.value.includes(".jpg") ||
+                    this.value.includes(".jpeg") ||
+                    this.value.includes(".gif")) {
                     $("#" + uniqueFileID + "__icon").attr("src", "./Home/Documents/" + this.value);
                 }
                 else if (this.value.includes(".pdf")) {
@@ -309,9 +337,10 @@ var initializeDesktop = function () {
             }
         }
     });
-    console.log("Desktop refreshed");
 };
-$(document).ready(function () { initializeDesktop(); });
+$(document).ready(function () {
+    initializeDesktop();
+});
 // sub FUNCTIONS
 var generateRandomString = function (length) {
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -320,7 +349,7 @@ var generateRandomString = function (length) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     return text;
 };
-document.addEventListener('contextmenu', function (event) {
+document.addEventListener("contextmenu", function (event) {
     event.preventDefault();
     desktopContextMenu(event.clientX, event.clientY, true);
 });

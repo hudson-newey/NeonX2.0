@@ -1,139 +1,156 @@
-var usernames = new Array("admin");
-var passwords = new Array("admin");
+var usernames = ["admin"];
+var passwords = ["admin"];
 // credentials checking function
-var login = function (usrname, pswd) {
+function login(usrname, pswd) {
     var loggedIn = false;
     for (var i = 0; i < usernames.length; i++) {
         if (usrname == usernames[i] && pswd == passwords[i]) {
-            console.log("Logging in:  " + usrname + "...");
             window.location.href = "desktop.html?usr=" + usrname;
             loggedIn = true;
+            return;
         }
     }
-    // alert the user if login attempt failed
-    if (!loggedIn)
-        alert("Incorrect Username & Password...");
-};
+    alert("Incorrect Username & Password...");
+}
 // push new account to login arrays
-var addAccount = function () {
+function addAccount() {
     if ($("#regpass").val() == $("#reregpass").val()) {
         usernames.push($("#regname").val());
         passwords.push($("#regpass").val());
         return;
     }
     alert("Please Check Both Passwords Match...");
-};
+}
 // enter keydown to login temp event
 function keydown(e) {
     var key = e.keyCode || e.which;
     if (key == 13) {
         addAccount();
-        login(document.getElementById('name').value, document.getElementById('pass').value);
+        login(document.getElementById("name").value, document.getElementById("pass").value);
     }
 }
 // sub functions
 $.urlParam = function (name) {
-    var results = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.href);
-    return results[1] || 0;
+    var results = new RegExp("[?&]" + name + "=([^&#]*)").exec(window.location.href);
+    if (results === null) {
+        return "";
+    }
+    return results[1];
 };
 $(function () {
+    var _this = this;
     // if the user logged out instead of locked, it should display a prompt for the login username
     // if locked, it will not have any navigation or prompts avalible
     $(document).ready(function () {
-        $("#name").trigger('focus');
-        $("#name").val($.urlParam('usr'));
-        $("#pass").trigger('focus');
+        $("#name").trigger("focus");
+        $("#name").val($.urlParam("usr"));
+        $("#pass").trigger("focus");
     });
-    $(".input input").focus(function () {
-        $(this).parent(".input").each(function () {
+    $(".input input")
+        .focus(function () {
+        $(this)
+            .parent(".input")
+            .each(function () {
             $("label", this).css({
                 "line-height": "18px",
                 "font-size": "18px",
                 "font-weight": "100",
-                "top": "0px"
+                top: "0px"
             });
             $(".spin", this).css({
-                "width": "100%"
+                width: "100%"
             });
         });
-    }).blur(function () {
+    })
+        .blur(function () {
         $(".spin").css({
-            "width": "0px"
+            width: "0px"
         });
-        if ($(this).val() == "") {
-            $(this).parent(".input").each(function () {
+        if (!$(this).val()) {
+            $(this)
+                .parent(".input")
+                .each(function () {
                 $("label", this).css({
                     "line-height": "60px",
                     "font-size": "24px",
                     "font-weight": "300",
-                    "top": "10px"
+                    top: "10px"
                 });
             });
         }
     });
     $(".button").click(function (e) {
-        var pX = e.pageX, pY = e.pageY, oX = parseInt($(this).offset().left), oY = parseInt($(this).offset().top);
-        $(this).append('<span class="click-efect x-' + oX + ' y-' + oY + '" style="margin-left:' + (pX - oX) + 'px;margin-top:' + (pY - oY) + 'px;"></span>');
-        $('.x-' + oX + '.y-' + oY + '').animate({
-            "width": "500px",
-            "height": "500px",
-            "top": "-250px",
-            "left": "-250px"
+        var _a, _b, _c, _d;
+        var pX = e.pageX, pY = e.pageY, oX = (_b = (_a = $(_this).offset()) === null || _a === void 0 ? void 0 : _a.left) !== null && _b !== void 0 ? _b : 0, oY = (_d = (_c = $(_this).offset()) === null || _c === void 0 ? void 0 : _c.top) !== null && _d !== void 0 ? _d : 0;
+        $(_this).append("<span class='click-efect x-" +
+            oX +
+            " y-" +
+            oY +
+            "' style='margin-left:" +
+            (pX - oX) +
+            "px;margin-top:" +
+            (pY - oY) +
+            "px;'></span>");
+        $(".x-" + oX + ".y-" + oY).animate({
+            width: "500px",
+            height: "500px",
+            top: "-250px",
+            left: "-250px"
         }, 600);
-        $("button", this).addClass('active');
+        $("button", _this).addClass("active");
     });
     $(".alt-2").click(function () {
-        if (!$(this).hasClass('material-button')) {
+        if (!$(this).hasClass("material-button")) {
             $(".shape").css({
-                "width": "100%",
-                "height": "100%",
-                "transform": "rotate(0deg)"
+                width: "100%",
+                height: "100%",
+                transform: "rotate(0deg)"
             });
             setTimeout(function () {
                 $(".overbox").css({
-                    "overflow": "initial"
+                    overflow: "initial"
                 });
             }, 600);
             $(this).animate({
-                "width": "140px",
-                "height": "140px"
+                width: "140px",
+                height: "140px"
             }, 500, function () {
                 $(".box").removeClass("back");
-                $(this).removeClass('active');
+                $(this).removeClass("active");
             });
             $(".overbox .title").fadeOut(300);
             $(".overbox .input").fadeOut(300);
             $(".overbox .button").fadeOut(300);
-            $(".alt-2").addClass('material-buton');
+            $(".alt-2").addClass("material-buton");
         }
     });
     $(".material-button").click(function () {
-        if ($(this).hasClass('material-button')) {
+        if ($(this).hasClass("material-button")) {
             setTimeout(function () {
                 $(".overbox").css({
-                    "overflow": "hidden"
+                    overflow: "hidden"
                 });
                 $(".box").addClass("back");
             }, 200);
-            $(this).addClass('active').animate({
-                "width": "700px",
-                "height": "700px"
+            $(this).addClass("active").animate({
+                width: "700px",
+                height: "700px"
             });
             setTimeout(function () {
                 $(".shape").css({
-                    "width": "50%",
-                    "height": "50%",
-                    "transform": "rotate(45deg)"
+                    width: "50%",
+                    height: "50%",
+                    transform: "rotate(45deg)"
                 });
                 $(".overbox .title").fadeIn(300);
                 $(".overbox .input").fadeIn(300);
                 $(".overbox .button").fadeIn(300);
             }, 700);
-            $(this).removeClass('material-button');
+            $(this).removeClass("material-button");
         }
-        if ($(".alt-2").hasClass('material-buton')) {
-            $(".alt-2").removeClass('material-buton');
-            $(".alt-2").addClass('material-button');
+        if ($(".alt-2").hasClass("material-buton")) {
+            $(".alt-2").removeClass("material-buton");
+            $(".alt-2").addClass("material-button");
         }
     });
 });

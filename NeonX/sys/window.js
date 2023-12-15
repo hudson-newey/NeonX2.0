@@ -7,7 +7,7 @@ function createWindow() {
     center: true,
     fullscreen: true,
     alwaysOnTop: true,
-    title: "Grathium UI",
+    title: "NeonX2.0",
     icon: __dirname + "/favicon.png",
     transparent: true,
     frame: false,

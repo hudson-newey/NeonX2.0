@@ -16,7 +16,6 @@ function download() {
 function readfile(filelist) {
     var text = filelist[0];
     document.getElementById("mainInput").name = text.name;
-    console.dir(text);
     var reader = new FileReader();
     reader.onload = function (e) {
         document.getElementById("mainInput").value = e.target.result;
