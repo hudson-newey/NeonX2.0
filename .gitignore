@@ -9,6 +9,8 @@ NeonX/sys/login.js
 NeonX/sys/screensaver.js
 NeonX/sys/script.js
 
+NeonX/**/dist/
+
 
 # Logs
 logs
