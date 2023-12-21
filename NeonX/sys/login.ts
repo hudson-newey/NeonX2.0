@@ -1,197 +1,27 @@
-const usernames: string[] = ["admin"];
-const passwords: string[] = ["admin"];
-
-// credentials checking function
-function login(usrname: string, pswd: string): void {
-  let loggedIn: boolean = false;
-
-  for (let i = 0; i < usernames.length; i++) {
-    if (usrname == usernames[i] && pswd == passwords[i]) {
-      window.location.href = "desktop.html?usr=" + usrname;
-      loggedIn = true;
-      return;
-    }
+class User {
+  constructor(public username: string, public password: string) {
+    this.#username = username;
+    this.#password = password;
   }
 
-  alert("Incorrect Username & Password...");
-}
+  #username: string;
+  #password: string;
 
-// push new account to login arrays
-function addAccount(): void {
-  if ($("#regpass").val() == $("#reregpass").val()) {
-    usernames.push($("#regname").val());
-    passwords.push($("#regpass").val());
-    return;
-  }
-
-  alert("Please Check Both Passwords Match...");
-}
-
-// enter keydown to login temp event
-function keydown(e: KeyboardEvent): void {
-  const key = e.keyCode || e.which;
-
-  if (key == 13) {
-    addAccount();
-    login(
-      document.getElementById("name").value,
-      document.getElementById("pass").value
-    );
+  public login(username: string, password: string): boolean {
+    return this.#username === username && this.#password === password;
   }
 }
 
-// sub functions
-$.urlParam = (name: string) => {
-  const results: RegExpExecArray | null = new RegExp(
-    "[?&]" + name + "=([^&#]*)"
-  ).exec(window.location.href);
+const users: User[] = [
+  new User("admin", "admin")
+];
 
-  if (results === null) {
-    return "";
-  }
+function isFormValid(): boolean {
+  const usernameInput = document.getElementById("usr") as HTMLInputElement;
+  const passwordInput = document.getElementById("pass") as HTMLInputElement;
 
-  return results[1];
-};
+  const loginUsername = usernameInput.value;
+  const loginPassword = passwordInput.value;
 
-$(function() {
-  // if the user logged out instead of locked, it should display a prompt for the login username
-  // if locked, it will not have any navigation or prompts avalible
-  $(document).ready(function() {
-    $("#name").trigger("focus");
-    $("#name").val($.urlParam("usr"));
-    $("#pass").trigger("focus");
-  });
-
-  $(".input input")
-    .focus(function() {
-      $(this)
-        .parent(".input")
-        .each(function() {
-          $("label", this).css({
-            "line-height": "18px",
-            "font-size": "18px",
-            "font-weight": "100",
-            top: "0px",
-          });
-          $(".spin", this).css({
-            width: "100%",
-          });
-        });
-    })
-    .blur(function() {
-      $(".spin").css({
-        width: "0px",
-      });
-      if (!$(this).val()) {
-        $(this)
-          .parent(".input")
-          .each(function() {
-            $("label", this).css({
-              "line-height": "60px",
-              "font-size": "24px",
-              "font-weight": "300",
-              top: "10px",
-            });
-          });
-      }
-    });
-
-  $(".button").click((e) => {
-    let pX = e.pageX,
-      pY = e.pageY,
-      oX = $(this).offset()?.left ?? 0,
-      oY = $(this).offset()?.top ?? 0;
-
-    $(this).append(
-      "<span class='click-efect x-" +
-        oX +
-        " y-" +
-        oY +
-        "' style='margin-left:" +
-        (pX - oX) +
-        "px;margin-top:" +
-        (pY - oY) +
-        "px;'></span>"
-    );
-    $(`.x-${oX}.y-${oY}`).animate(
-      {
-        width: "500px",
-        height: "500px",
-        top: "-250px",
-        left: "-250px",
-      },
-      600
-    );
-    $("button", this).addClass("active");
-  });
-
-  $(".alt-2").click(function() {
-    if (!$(this).hasClass("material-button")) {
-      $(".shape").css({
-        width: "100%",
-        height: "100%",
-        transform: "rotate(0deg)",
-      });
-
-      setTimeout(function() {
-        $(".overbox").css({
-          overflow: "initial",
-        });
-      }, 600);
-
-      $(this).animate(
-        {
-          width: "140px",
-          height: "140px",
-        },
-        500,
-        function() {
-          $(".box").removeClass("back");
-
-          $(this).removeClass("active");
-        }
-      );
-
-      $(".overbox .title").fadeOut(300);
-      $(".overbox .input").fadeOut(300);
-      $(".overbox .button").fadeOut(300);
-
-      $(".alt-2").addClass("material-buton");
-    }
-  });
-
-  $(".material-button").click(function() {
-    if ($(this).hasClass("material-button")) {
-      setTimeout(function() {
-        $(".overbox").css({
-          overflow: "hidden",
-        });
-        $(".box").addClass("back");
-      }, 200);
-
-      $(this).addClass("active").animate({
-        width: "700px",
-        height: "700px",
-      });
-
-      setTimeout(function() {
-        $(".shape").css({
-          width: "50%",
-          height: "50%",
-          transform: "rotate(45deg)",
-        });
-
-        $(".overbox .title").fadeIn(300);
-        $(".overbox .input").fadeIn(300);
-        $(".overbox .button").fadeIn(300);
-      }, 700);
-
-      $(this).removeClass("material-button");
-    }
-
-    if ($(".alt-2").hasClass("material-buton")) {
-      $(".alt-2").removeClass("material-buton");
-      $(".alt-2").addClass("material-button");
-    }
-  });
-});
+  return users.some(user => user.login(loginUsername, loginPassword));
+}

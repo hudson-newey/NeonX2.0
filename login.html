@@ -4,82 +4,50 @@
     <meta charset="UTF-8" />
     <title>NeonX</title>
     <link rel="shortcut icon" href="./NeonX/icons/favicon.png" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900&subset=latin,latin-ext"
-    />
     <link rel="stylesheet" href="./NeonX/sys/dist/login.css" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <h1 style="color: white">Username: admin</h1>
-    <br />
-    <h1 style="color: white">Password: admin</h1>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="./NeonX/sys/dist/login.js"></script>
   </head>
 
   <body>
-    <div class="materialContainer">
-      <div class="box" onkeydown="keydown(event)">
-        <div class="title">NeonX Login</div>
+    <header>
+      <!-- This should only be used for demonstrations -->
+      <div class="login-credentials">
+        <strong class="login-credential">Username: admin</strong>
+        <strong class="login-credential">Password: admin</strong>
+      </div>
+    </header>
 
-        <div id="usrname" class="input">
-          <label for="name">Username</label>
+    <div class="container">
+      <form
+        name="login-form"
+        onsubmit="return isFormValid();"
+        action="desktop.html"
+        method="get"
+      >
+        <div class="title">NeonX Desktop</div>
+
+        <div class="input-group">
+          <label for="usr">Username</label>
           <input
             type="text"
             autocomplete="off"
             spellcheck="false"
-            name="name"
-            id="name"
+            name="usr"
+            id="usr"
+            required
+            autofocus
           />
-          <span class="spin"></span>
         </div>
 
-        <div id="pswd" class="input">
+        <div class="input-group">
           <label for="pass">Password</label>
-          <input type="password" name="pass" id="pass" />
-          <span class="spin"></span>
+          <input type="password" name="pass" id="pass" required />
         </div>
 
-        <div class="button login">
-          <button
-            onclick="login(document.getElementById('name').value, document.getElementById('pass').value);"
-          >
-            <span>Login</span> <i class="fa fa-check"></i>
-          </button>
-        </div>
-      </div>
-
-      <div class="overbox">
-        <div class="material-button alt-2"><span class="shape"></span></div>
-
-        <div class="title">NEW ACCOUNT</div>
-
-        <div class="input">
-          <label for="regname">Username</label>
-          <input type="text" name="regname" id="regname" />
-          <span class="spin"></span>
-        </div>
-
-        <div class="input">
-          <label for="regpass">Password</label>
-          <input type="password" name="regpass" id="regpass" />
-          <span class="spin"></span>
-        </div>
-
-        <div class="input">
-          <label for="reregpass">Repeat Password</label>
-          <input type="password" name="reregpass" id="reregpass" />
-          <span class="spin"></span>
-        </div>
-
-        <div class="button">
-          <button onclick="addAccount();"><span>NEXT</span></button>
-        </div>
-      </div>
-    </div>
+        <button class="login-button" type="submit">
+          Login
+        </button>
+      </form>
   </body>
 </html>
