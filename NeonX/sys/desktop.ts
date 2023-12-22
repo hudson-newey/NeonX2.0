@@ -1,6 +1,5 @@
 let openApps: string[] = new Array();
 let mouseLocation: number[] = new Array(0, 0);
-const backgroundCount: number = 8;
 
 // icons
 function addIcon(action: string): void {

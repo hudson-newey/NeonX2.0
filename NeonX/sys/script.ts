@@ -79,19 +79,6 @@ function getTime(): void {
   );
 }
 
-// load background
-function loadBackground(): void {
-  $("#currentUser").text($.urlParam("usr"));
-
-  const backgroundNumber = Math.ceil(Math.random() * backgroundCount);
-  const backgroundUrl = `url('./NeonX/backgrounds/${backgroundNumber}.png')`;
-  const backgroundElement = document.getElementById("desktopBG");
-
-  if (backgroundElement) {
-    backgroundElement.style.backgroundImage = backgroundUrl;
-  }
-}
-
 // if holding down super key (esc), log off
 var lastKeyUpAt: number = 0;
 $(document).on("keydown", function (event: any) {
@@ -199,7 +186,7 @@ $(document).mouseup(function (e: any) {
     $(".menu").hide();
 });
 
-loadBackground();
+$("#currentUser").text($.urlParam("usr"));
 
 /* LOOP */
 // countdown timer till screensaver will be activated

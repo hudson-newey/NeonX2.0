@@ -1,6 +1,7 @@
 $text-color: #abb2bf;
 $background-color: #21252b;
 $accent-color: white;
+$border-radius: 8px;
 
 // TODO: fix this hacky solution
 * {
@@ -8,7 +9,7 @@ $accent-color: white;
 }
 
 body {
-  background-image: url("../../backgrounds/loginBG.png");
+  background-image: url("../../backgrounds/1.jpeg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -77,10 +78,16 @@ body {
   translate: -50%;
   background-color: rgba(transparent, 0.05);
   border: solid thin $text-color;
+  border-radius: $border-radius / 2;
   color: $text-color;
   margin-top: 3rem;
   height: 4rem;
   cursor: pointer;
+  transition: background-color 200ms ease-in-out;
+  
+  &:hover {
+    background-color: rgba(transparent, 0.3);
+  }
 }
 
 .container {

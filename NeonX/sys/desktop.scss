@@ -1,6 +1,10 @@
 $baseColor: #000;
 $keyColor: white;
-$accentColor: #202340;
+$accentColor: var(--accent-color);
+
+:root {
+  --accent-color: #00bbff;
+}
 
 /* DESKTOP */
 .desktop__item {
@@ -55,7 +59,7 @@ img.icons {
   color: $keyColor;
 
   &:hover {
-    color: red;
+    color: $accentColor;
   }
 }
 
@@ -70,26 +74,30 @@ img.icons {
   color: #282c34;
   font-size: 20px;
   padding: 8px;
-  width: 176px;
+  width: 200px;
   border-style: outset;
   border-width: thin;
   border-color: $keyColor;
   animation: fadein 0.45s;
   user-select: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 1px rgba(0, 0, 0, 0.1);
-  filter: grayscale(0.1) drop-shadow(16px 16px 20px #21252b);
+  filter: grayscale(0.1) drop-shadow(8px 8px 10px #21252b);
   opacity: 0.95;
   z-index: 2;
 
   a {
+    cursor: pointer;
+
     &:visited {
       color: #282c34;
     }
 
     &:hover {
+      position: relative;
       background-color: #eee;
-      cursor: pointer;
-      border-left-style: groove;
+      border-left: groove medium $accentColor;
+      left: -10px;
+      padding-left: 7px;
     }
   }
 
@@ -136,7 +144,10 @@ img.icons {
 
 #desktopBG {
   position: fixed;
-  background-image: url('');
+  // I use both background-image and background-color so that
+  // when the background image changes, there isn't a flash of white
+  background-color: $baseColor !important;
+  background-image: url("../../static/background.png");
   height: 100%;
 }
 
@@ -145,7 +156,6 @@ img.icons {
   position: relative;
   top: 15px;
   left: 12px;
-  border-color: $accentColor;
   color: $keyColor;
   background-color: $baseColor;
   font-size: large;
