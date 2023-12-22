@@ -11,11 +11,12 @@
   <script src='./NeonX/lib/jquery.js'></script>
   <script src="./NeonX/lib/jquery-ui.js"></script>
   <script src='./NeonX/lib/masonry.min.js'></script>
+  <script src="./NeonX/sys/dist/constants.js"></script>
 </head>
 <body>
 
 <div id="desktopBG" class="desktop">
-  <div class="desktop__item" ondblclick="startProgram('', 'https://www.bing.com');">
+  <div class="desktop__item" ondblclick="startProgram('', browserNewTab);">
     <img class="desktop_icons" src="./NeonX/icons/internet.png"></img>
     <text>Browser</text>
   </div>
@@ -80,7 +81,7 @@
 
       <ul class="start-menu__recent">
         <li>
-          <a onclick="startProgram('', 'https://www.bing.com');">
+          <a onclick="startProgram('', browserNewTab);">
             <i><img class="icons" src="./NeonX/icons/internet.png"/>Web Browser</i>
           </a>
         </li>
@@ -109,7 +110,7 @@
   <ul id="all-apps" style="display: none;">
     <button id="allAppsCloseBTN" type="button">exit</button>
 
-    <div class="draw__item" onclick="startProgram('', 'https://www.bing.com'); $('#all-apps').hide();">
+    <div class="draw__item" onclick="startProgram('', browserNewTab); $('#all-apps').hide();">
       <button class="deleteBTN">x</button>
       <img class="desktop_icons" src="./NeonX/icons/internet.png"></img><br>
       <text>Web Browser</text>
