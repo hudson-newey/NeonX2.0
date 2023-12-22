@@ -280,11 +280,10 @@ a {
 
 .time {
   position: fixed;
-  right: 8px;
-  bottom: -16px;
+  right: 1rem;
   z-index: 999999;
 
-  p {
+  time {
     font-size: 17px;
     color: $keyColor;
   }

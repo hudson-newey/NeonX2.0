@@ -146,6 +146,11 @@
       <img class="desktop_icons" src="./applications/PDF Viewer/favicon.png"></img><br>
       <text>PDF Viewer</text>
     </div>
+    <div class="draw__item" onclick="startProgram('Clock', '')">
+      <button class="deleteBTN">x</button>
+      <img class="desktop_icons" src="./applications/Clock/favicon.png"></img><br>
+      <text>Clock</text>
+    </div>
     <div class="draw__item" onclick="startProgram('Camera', '')">
       <button class="deleteBTN">x</button>
       <img class="desktop_icons" src="./applications/Camera/favicon.png"></img><br>
@@ -167,7 +172,7 @@
       <span class="wrapper-taskbar" id="appsTray">
       </span>
 
-      <span class="time" onclick="startProgram('Clock', '')"><p id="timeDisplay"></p></span>
+      <span class="time" onclick="startProgram('Clock', '')"><time id="timeDisplay"></time></span>
       <button id="showdesktopBTN" type="button" onclick="showDesktop()"></button>
     </div>
   </div>
