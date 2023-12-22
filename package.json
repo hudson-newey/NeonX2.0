@@ -2,7 +2,7 @@
   "name": "neonx2.0",
   "version": "1.0.0",
   "description": "A desktop environment written in TypeScript",
-  "main": "./NeonX/sys/window.js",
+  "main": "./NeonX/sys/dist/window.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron . --no-sandbox"
