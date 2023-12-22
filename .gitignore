@@ -3,14 +3,15 @@
 
 NeonX/sys/__pycache__/
 
-NeonX/sys/dist/
-NeonX/sys/desktop.js
-NeonX/sys/login.js
-NeonX/sys/screensaver.js
-NeonX/sys/script.js
+# disabled for web browser demo
+# NeonX/sys/dist/
+# NeonX/sys/desktop.js
+# NeonX/sys/login.js
+# NeonX/sys/screensaver.js
+# NeonX/sys/script.js
 
-NeonX/**/dist/
-applications/**/dist/
+# NeonX/**/dist/
+# applications/**/dist/
 
 
 # Logs

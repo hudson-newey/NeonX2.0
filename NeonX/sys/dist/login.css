@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("../../static/background.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+  margin: 0px;
+}
+
+.input-group {
+  margin-top: 2.5rem;
+}
+.input-group > label {
+  user-select: none;
+  background: transparent;
+  color: #abb2bf;
+  font-size: 24px;
+  font-weight: 300;
+}
+.input-group > input {
+  outline: none;
+  border: none;
+  border-bottom: solid thin #abb2bf;
+  background: transparent;
+  color: #abb2bf;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.login-credentials {
+  color: white;
+  font-size: 2rem;
+}
+.login-credentials > .login-credential {
+  display: block;
+  content: "";
+}
+
+.title {
+  position: relative;
+  width: 100%;
+  float: left;
+  line-height: 46px;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #abb2bf;
+  margin-bottom: 3rem;
+}
+.title::before {
+  position: absolute;
+  width: 5px;
+  height: 100%;
+  left: -50px;
+  background: #abb2bf;
+  content: "";
+}
+
+.login-button {
+  position: relative;
+  width: 60%;
+  left: 50%;
+  translate: -50%;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: solid thin #abb2bf;
+  border-radius: 4px;
+  color: #abb2bf;
+  margin-top: 3rem;
+  height: 4rem;
+  cursor: pointer;
+  transition: background-color 200ms ease-in-out;
+}
+.login-button:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.container {
+  position: absolute;
+  width: 100%;
+  max-width: 460px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(33, 37, 43, 0.9);
+  padding: 20px 50px 40px 50px;
+  border-radius: 8px;
+}
