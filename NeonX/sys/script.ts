@@ -49,7 +49,7 @@ function resizeStart(): void {
 function toggleStart(): void {
   $(".start-menu-fade").fadeToggle(500);
   $(".start-menu").fadeToggle(250).toggleClass("start-menu--open");
-  $(".taskbar__item--start").toggleClass("start--open");
+  $(".startIcon").toggleClass("start--open");
   $("#search__input").val("");
   $("#search__input").focus();
 }
@@ -122,7 +122,7 @@ $(".desktop").click((e: MouseEvent) => {
   }
 });
 
-$(".taskbar__item--start").click(toggleStart);
+$(".startIcon").click(toggleStart);
 $(".start-menu__recent li a").click(toggleStart);
 $(".start-screen__tile").click(toggleStart);
 
@@ -137,7 +137,7 @@ document.getElementById("allAppsCloseBTN").onclick = () => {
 
 // Prevent "open" class on start
 $(() => {
-  $(".taskbar__item--start").click(() => {
+  $(".startIcon").click(() => {
     $(this).removeClass("taskbar__item--open taskbar__item--active");
   });
 });

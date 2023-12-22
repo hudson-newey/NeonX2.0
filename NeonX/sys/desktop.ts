@@ -1,4 +1,4 @@
-let openApps: string[] = new Array();
+let openApps: string[] = [];
 let mouseLocation: number[] = new Array(0, 0);
 
 // icons
@@ -46,83 +46,76 @@ let startProgram = (app: string, uri: string): void => {
   if (uri != "" && uri != null) newWindow(uri, uri); // navigate to website
   if (app != "" && app != null)
     newWindow("./applications/" + app + "/index.html", app);
+
+  $("#all-apps").hide();
 };
 
 // CREATE CONTAINER
 function newWindow(appLink: string, appName: string): void {
   let containerID: string = generateRandomString(8);
 
-  let appContainer = document.createElement("app");
+  // we do this to prevent duplicate container IDs
+  while (openApps.includes(containerID)) {
+    containerID = generateRandomString(8);
+  }
+
+  const appContainer = document.createElement("div");
   appContainer.id = containerID;
   appContainer.className = "programWindow";
-  appContainer.draggable = "false";
-  appContainer.ondblclick = function () {
-    fullscreenProgram(containerID);
-  };
+  appContainer.ondblclick = () => fullscreenProgram(containerID);
   $("#desktopBG").append(appContainer);
   openApps.push(containerID);
   $(".programWindow").draggable();
 
   /* GLOBAL MENU BUTTONS */
-  let closeBTN = document.createElement("button");
+  const closeBTN = document.createElement("button");
   closeBTN.className = "menubar";
   closeBTN.innerText = "X";
-  closeBTN.onclick = function () {
-    taskkill(3, containerID, false);
-  };
-  $("#" + containerID).append(closeBTN);
+  closeBTN.onclick = () => taskKill(3, containerID, false);
+  appContainer.append(closeBTN);
 
-  // maximise button
-  let maxBTN = document.createElement("button");
+  // maximize button
+  const maxBTN = document.createElement("button");
   maxBTN.className = "menubar";
-  maxBTN.innerText = "🗖";
-  maxBTN.onclick = function () {
-    fullscreenProgram(containerID, false);
-  };
-  $("#" + containerID).append(maxBTN);
+  maxBTN.innerText = "↑";
+  maxBTN.onclick = () => fullscreenProgram(containerID);
+  appContainer.append(maxBTN);
 
-  // minimise button
-  let minBTN = document.createElement("button");
+  // minimize button
+  const minBTN = document.createElement("button");
   minBTN.className = "menubar";
-  minBTN.innerText = "_";
+  minBTN.innerText = "↓";
   minBTN.style.top = "-2px";
-  minBTN.onclick = function () {
-    minimise(containerID);
-  };
-  $("#" + containerID).append(minBTN);
+  minBTN.onclick = () => minimize(containerID);
+  appContainer.append(minBTN);
 
   // container header
-  let containerTitle = document.createElement("span");
+  const containerTitle = document.createElement("span");
   containerTitle.className = "containerTitle";
   containerTitle.innerText = appName;
   minBTN.style.top = "-2px";
-  $("#" + containerID).append(containerTitle);
+  appContainer.append(containerTitle);
 
-  //vf = viewerframe
-  let vf = document.createElement("iframe");
-  vf.src = appLink;
-  //vf.scrolling = "no"
-  vf.className = "viewFrame";
-  $("#" + containerID).append(vf);
+  const viewFrame = document.createElement("iframe");
+  viewFrame.src = appLink;
+  viewFrame.className = "viewFrame";
+  appContainer.append(viewFrame);
 
-  appContainer.onmouseup = function () {
-    vf.style.display = "block";
-  };
-  appContainer.onmousedown = function (event) {
-    taskkill(event, containerID, true, vf);
-  };
+  appContainer.onmouseup = () => (viewFrame.style.display = "block");
+  appContainer.onmousedown = ($event) =>
+    taskKill($event, containerID, true, viewFrame);
 
   // add taskbar object
-  let taskbarobjID: string = generateRandomString(8);
-  let taskbarobj = document.createElement("p");
-  taskbarobj.id = taskbarobjID;
-  taskbarobj.className = "taskbarItem";
-  taskbarobj.setAttribute("app", containerID);
-  $("#appsTray").append(taskbarobj);
+  const taskbarItemId: string = generateRandomString(8);
+  const taskbarItem = document.createElement("p");
+  taskbarItem.id = taskbarItemId;
+  taskbarItem.className = "taskbarItem";
+  taskbarItem.setAttribute("app", containerID);
+  $("#appsTray").append(taskbarItem);
 
-  // traskbar object and icon
+  // taskbar object and icon
   if (!appName.includes("://")) {
-    taskbarobj.insertAdjacentHTML(
+    taskbarItem.insertAdjacentHTML(
       "afterbegin",
       "<img class='appTrayIcon' src='./applications/" +
         appName +
@@ -131,16 +124,15 @@ function newWindow(appLink: string, appName: string): void {
     );
   } else {
     // web app frame
-
     if (appName.includes("localhost:8080")) {
       // file explorer
-      taskbarobj.insertAdjacentHTML(
+      taskbarItem.insertAdjacentHTML(
         "afterbegin",
         "<img class='appTrayIcon' src='./NeonX/icons/folder.png'>File Explorer"
       );
     } else {
       // web frame
-      taskbarobj.insertAdjacentHTML(
+      taskbarItem.insertAdjacentHTML(
         "afterbegin",
         "<img class='appTrayIcon' src='./NeonX/icons/internet.png'>Web Browser"
       );
@@ -150,12 +142,13 @@ function newWindow(appLink: string, appName: string): void {
   // init taskbar item with click events
   $(".taskbarItem").mousedown(function (event) {
     if (event.which == 1) {
-      bringtoFront($(this).attr("app"));
+      bringToFront($(this).attr("app"));
     } else if (event.which == 3) {
-      taskkill(3, $(this).attr("app"), false);
+      taskKill(3, $(this).attr("app"), false);
     }
   });
-  bringtoFront(containerID);
+
+  bringToFront(containerID);
 }
 
 // remove program from backend list of open apps
@@ -167,14 +160,14 @@ let removeProgram = (app: string): void => {
 
 // TASKKILL (event, app, false)
 // taskkill function
-function taskkill(
+function taskKill(
   e,
   app: string,
   click: boolean,
   innerFrame?: HTMLIFrameElement
 ): void {
   // bring to front
-  bringtoFront(app);
+  bringToFront(app);
 
   // hide the inner frame so that the draggable hitbox is as big as possible
   if (innerFrame) {
@@ -201,8 +194,7 @@ function taskkill(
   }
 }
 
-// brings app to front of desktop
-function bringtoFront(app: string): void {
+function bringToFront(app: string): void {
   for (var i = 0; i < openApps.length; i++) {
     if (openApps[i] != app) {
       document.getElementById(openApps[i]).style.zIndex -= 1;
@@ -211,17 +203,16 @@ function bringtoFront(app: string): void {
     }
   }
   $("#" + app).css("display", "inline");
-} // end of bring to front
+}
 
-// minimises app to hidden on desktop
-function minimise(app): void {
+// minimizes app to hidden on desktop
+function minimize(app): void {
   $("#" + app).css("display", "none");
 }
 
-// fullscreens container window
 function fullscreenProgram(app: string): void {
   const appElement = $(`#${app}`);
-  
+
   if (appElement.width() === $(window).width()) {
     document.getElementById(app).style.top = "100px";
     document.getElementById(app).style.left = "150px";
@@ -239,11 +230,11 @@ function fullscreenProgram(app: string): void {
 
 function showDesktop(): void {
   $("#all-apps").hide();
-  openApps.forEach((app: string) => minimise(app));
-};
+  openApps.forEach((app: string) => minimize(app));
+}
 
 // desktop context menu toggling
-function desktopContextMenu(x, y, toggle: boolean): void {
+function desktopContextMenu(x: number, y: number, toggle: boolean): void {
   if (toggle) {
     if ($("#desktopContextMenu").css("display") == "block") {
       $("#desktopContextMenu").css("display", "none");
@@ -339,7 +330,7 @@ let initializeDesktop = (): void => {
 
   // taskbar initilization
   $(".taskbarItem").click(function (e) {
-    bringtoFront($(this).attr("app"));
+    bringToFront($(this).attr("app"));
   });
 
   // all apps grid

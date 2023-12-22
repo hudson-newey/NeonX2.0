@@ -38,9 +38,9 @@ a {
   width: 45%;
   height: 60%;
   color: $keyColor;
-  /* background-image: linear-gradient(to bottom right, #21252b, #31353b); */
+  background-image: linear-gradient(to bottom right, #21252b, #31353b);
   /* DEPRICATED */
-  background-color: $accentColor;
+  // background-color: $accentColor;
   animation: 0.9s fadein;
   user-select: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -54,6 +54,10 @@ a {
   font-size: 18px;
   left: 50%;
   transform: translate(-50%, 2px);
+
+  &:active {
+    cursor: move;
+  }
 }
 
 .menubar {
@@ -83,7 +87,7 @@ a {
   overflow: hidden;
 }
 
-app {
+.programWindow {
   border-style: none;
   overflow: hidden;
 

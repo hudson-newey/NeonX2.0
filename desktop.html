@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" onkeyup="esc(event);" onmousemove="screensaverTimeout=200;">
+<html lang="en" onkeyup="esc(event)" onmousemove="screensaverTimeout=600">
 <head>
   <meta charset="UTF-8">
   <title>NeonX</title>
@@ -16,41 +16,42 @@
 <body>
 
 <div id="desktopBG" class="desktop">
-  <div class="desktop__item" ondblclick="startProgram('', browserNewTab);">
+  <div class="desktop__item" ondblclick="startProgram('', browserNewTab)">
     <img class="desktop_icons" src="./NeonX/icons/internet.png"></img>
     <text>Browser</text>
   </div>
-  <div class="desktop__item" ondblclick="startProgram('Notepad', '');">
+  <div class="desktop__item" ondblclick="startProgram('Notepad', '')">
     <img class="desktop_icons" src="./applications/Notepad/favicon.png"></img>
     <text>Notepad</text>
   </div>
-  <div class="desktop__item" ondblclick="startProgram('', 'http://localhost:8080/?dir=Home');">
+  <div class="desktop__item" ondblclick="startProgram('', 'http://localhost:8080/?dir=Home')">
     <img class="desktop_icons" src="./NeonX/icons/files.png"></img>
     <text>Files</text>
   </div>
-  <div class="desktop__item" ondblclick="startProgram('Google Docs', '');">
+  <div class="desktop__item" ondblclick="startProgram('Google Docs', '')">
     <img class="desktop_icons" src="./applications/Google Docs/favicon.png"></img>
     <text>Docs</text>
   </div>
-  <div class="desktop__item" ondblclick="startProgram('Google Slides', '');">
+  <div class="desktop__item" ondblclick="startProgram('Google Slides', '')">
     <img class="desktop_icons" src="./applications/Google Slides/favicon.png"></img>
     <text>Slides</text>
   </div>
-  <div class="desktop__item" ondblclick="startProgram('Google Sheets', '');">
+  <div class="desktop__item" ondblclick="startProgram('Google Sheets', '')">
     <img class="desktop_icons" src="./applications/Google Sheets/favicon.png"></img>
     <text>Sheets</text>
   </div>
 
   <div class="start-menu-fade"></div>
-  <a id="editDesktopBTN" href="#" onclick="desktopContextMenu(window.innerWidth - 200, 0, true);">☰</a>
+  <a id="editDesktopBTN" href="#" onclick="desktopContextMenu(window.innerWidth - 200, 0, true)">☰</a>
 
   <!--CONTEXT MENU-->
-  <ul class="contextMenu" id="desktopContextMenu" style="display:none;">
+  <ul class="contextMenu" id="desktopContextMenu" style="display:none">
     <strong id="contextMenuTitle"><u>NeonX</u></strong><br>
-    <a onclick="initializeDesktop();">Refresh Desktop</a><br>
-    <a onclick="addFile('file');">New File</a><br>
-    <a onclick="document.getElementById('file-input').click();">Install Apps</a><input id="file-input" type="file" name="name" onchange="addApp(this.files)" style="display: none;"/><br>
+    <a onclick="initializeDesktop()">Refresh Desktop</a><br>
+    <a onclick="addFile('file')">New File</a><br>
+    <a onclick="document.getElementById('file-input').click()">Install Apps</a><input id="file-input" type="file" name="name" onchange="addApp(this.files)" style="display: none"/><br>
     <a onclick="$('#all-apps').show()">All Apps</a><br>
+    <a onclick="startProgram('Settings', '')">Settings</a><br>
   </ul>
 
   <div class="start-menu">
@@ -63,37 +64,37 @@
         </div>
         </a>
         <div class="menu" data-menu="user">
-          <a href="#">Change account picture</a>
+          <a href="#" onclick="startProgram('Settings', '')">Settings</a>
           <a href="#" onclick="user('lock')">Lock</a>
           <a href="#" onclick="user('logout')">Switch User</a>
         </div>
         <a class="user-info__power menu-toggle" href="#" data-menu="power">
-          <strong>✲</strong>
+          <strong>⏻</strong>
         </a>
       </div>
 
       <div class="menu" data-menu="power">
-        <a onclick="user('sleep');">Sleep</a>
-        <a onclick="window.close();" href="#">Power off</a>
-        <a onclick="location.reload(false);" href="#">Reset</a>
+        <a onclick="user('sleep')">Sleep</a>
+        <a onclick="window.close()" href="#">Power off</a>
+        <a onclick="location.reload(false)" href="#">Reset</a>
       </div>
 
 
       <ul class="start-menu__recent">
         <li>
-          <a onclick="startProgram('', browserNewTab);">
+          <a onclick="startProgram('', browserNewTab)">
             <i><img class="icons" src="./NeonX/icons/internet.png"/>Web Browser</i>
           </a>
         </li>
 
         <li>
-          <a href="javascript:void(0);" onclick="startProgram('Notepad', '');">
+          <a href="javascript:void(0)" onclick="startProgram('Notepad', '')">
             <i><img class="icons" src="./applications/Notepad/favicon.png"/>Notepad</i>
           </a>
         </li>
         <li class="start-menu__notepad">
-          <a onclick="startProgram('', 'http://localhost:8080/?dir=Home');">
-            <i class="fa fa-pencil" style="display:none;"></i><i><img class="icons" src="./NeonX/icons/files.png"/>Files</i>
+          <a onclick="startProgram('', 'http://localhost:8080/?dir=Home')">
+            <i class="fa fa-pencil" style="display:none"></i><i><img class="icons" src="./NeonX/icons/files.png"/>Files</i>
           </a>
         </li>
       </ul>
@@ -102,68 +103,63 @@
         All apps
         <i class="fa fa-arrow-right"></i>
       </a>
-      <input type="text" id="search__input" placeholder="search" onkeydown="navigate(event);" spellcheck="false" autocomplete="off" autofocus></input>
+      <input type="text" id="search__input" placeholder="search" onkeydown="navigate(event)" spellcheck="false" autocomplete="off" autofocus></input>
     </div>
   </div>
 
   <!--all apps traybar-->
-  <ul id="all-apps" style="display: none;">
+  <ul id="all-apps" style="display: none">
     <button id="allAppsCloseBTN" type="button">exit</button>
 
-    <div class="draw__item" onclick="startProgram('', browserNewTab); $('#all-apps').hide();">
+    <div class="draw__item" onclick="startProgram('', browserNewTab)">
       <button class="deleteBTN">x</button>
       <img class="desktop_icons" src="./NeonX/icons/internet.png"></img><br>
       <text>Web Browser</text>
     </div>
-    <div class="draw__item" onclick="startProgram('Notepad', ''); $('#all-apps').hide();">
+    <div class="draw__item" onclick="startProgram('Notepad', '')">
       <button class="deleteBTN">x</button>
       <img class="desktop_icons" src="./applications/Notepad/favicon.png"></img><br>
       <text>Notepad</text>
     </div>
-    <div class="draw__item" onclick="startProgram('', 'http://localhost:8080/?dir=Home'); $('#all-apps').hide();">
+    <div class="draw__item" onclick="startProgram('', 'http://localhost:8080/?dir=Home')">
       <button class="deleteBTN">x</button>
       <img class="desktop_icons" src="./NeonX/icons/files.png"></img><br>
       <text>Files</text>
     </div>
-    <div class="draw__item" onclick="startProgram('Google Docs', ''); $('#all-apps').hide();">
+    <div class="draw__item" onclick="startProgram('Google Docs', '')">
       <button class="deleteBTN">x</button>
       <img class="desktop_icons" src="./applications/Google Docs/favicon.png"></img><br>
       <text>Docs</text>
     </div>
-    <div class="draw__item" onclick="startProgram('Google Slides', ''); $('#all-apps').hide();">
+    <div class="draw__item" onclick="startProgram('Google Slides', '')">
       <button class="deleteBTN">x</button>
       <img class="desktop_icons" src="./applications/Google Slides/favicon.png"></img><br>
       <text>Slides</text>
     </div>
-    <div class="draw__item" onclick="startProgram('Google Sheets', ''); $('#all-apps').hide();">
+    <div class="draw__item" onclick="startProgram('Google Sheets', '')">
       <button class="deleteBTN">x</button>
       <img class="desktop_icons" src="./applications/Google Sheets/favicon.png"></img><br>
       <text>Sheets</text>
     </div>
-    <div class="draw__item" onclick="startProgram('PDF Viewer', ''); $('#all-apps').hide();">
+    <div class="draw__item" onclick="startProgram('PDF Viewer', '')">
       <button class="deleteBTN">x</button>
       <img class="desktop_icons" src="./applications/PDF Viewer/favicon.png"></img><br>
       <text>PDF Viewer</text>
     </div>
-    <div class="draw__item" onclick="startProgram('Calculator', ''); $('#all-apps').hide();">
-      <button class="deleteBTN">x</button>
-      <img class="desktop_icons" src="./applications/Calculator/favicon.png"></img><br>
-      <text>Calculator</text>
-    </div>
-    <div class="draw__item" onclick="startProgram('Camera', ''); $('#all-apps').hide();">
+    <div class="draw__item" onclick="startProgram('Camera', '')">
       <button class="deleteBTN">x</button>
       <img class="desktop_icons" src="./applications/Camera/favicon.png"></img><br>
       <text>Camera</text>
     </div>
-    <div class="draw__item" onclick="startProgram('Calender', ''); $('#all-apps').hide();">
+    <div class="draw__item" onclick="startProgram('Settings', '')">
       <button class="deleteBTN">x</button>
-      <img class="desktop_icons" src="./applications/Calender/favicon.png"></img><br>
-      <text>Calender</text>
+      <img class="desktop_icons" src="./applications/Settings/favicon.png"></img><br>
+      <text>Settings</text>
     </div>
   </ul>
   
   <div class="taskbar">
-    <a id="superButton" class="taskbar__item taskbar__item--start" href="javascript:void(0)">
+    <a id="superButton" class="taskbar__item startIcon" href="javascript:void(0)">
       <b>X</b>
     </a>
 
@@ -171,8 +167,8 @@
       <span class="wrapper-taskbar" id="appsTray">
       </span>
 
-      <span class="time" onclick="startProgram('Calender', '');"><p id="timeDisplay"></p></span>
-      <button id="showdesktopBTN" type="button" onclick="showDesktop();"></button>
+      <span class="time" onclick="startProgram('Clock', '')"><p id="timeDisplay"></p></span>
+      <button id="showdesktopBTN" type="button" onclick="showDesktop()"></button>
     </div>
   </div>
 
