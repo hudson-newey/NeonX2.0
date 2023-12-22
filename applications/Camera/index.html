@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html>
-<video id="video" autoplay></video>
-<link rel="stylesheet" href="./style.css">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeonX Camera</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./dist/style.css" />
+    <script src="./dist/script.js"></script>
+  </head>
 
-<script type="text/javascript">
-// Grab elements, create settings, etc.
-var video = document.getElementById('video');
+  <body>
+    <video id="videoOutlet" autoplay></video>
 
-// Get access to the camera!
-if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    // Not adding `{ audio: true }` since we only want video now
-    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-        //video.src = window.URL.createObjectURL(stream);
-        video.srcObject = stream;
-        video.play();
-    });
-}
-</script>
+    <button id="captureButton" onclick="takePicture()">
+        <i class="fa fa-camera"></i>
+    </button>
+  </body>
 </html>
