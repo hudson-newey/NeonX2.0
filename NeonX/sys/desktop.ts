@@ -211,20 +211,14 @@ function minimize(app): void {
 }
 
 function fullscreenProgram(app: string): void {
+  const fullscreenClass = "fullscreen";
   const appElement = $(`#${app}`);
+  const isFullscreen = appElement.hasClass(fullscreenClass);
 
-  if (appElement.width() === $(window).width()) {
-    document.getElementById(app).style.top = "100px";
-    document.getElementById(app).style.left = "150px";
-    document.getElementById(app).style.opacity = "0.95";
-    appElement.height($(window).height() * 0.6);
-    appElement.width($(window).width() * 0.45);
+  if (isFullscreen) {
+    appElement.removeClass(fullscreenClass);
   } else {
-    document.getElementById(app).style.top = "0px";
-    document.getElementById(app).style.left = "0px";
-    document.getElementById(app).style.opacity = "1";
-    appElement.height($(window).height() - 45);
-    appElement.width($(window).width());
+    appElement.addClass(fullscreenClass);
   }
 }
 
