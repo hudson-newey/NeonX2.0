@@ -105,13 +105,6 @@ $(document).on("keyup", () => {
 
 // webpage init
 $(window).load(() => {
-  const container = $(".start-screen");
-
-  container.masonry({
-    itemSelector: ".masonry-item",
-    columnWidth: 128,
-  });
-
   $(".start-menu").hide().css("opacity", 1);
 });
 
