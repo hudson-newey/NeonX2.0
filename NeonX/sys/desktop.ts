@@ -14,11 +14,11 @@ let addFile = (): void => {
   let uniqueLinkID: string = generateRandomString(8);
   let iconContainer = document.createElement("div");
   iconContainer.id = uniqueLinkID;
-  iconContainer.className = "desktop__item";
+  iconContainer.className = "desktopItem";
   $("#desktopBG").append(iconContainer);
 
   let iconPicture = document.createElement("img");
-  iconPicture.className = "desktop_icons";
+  iconPicture.className = "desktopItemIcon";
   iconPicture.id = uniqueLinkID + "__icon";
   iconPicture.src = "./NeonX/icons/file_icon.png";
   $("#" + uniqueLinkID).append(iconPicture);
@@ -280,7 +280,7 @@ function addApp(file: any) {
       let iconID = generateRandomString(8);
       let iconContainer = document.createElement("div");
       iconContainer.id = iconID;
-      iconContainer.className = "desktop__item";
+      iconContainer.className = "desktopItem";
       iconContainer.ondblclick = function () {
         startProgram(appName, "");
       };
@@ -288,14 +288,14 @@ function addApp(file: any) {
 
       let drawIcon = document.createElement("div");
       drawIcon.id = iconID;
-      drawIcon.className = "draw__item";
+      drawIcon.className = "drawItem";
       drawIcon.onclick = function () {
         startProgram(appName, "");
       };
       $("#all-apps").append(drawIcon);
 
       let iconPicture = document.createElement("img");
-      iconPicture.className = "desktop_icons";
+      iconPicture.className = "desktopItemIcon";
       iconPicture.src = "./applications/" + appName + "/favicon.png";
       $("#" + iconID).append(iconPicture);
 
@@ -314,9 +314,9 @@ function addApp(file: any) {
 // used for initialization of desktop and refreshes
 let initializeDesktop = (): void => {
   // desktop icons init
-  let p = $(".desktop__item").draggable();
+  let p = $(".desktopItem").draggable();
 
-  const desktopItems = $(".desktop__item");
+  const desktopItems = $(".desktopItem");
   desktopItems.each((i) => {
     desktopItems[i].onmousedown = () => editDesktop(desktopItems[i], true);
     desktopItems[i].onmouseup = () => editDesktop(desktopItems[i], false);

@@ -7,7 +7,7 @@ $accentColor: var(--accent-color);
 }
 
 /* DESKTOP */
-.desktop__item {
+.desktopItem {
   display: inline-block;
   position: static;
   margin-right: 4px;
@@ -28,7 +28,7 @@ $accentColor: var(--accent-color);
   }
 }
 
-.desktop_icons {
+.desktopItemIcon {
   position: relative;
   height: 56px;
   width: 56px;
@@ -51,7 +51,7 @@ img.icons {
   background-color: transparent;
 }
 
-#editDesktopBTN {
+#editDesktopButton {
   position: absolute;
   right: 5px;
   top: 2.5px;
