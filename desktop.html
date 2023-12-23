@@ -44,12 +44,12 @@
 
   <!--CONTEXT MENU-->
   <ul class="contextMenu" id="desktopContextMenu" style="display:none">
-    <strong id="contextMenuTitle"><u>NeonX</u></strong><br>
-    <a onclick="initializeDesktop()">Refresh Desktop</a><br>
-    <a onclick="addFile('file')">New File</a><br>
-    <a onclick="document.getElementById('file-input').click()">Install Apps</a><input id="file-input" type="file" name="name" onchange="addApp(this.files)" style="display: none"/><br>
-    <a onclick="$('#all-apps').show()">All Apps</a><br>
-    <a onclick="startProgram('Settings', '')">Settings</a><br>
+    <strong id="contextMenuTitle"><u>NeonX</u></strong>
+    <li onclick="initializeDesktop()">Refresh Desktop</li>
+    <li onclick="addFile('file')">New File</li>
+    <li onclick="document.getElementById('file-input').click()">Install Apps</li>
+    <li onclick="$('#all-apps').show()">All Apps</li>
+    <li onclick="startProgram('Settings', '')">Settings</li>
   </ul>
 
   <div class="start-menu">
@@ -184,6 +184,9 @@
 <footer>
   <script src="./NeonX/sys/dist/desktop.js"></script>
   <script src="./NeonX/sys/dist/script.js"></script>
+
+  <!-- TODO: remove this -->
+  <input id="file-input" type="file" name="name" onchange="addApp(this.files)" style="display: none"/>
 </footer>
 
 </html>
