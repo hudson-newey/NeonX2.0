@@ -5,6 +5,37 @@ body {
     background-color: $background-color;
 }
 
-#main-heading {
+nav {
+    position: absolute;
     color: $font-color;
+    background-color: lighten($background-color, 10%);
+    padding: 0.1rem;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+
+    ul > li {
+        display: inline-block;
+        margin-right: 1rem;
+        list-style-type: none;
+    }
+
+    a {
+        color: $font-color;
+        text-decoration: none;
+    }
+
+    .selectedMenuItem {
+        font-weight: bold;
+    }
+}
+
+.content {
+    position: absolute;
+    top: 3rem;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    padding: 1rem;
+    overflow: auto;
 }

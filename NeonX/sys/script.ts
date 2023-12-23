@@ -30,7 +30,7 @@ function user(status: string): void {
       break;
     case "sleep":
       window.location.href =
-        "./NeonX/screensaver.html?usr=" + $.urlParam("usr");
+        "./NeonX/sys/screensaver/screensaver.html?usr=" + $.urlParam("usr");
       break;
     default:
       console.error("status update failed...");
@@ -183,12 +183,12 @@ $("#currentUser").text($.urlParam("usr"));
 
 /* LOOP */
 // countdown timer till screensaver will be activated
-let screensaverTimeout: number = 480; // seconds (8) miniutes default
+let screensaverTimeout: number = 480; // seconds (8) minutes default
 function loop(): void {
   getTime();
   setTimeout(loop, 1000);
   screensaverTimeout -= 1;
   if (screensaverTimeout < 1)
-    window.location.href = "./NeonX/screensaver.html?usr=" + $.urlParam("usr");
+    window.location.href = "./NeonX/sys/screensaver/screensaver.html?usr=" + $.urlParam("usr");
 }
 loop();

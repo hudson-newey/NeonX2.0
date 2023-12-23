@@ -1,0 +1,36 @@
+$accentColor: #00bbff;
+
+body {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0px;
+  padding: 0px;
+}
+
+#svgContainer {
+  position: absolute;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  margin: 0px;
+  padding: 0px;
+
+  background-color: black;
+  width: 100%;
+  height: 100%;
+}
+
+#mainHeading {
+  position: absolute;
+  top: calc(50% - 1em);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 7rem;
+  font-family: "Roboto", sans-serif;
+}
