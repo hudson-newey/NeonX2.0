@@ -311,6 +311,81 @@ function addApp(file: any) {
   reader.readAsText(file[0]);
 }
 
+// creates a blue bounding box element when dragging on the desktop
+let desktopHighlighting: boolean = false;
+function bindDesktopHighlight(): void {
+  const desktopElement = document.getElementById("desktopBG") as HTMLDivElement;
+
+  desktopElement.addEventListener("mousemove", (event: MouseEvent) => {
+    mousePosition = [event.clientX, event.clientY];
+  });
+
+  desktopElement.addEventListener("mousedown", (event: MouseEvent) => {
+    // only create the highlight if we are left clicking
+    if (event.which !== 1) {
+      return;
+    }
+
+    // exit if we are touching any other child element
+    // we have to do this because most elements are contained within the desktop
+    if (event.target !== desktopElement) {
+      return;
+    }
+
+    var interval = setInterval(() => resizeDesktopHighlight(event), 0);
+    desktopElement.addEventListener("mouseup", () => {
+      clearInterval(interval);
+      removeDesktopHighlight();
+    });
+  });
+}
+
+let mousePosition: number[] = [0, 0];
+let dragStartPosition: number[] = [0, 0];
+function resizeDesktopHighlight(event: MouseEvent): void {
+  const highlightClass = "cursorHighlight";
+
+  const desktopElement = document.getElementById("desktopBG") as HTMLDivElement;
+  let highlightElement = document.getElementsByClassName(highlightClass)[0] as HTMLDivElement;
+
+  if (!highlightElement) {
+    // create a new one
+    const newHighlightElement = document.createElement("div");
+    newHighlightElement.className = highlightClass;
+
+    newHighlightElement.style.left = `${event.clientX}px`;
+    newHighlightElement.style.top = `${event.clientY}px`;
+
+    dragStartPosition = [event.clientX, event.clientY];
+
+    desktopElement.appendChild(newHighlightElement);
+
+    highlightElement = newHighlightElement;
+  }
+  
+  const highlightWidth = mousePosition[0] - dragStartPosition[0];
+  const highlightHeight = mousePosition[1] - dragStartPosition[1];
+
+  highlightElement.style.width = `${Math.abs(highlightWidth)}px`;
+  highlightElement.style.height = `${Math.abs(highlightHeight)}px`;
+
+  if (highlightWidth < 0) {
+    highlightElement.style.left = `${mousePosition[0]}px`;
+  }
+
+  if (highlightHeight < 0) {
+    highlightElement.style.top = `${mousePosition[1]}px`;
+  }
+}
+
+function removeDesktopHighlight(): void {
+  const highlightElement = document.getElementsByClassName("cursorHighlight")[0] as HTMLDivElement;
+
+  if (highlightElement) {
+    highlightElement.remove();
+  }
+}
+
 // used for initialization of desktop and refreshes
 let initializeDesktop = (): void => {
   // desktop icons init
@@ -321,6 +396,8 @@ let initializeDesktop = (): void => {
     desktopItems[i].onmousedown = () => editDesktop(desktopItems[i], true);
     desktopItems[i].onmouseup = () => editDesktop(desktopItems[i], false);
   });
+
+  bindDesktopHighlight();
 
   // taskbar initilization
   $(".taskbarItem").click(function (e) {

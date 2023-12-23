@@ -86,8 +86,9 @@ img.icons {
   z-index: 2;
 
   li {
+    list-style-type: none;
     cursor: pointer;
-
+    
     &:visited {
       color: #282c34;
     }
@@ -104,6 +105,15 @@ img.icons {
   #contextMenuTitle {
     font-size: 20px;
   }
+}
+
+.cursorHighlight {
+  position: absolute;
+  background-color: $accentColor;
+  border: solid medium $accentColor;
+  border-radius: 0.5rem;
+  z-index: 1;
+  opacity: 0.3;
 }
 
 .media {
