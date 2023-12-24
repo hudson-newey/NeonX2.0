@@ -251,13 +251,22 @@ a {
   flex-direction: row;
 
   & > #superButton {
+    display: block;
+    font-size: 30px;
     color: $keyColor;
+    font-weight: bold;
     margin: auto;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-    
+    background-color: transparent;
+    border: none;
+
     &:hover {
       background-color: rgba(120, 144, 156, 0.15);
+    }
+
+    &:active {
+      background-color: rgba(120, 144, 156, 0.25);
     }
   }
 
@@ -272,7 +281,7 @@ a {
     font-size: 22px;
     border: 1px solid transparent;
     transition: all 100ms;
-  
+
     &:hover {
       background-color: rgba(120, 144, 156, 0.15);
     }
@@ -328,17 +337,17 @@ a {
   z-index: 9999;
   color: $keyColor;
   background-color: #282c34;
+}
 
-  &-fade {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 9998;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
+.desktopFade {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9998;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .start--open {
@@ -473,30 +482,10 @@ a {
   text-align: center;
 }
 
-#allAppsButton {
-  position: absolute;
-  right: 0;
-  bottom: 40px;
-  display: block;
-  margin-bottom: 10px;
-  color: $keyColor;
-  transition: all 100ms;
-  cursor: pointer;
-}
-
-#allAppsButton > i {
-  margin-left: 5px;
-  margin-right: 5px;
-  border: 2px solid $keyColor;
-  border-radius: 100px;
-  width: 32px;
-  height: 32px;
-  line-height: 26px;
-  text-align: center;
-
-  &:hover {
-    background-color: #37474f;
-  }
+.startMenuItemText {
+  position: relative;
+  margin-left: 0.5rem;
+  top: -0.65rem;
 }
 
 .start-screen-scroll {

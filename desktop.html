@@ -39,10 +39,8 @@
     <span>Sheets</span>
   </div>
 
-  <div class="start-menu-fade"></div>
   <a id="editDesktopButton" href="#" onclick="desktopContextMenu(window.innerWidth - 200, 0, true)">☰</a>
 
-  <!--CONTEXT MENU-->
   <ul class="contextMenu" id="desktopContextMenu" style="display:none">
     <strong id="contextMenuTitle"><u>NeonX</u></strong>
     <li onclick="initializeDesktop()">Refresh Desktop</li>
@@ -57,7 +55,7 @@
       <div class="media">
         <a class="user-info menu-toggle" href="#" data-menu="user">
         <img class="user-info__img media__img" src="./NeonX/icons/profile.png">
-        <div class="user-info__name media__body">
+        <div class="accountImage">
           <span id="currentUser">Demo Account</span>
         </div>
         </a>
@@ -79,34 +77,46 @@
 
 
       <ul class="start-menu__recent">
-        <li>
+        <li class="startMenuItem">
           <a onclick="startProgram('', browserNewTab)">
-            <i><img class="icons" src="./NeonX/icons/internet.png"/>Web Browser</i>
+            <img class="icons" src="./NeonX/icons/internet.png"/>
+            <span class="startMenuItemText">Web Browser</span>
           </a>
         </li>
 
-        <li>
+        <li class="startMenuItem">
           <a onclick="startProgram('Notepad', '')">
-            <i><img class="icons" src="./applications/Notepad/favicon.png"/>Notepad</i>
+            <img class="icons" src="./applications/Notepad/favicon.png"/>
+            <span class="startMenuItemText">Notepad</span>
           </a>
         </li>
 
-        <li>
+        <li class="startMenuItem">
           <a onclick="startProgram('', 'http://localhost:8080/?dir=Home')">
-            <i><img class="icons" src="./NeonX/icons/files.png"/>Files</i>
+            <img class="icons" src="./NeonX/icons/files.png"/>
+            <span class="startMenuItemText">Files</span>
+          </a>
+        </li>
+
+        <li class="startMenuItem">
+          <a onclick="startProgram('Settings', '')">
+            <img class="icons" src="./applications/Settings/favicon.png"/>
+            <span class="startMenuItemText">Settings</span>
+          </a>
+        </li>
+
+        <li class="startMenuItem">
+          <a id="allAppsButton" href="#">
+            <img class="icons" src="./applications/Settings/favicon.png"/>
+            <span class="startMenuItemText">All apps</span>
           </a>
         </li>
       </ul>
 
-      <a id="allAppsButton" href="#">
-        All apps
-        <i class="fa fa-arrow-right"></i>
-      </a>
       <input type="span" id="search__input" placeholder="search" onkeydown="navigate(event)" spellcheck="false" autocomplete="off" autofocus></input>
     </div>
   </div>
 
-  <!--all apps grid-->
   <div id="all-apps" style="display: none">
     <button id="allAppsCloseBTN" type="button">exit</button>
 
@@ -163,9 +173,7 @@
   </div>
   
   <div class="taskbar">
-    <a id="superButton" class="" href="#">
-      <b>X</b>
-    </a>
+    <button id="superButton" class="" href="#">X</button>
 
     <div class="taskbarTray">
       <span class="wrapper-taskbar" id="appsTray"></span>

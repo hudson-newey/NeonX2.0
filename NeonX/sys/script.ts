@@ -46,12 +46,37 @@ function resizeStart(): void {
   });
 }
 
+let startToggled = false;
 function toggleStart(): void {
-  $(".start-menu-fade").fadeToggle(500);
+  const desktopFadeClass = "desktopFade";
+  startToggled = !startToggled;
+
   $(".start-menu").fadeToggle(250).toggleClass("start-menu--open");
   $("#superButton").toggleClass("start--open");
   $("#search__input").val("");
   $("#search__input").focus();
+
+  if (startToggled) {
+    const newDesktopFadeElement = document.createElement("div");
+    const desktopElement = document.getElementById("desktopBG");
+    newDesktopFadeElement.className = desktopFadeClass;
+
+    if (!desktopElement) {
+      throw new Error("Could not find desktop element");
+    }
+
+    desktopElement.appendChild(newDesktopFadeElement);
+  } else {
+    const desktopFadeElement = document.getElementsByClassName(desktopFadeClass)[0];
+    
+    if (!desktopFadeClass) {
+      throw new Error("Could not find desktopFadeClass");
+    }
+
+    desktopFadeElement.remove();
+  }
+
+  $(".desktopFade").fadeToggle(250);
 }
 
 // Current time
