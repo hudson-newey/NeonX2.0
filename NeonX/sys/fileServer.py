@@ -78,7 +78,7 @@ def decodeFile(filename):
 # Create an object of the above class
 handler_object = MyHttpRequestHandler
 
-PORT = 8080
+PORT = 8081
 my_server = socketserver.TCPServer(("", PORT), handler_object)
 
 # Star the server

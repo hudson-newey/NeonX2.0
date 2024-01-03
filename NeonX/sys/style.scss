@@ -7,18 +7,18 @@ $accentColor: #21252b;
 *:after {
   box-sizing: border-box;
   user-select: none;
-  cursor: url('../cursor.png'), auto;
+  cursor: url("../cursor.png"), auto;
 }
 
 body {
   overflow: hidden;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   font-size: 15px;
 }
 
 a {
   text-decoration: none;
-  cursor: url('../cursor.png'), auto;
+  cursor: url("../cursor.png"), auto;
 }
 
 // this is used when dragging a window so that the program window hitbox covers the entire chrome
@@ -39,13 +39,20 @@ a {
   height: 60%;
   color: $keyColor;
   background-image: linear-gradient(to bottom right, #21252b, #31353b);
-  /* DEPRICATED */
-  // background-color: $accentColor;
   animation: 0.9s fadein;
   user-select: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 1px rgba(0, 0, 0, 0.1);
   filter: grayscale(0.1) drop-shadow(8px 8px 10px #21252b);
   transform: scale(1);
+
+  &.fullscreen {
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+    top: 0px !important;
+    left: 0px !important;
+    opacity: 1 !important;
+  }
 }
 
 .containerTitle {
@@ -110,7 +117,7 @@ a {
 /* ALL APPS */
 #all-apps {
   position: absolute;
-  color: #EFF0F1;
+  color: #eff0f1;
   background: rgba(1, 1, 1, 0.7);
   left: 0px;
   top: -48px;
@@ -146,7 +153,7 @@ a {
   }
 }
 
-.draw__item {
+.drawItem {
   position: relative;
   top: 100px;
   padding: 40px;
@@ -171,7 +178,7 @@ a {
       background-color: rgba(80, 80, 80, 0.9) !important;
     }
   }
-  
+
   &:hover {
     .deleteBTN {
       background-color: rgba(80, 80, 80, 0.6);
@@ -188,7 +195,7 @@ a {
   display: flex;
   width: 99%;
 
-  &>p {
+  & > p {
     position: relative;
     display: flex;
     border-right: solid;
@@ -243,39 +250,50 @@ a {
   display: flex;
   flex-direction: row;
 
-  // DEPRICATED
-  &__item {
-    display: flex;
-    margin-right: 4px;
-    text-align: center;
-    width: 48px;
-    height: 48px;
-    font-size: 22px;
+  & > #superButton {
+    display: block;
+    font-size: 30px;
     color: $keyColor;
+    font-weight: bold;
+    margin: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+      background-color: rgba(120, 144, 156, 0.15);
+    }
+
+    &:active {
+      background-color: rgba(120, 144, 156, 0.25);
+    }
+  }
+
+  &* {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 6px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    color: $keyColor;
+    font-size: 22px;
     border: 1px solid transparent;
     transition: all 100ms;
-    
+
     &:hover {
       background-color: rgba(120, 144, 156, 0.15);
     }
   }
-  
-  &__tray {
-    display: flex;
-    color: $keyColor;
-    padding: 0 10px;
-    line-height: 48px;
-    width: 100%;
-  }
 }
 
-.taskbar__item>i {
-  display: inline-block;
-  vertical-align: middle;
-  margin-top: 6px;
-  width: 32px;
-  height: 32px;
-  line-height: 32px;
+.taskbarTray {
+  display: flex;
+  color: $keyColor;
+  padding: 0 10px;
+  line-height: 48px;
+  width: 100%;
 }
 
 .time {
@@ -283,19 +301,14 @@ a {
   right: 1rem;
   z-index: 999999;
 
-  time {
+  #timeDisplay {
     font-size: 17px;
     color: $keyColor;
+    cursor: pointer;
   }
 }
 
-#timeDisplay:hover {
-  cursor: pointer;
-  color: #fff;
-  transition: all 600ms;
-}
-
-#showdesktopBTN {
+#showDesktopButton {
   position: relative;
   background-color: rgba(120, 144, 156, 0.5);
   bottom: 80px;
@@ -324,17 +337,17 @@ a {
   z-index: 9999;
   color: $keyColor;
   background-color: #282c34;
+}
 
-  &-fade {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 9998;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
+.desktopFade {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9998;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .start--open {
@@ -357,7 +370,7 @@ a {
   height: 32px;
   border: 0;
   font-size: 12px;
-  color: #607D8B;
+  color: #607d8b;
   background-color: transparent;
   z-index: 0;
   -webkit-appearance: none;
@@ -462,37 +475,17 @@ a {
   background-color: rgba(255, 255, 255, 0.15);
 }
 
-.start-menu__recent li a>i {
+.start-menu__recent li a > i {
   display: inline-block;
   margin-right: 4px;
   font-size: 20px;
   text-align: center;
 }
 
-#all-appsBTN {
-  position: absolute;
-  right: 0;
-  bottom: 40px;
-  display: block;
-  margin-bottom: 10px;
-  color: $keyColor;
-  transition: all 100ms;
-  cursor: pointer;
-}
-
-#all-appsBTN>i {
-  margin-left: 5px;
-  margin-right: 5px;
-  border: 2px solid $keyColor;
-  border-radius: 100px;
-  width: 32px;
-  height: 32px;
-  line-height: 26px;
-  text-align: center;
-
-  &:hover {
-    background-color: #37474F;
-  }
+.startMenuItemText {
+  position: relative;
+  margin-left: 0.5rem;
+  top: -0.65rem;
 }
 
 .start-screen-scroll {
@@ -560,16 +553,16 @@ a {
     background-color: $keyColor;
   }
 
-  &>a {
+  & > a {
     display: block;
     width: 200px;
     padding: 10px 15px;
     font-size: 16px;
-    color: #455A64;
+    color: #455a64;
     transition: all 100ms;
 
     &:hover {
-      background-color: #ECEFF1;
+      background-color: #eceff1;
     }
   }
 }

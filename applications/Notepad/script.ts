@@ -1,31 +1,18 @@
-function download(): void {
-	let link = document.createElement('a')
-	let str: string = document.getElementById("mainInput").value
-	str = str.split("\u000A").join("\u000D\u000A")
-	bl = new Blob([str])
-	link.href = URL.createObjectURL(bl)
+function readFile($event: Event) {
+	const textArea = document.getElementById("textInput");
+  const input = $event.target as HTMLInputElement;
 
-	if (document.getElementById("mainInput").name!=""){
-		link.download = document.getElementById("mainInput").name
-	} else {
-		link.download = "text.txt"
-	}
+  if (!input.files || !input.files[0]) return;
 
-	let e = new MouseEvent("click")
-	link.dispatchEvent(e)
-}
+  if (!textArea) return;
 
-function readfile(filelist: [string]): string {
-	let text: any = filelist[0]
-	document.getElementById("mainInput").name=text.name
-	let reader = new FileReader()
-	reader.onload = function(e) {
-    document.getElementById("mainInput").value = e.target.result
-  }
+  const file = input.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = () => {
+    const text = reader.result as string;
+    textArea.innerHTML = text;
+  };
 
-  reader.readAsText(text)
-}
-
-function toggleSpelling(): void {
-	document.getElementById('mainInput').spellcheck = document.getElementById('spellcheck').checked
+  reader.readAsText(file);
 }

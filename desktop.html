@@ -7,51 +7,47 @@
   <link rel="stylesheet" href="./NeonX/sys/dist/desktop.css">
   <link rel="shortcut icon" href="./NeonX/icons/favicon.png">
 
-  <!--JS Librarys-->>
   <script src='./NeonX/lib/jquery.js'></script>
   <script src="./NeonX/lib/jquery-ui.js"></script>
-  <script src='./NeonX/lib/masonry.min.js'></script>
   <script src="./NeonX/sys/dist/constants.js"></script>
 </head>
 <body>
 
 <div id="desktopBG" class="desktop">
-  <div class="desktop__item" ondblclick="startProgram('', browserNewTab)">
-    <img class="desktop_icons" src="./NeonX/icons/internet.png"></img>
-    <text>Browser</text>
+  <div class="desktopItem" ondblclick="startProgram('', browserNewTab)">
+    <img class="desktopItemIcon" src="./NeonX/icons/internet.png"></img>
+    <span>Browser</span>
   </div>
-  <div class="desktop__item" ondblclick="startProgram('Notepad', '')">
-    <img class="desktop_icons" src="./applications/Notepad/favicon.png"></img>
-    <text>Notepad</text>
+  <div class="desktopItem" ondblclick="startProgram('Notepad', '')">
+    <img class="desktopItemIcon" src="./applications/Notepad/favicon.png"></img>
+    <span>Notepad</span>
   </div>
-  <div class="desktop__item" ondblclick="startProgram('', 'http://localhost:8080/?dir=Home')">
-    <img class="desktop_icons" src="./NeonX/icons/files.png"></img>
-    <text>Files</text>
+  <div class="desktopItem" ondblclick="startProgram('', 'http://localhost:8080/?dir=Home')">
+    <img class="desktopItemIcon" src="./NeonX/icons/files.png"></img>
+    <span>Files</span>
   </div>
-  <div class="desktop__item" ondblclick="startProgram('Google Docs', '')">
-    <img class="desktop_icons" src="./applications/Google Docs/favicon.png"></img>
-    <text>Docs</text>
+  <div class="desktopItem" ondblclick="startProgram('Google Docs', '')">
+    <img class="desktopItemIcon" src="./applications/Google Docs/favicon.png"></img>
+    <span>Docs</span>
   </div>
-  <div class="desktop__item" ondblclick="startProgram('Google Slides', '')">
-    <img class="desktop_icons" src="./applications/Google Slides/favicon.png"></img>
-    <text>Slides</text>
+  <div class="desktopItem" ondblclick="startProgram('Google Slides', '')">
+    <img class="desktopItemIcon" src="./applications/Google Slides/favicon.png"></img>
+    <span>Slides</span>
   </div>
-  <div class="desktop__item" ondblclick="startProgram('Google Sheets', '')">
-    <img class="desktop_icons" src="./applications/Google Sheets/favicon.png"></img>
-    <text>Sheets</text>
+  <div class="desktopItem" ondblclick="startProgram('Google Sheets', '')">
+    <img class="desktopItemIcon" src="./applications/Google Sheets/favicon.png"></img>
+    <span>Sheets</span>
   </div>
 
-  <div class="start-menu-fade"></div>
-  <a id="editDesktopBTN" href="#" onclick="desktopContextMenu(window.innerWidth - 200, 0, true)">☰</a>
+  <a id="editDesktopButton" href="#" onclick="desktopContextMenu(window.innerWidth - 200, 0, true)">☰</a>
 
-  <!--CONTEXT MENU-->
   <ul class="contextMenu" id="desktopContextMenu" style="display:none">
-    <strong id="contextMenuTitle"><u>NeonX</u></strong><br>
-    <a onclick="initializeDesktop()">Refresh Desktop</a><br>
-    <a onclick="addFile('file')">New File</a><br>
-    <a onclick="document.getElementById('file-input').click()">Install Apps</a><input id="file-input" type="file" name="name" onchange="addApp(this.files)" style="display: none"/><br>
-    <a onclick="$('#all-apps').show()">All Apps</a><br>
-    <a onclick="startProgram('Settings', '')">Settings</a><br>
+    <strong id="contextMenuTitle"><u>NeonX</u></strong>
+    <li onclick="initializeDesktop()">Refresh Desktop</li>
+    <li onclick="addFile('file')">New File</li>
+    <li onclick="document.getElementById('file-input').click()">Install Apps</li>
+    <li onclick="$('#all-apps').show()">All Apps</li>
+    <li onclick="startProgram('Settings', '')">Settings</li>
   </ul>
 
   <div class="start-menu">
@@ -59,7 +55,7 @@
       <div class="media">
         <a class="user-info menu-toggle" href="#" data-menu="user">
         <img class="user-info__img media__img" src="./NeonX/icons/profile.png">
-        <div class="user-info__name media__body">
+        <div class="accountImage">
           <span id="currentUser">Demo Account</span>
         </div>
         </a>
@@ -81,102 +77,114 @@
 
 
       <ul class="start-menu__recent">
-        <li>
+        <li class="startMenuItem">
           <a onclick="startProgram('', browserNewTab)">
-            <i><img class="icons" src="./NeonX/icons/internet.png"/>Web Browser</i>
+            <img class="icons" src="./NeonX/icons/internet.png"/>
+            <span class="startMenuItemText">Web Browser</span>
           </a>
         </li>
 
-        <li>
-          <a href="javascript:void(0)" onclick="startProgram('Notepad', '')">
-            <i><img class="icons" src="./applications/Notepad/favicon.png"/>Notepad</i>
+        <li class="startMenuItem">
+          <a onclick="startProgram('Notepad', '')">
+            <img class="icons" src="./applications/Notepad/favicon.png"/>
+            <span class="startMenuItemText">Notepad</span>
           </a>
         </li>
-        <li class="start-menu__notepad">
+
+        <li class="startMenuItem">
           <a onclick="startProgram('', 'http://localhost:8080/?dir=Home')">
-            <i class="fa fa-pencil" style="display:none"></i><i><img class="icons" src="./NeonX/icons/files.png"/>Files</i>
+            <img class="icons" src="./NeonX/icons/files.png"/>
+            <span class="startMenuItemText">Files</span>
+          </a>
+        </li>
+
+        <li class="startMenuItem">
+          <a onclick="startProgram('Settings', '')">
+            <img class="icons" src="./applications/Settings/favicon.png"/>
+            <span class="startMenuItemText">Settings</span>
+          </a>
+        </li>
+
+        <li class="startMenuItem">
+          <a id="allAppsButton" href="#">
+            <img class="icons" src="./applications/Settings/favicon.png"/>
+            <span class="startMenuItemText">All apps</span>
           </a>
         </li>
       </ul>
 
-      <a id="all-appsBTN" href="#">
-        All apps
-        <i class="fa fa-arrow-right"></i>
-      </a>
-      <input type="text" id="search__input" placeholder="search" onkeydown="navigate(event)" spellcheck="false" autocomplete="off" autofocus></input>
+      <input type="span" id="search__input" placeholder="search" onkeydown="navigate(event)" spellcheck="false" autocomplete="off" autofocus></input>
     </div>
   </div>
 
-  <!--all apps traybar-->
-  <ul id="all-apps" style="display: none">
+  <div id="all-apps" style="display: none">
     <button id="allAppsCloseBTN" type="button">exit</button>
 
-    <div class="draw__item" onclick="startProgram('', browserNewTab)">
+    <div class="drawItem" onclick="startProgram('', browserNewTab)">
       <button class="deleteBTN">x</button>
-      <img class="desktop_icons" src="./NeonX/icons/internet.png"></img><br>
-      <text>Web Browser</text>
+      <img class="desktopItemIcon" src="./NeonX/icons/internet.png"></img><br>
+      <span>Web Browser</span>
     </div>
-    <div class="draw__item" onclick="startProgram('Notepad', '')">
+    <div class="drawItem" onclick="startProgram('Notepad', '')">
       <button class="deleteBTN">x</button>
-      <img class="desktop_icons" src="./applications/Notepad/favicon.png"></img><br>
-      <text>Notepad</text>
+      <img class="desktopItemIcon" src="./applications/Notepad/favicon.png"></img><br>
+      <span>Notepad</span>
     </div>
-    <div class="draw__item" onclick="startProgram('', 'http://localhost:8080/?dir=Home')">
+    <div class="drawItem" onclick="startProgram('', 'http://localhost:8080/?dir=Home')">
       <button class="deleteBTN">x</button>
-      <img class="desktop_icons" src="./NeonX/icons/files.png"></img><br>
-      <text>Files</text>
+      <img class="desktopItemIcon" src="./NeonX/icons/files.png"></img><br>
+      <span>Files</span>
     </div>
-    <div class="draw__item" onclick="startProgram('Google Docs', '')">
+    <div class="drawItem" onclick="startProgram('Google Docs', '')">
       <button class="deleteBTN">x</button>
-      <img class="desktop_icons" src="./applications/Google Docs/favicon.png"></img><br>
-      <text>Docs</text>
+      <img class="desktopItemIcon" src="./applications/Google Docs/favicon.png"></img><br>
+      <span>Docs</span>
     </div>
-    <div class="draw__item" onclick="startProgram('Google Slides', '')">
+    <div class="drawItem" onclick="startProgram('Google Slides', '')">
       <button class="deleteBTN">x</button>
-      <img class="desktop_icons" src="./applications/Google Slides/favicon.png"></img><br>
-      <text>Slides</text>
+      <img class="desktopItemIcon" src="./applications/Google Slides/favicon.png"></img><br>
+      <span>Slides</span>
     </div>
-    <div class="draw__item" onclick="startProgram('Google Sheets', '')">
+    <div class="drawItem" onclick="startProgram('Google Sheets', '')">
       <button class="deleteBTN">x</button>
-      <img class="desktop_icons" src="./applications/Google Sheets/favicon.png"></img><br>
-      <text>Sheets</text>
+      <img class="desktopItemIcon" src="./applications/Google Sheets/favicon.png"></img><br>
+      <span>Sheets</span>
     </div>
-    <div class="draw__item" onclick="startProgram('PDF Viewer', '')">
+    <div class="drawItem" onclick="startProgram('PDF Viewer', '')">
       <button class="deleteBTN">x</button>
-      <img class="desktop_icons" src="./applications/PDF Viewer/favicon.png"></img><br>
-      <text>PDF Viewer</text>
+      <img class="desktopItemIcon" src="./applications/PDF Viewer/favicon.png"></img><br>
+      <span>PDF Viewer</span>
     </div>
-    <div class="draw__item" onclick="startProgram('Clock', '')">
+    <div class="drawItem" onclick="startProgram('Clock', '')">
       <button class="deleteBTN">x</button>
-      <img class="desktop_icons" src="./applications/Clock/favicon.png"></img><br>
-      <text>Clock</text>
+      <img class="desktopItemIcon" src="./applications/Clock/favicon.png"></img><br>
+      <span>Clock</span>
     </div>
-    <div class="draw__item" onclick="startProgram('Camera', '')">
+    <div class="drawItem" onclick="startProgram('Camera', '')">
       <button class="deleteBTN">x</button>
-      <img class="desktop_icons" src="./applications/Camera/favicon.png"></img><br>
-      <text>Camera</text>
+      <img class="desktopItemIcon" src="./applications/Camera/favicon.png"></img><br>
+      <span>Camera</span>
     </div>
-    <div class="draw__item" onclick="startProgram('Settings', '')">
+    <div class="drawItem" onclick="startProgram('Settings', '')">
       <button class="deleteBTN">x</button>
-      <img class="desktop_icons" src="./applications/Settings/favicon.png"></img><br>
-      <text>Settings</text>
-    </div>
-  </ul>
-  
-  <div class="taskbar">
-    <a id="superButton" class="taskbar__item startIcon" href="javascript:void(0)">
-      <b>X</b>
-    </a>
-
-    <div class="taskbar__tray">
-      <span class="wrapper-taskbar" id="appsTray">
-      </span>
-
-      <span class="time" onclick="startProgram('Clock', '')"><time id="timeDisplay"></time></span>
-      <button id="showdesktopBTN" type="button" onclick="showDesktop()"></button>
+      <img class="desktopItemIcon" src="./applications/Settings/favicon.png"></img><br>
+      <span>Settings</span>
     </div>
   </div>
+  
+  <div class="taskbar">
+    <button id="superButton" class="" href="#">X</button>
 
+    <div class="taskbarTray">
+      <span class="wrapper-taskbar" id="appsTray"></span>
+
+      <a class="time" onclick="startProgram('Clock', '')">
+        <time id="timeDisplay"></time>
+      </a>
+
+      <button id="showDesktopButton" type="button" onclick="showDesktop()"></button>
+    </div>
+  </div>
 </div>
 
 </body>
@@ -184,6 +192,9 @@
 <footer>
   <script src="./NeonX/sys/dist/desktop.js"></script>
   <script src="./NeonX/sys/dist/script.js"></script>
+
+  <!-- TODO: remove this -->
+  <input id="file-input" type="file" name="name" onchange="addApp(this.files)" style="display: none"/>
 </footer>
 
 <!-- This is only relevant to Grathium Industries website -->

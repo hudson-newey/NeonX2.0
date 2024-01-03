@@ -30,7 +30,7 @@ function user(status: string): void {
       break;
     case "sleep":
       window.location.href =
-        "./NeonX/screensaver.html?usr=" + $.urlParam("usr");
+        "./NeonX/sys/screensaver/screensaver.html?usr=" + $.urlParam("usr");
       break;
     default:
       console.error("status update failed...");
@@ -46,12 +46,37 @@ function resizeStart(): void {
   });
 }
 
+let startToggled = false;
 function toggleStart(): void {
-  $(".start-menu-fade").fadeToggle(500);
+  const desktopFadeClass = "desktopFade";
+  startToggled = !startToggled;
+
   $(".start-menu").fadeToggle(250).toggleClass("start-menu--open");
-  $(".startIcon").toggleClass("start--open");
+  $("#superButton").toggleClass("start--open");
   $("#search__input").val("");
   $("#search__input").focus();
+
+  if (startToggled) {
+    const newDesktopFadeElement = document.createElement("div");
+    const desktopElement = document.getElementById("desktopBG");
+    newDesktopFadeElement.className = desktopFadeClass;
+
+    if (!desktopElement) {
+      throw new Error("Could not find desktop element");
+    }
+
+    desktopElement.appendChild(newDesktopFadeElement);
+  } else {
+    const desktopFadeElement = document.getElementsByClassName(desktopFadeClass)[0];
+    
+    if (!desktopFadeClass) {
+      throw new Error("Could not find desktopFadeClass");
+    }
+
+    desktopFadeElement.remove();
+  }
+
+  $(".desktopFade").fadeToggle(250);
 }
 
 // Current time
@@ -105,13 +130,6 @@ $(document).on("keyup", () => {
 
 // webpage init
 $(window).load(() => {
-  const container = $(".start-screen");
-
-  container.masonry({
-    itemSelector: ".masonry-item",
-    columnWidth: 128,
-  });
-
   $(".start-menu").hide().css("opacity", 1);
 });
 
@@ -122,12 +140,12 @@ $(".desktop").click((e: MouseEvent) => {
   }
 });
 
-$(".startIcon").click(toggleStart);
+$("#superButton").click(toggleStart);
 $(".start-menu__recent li a").click(toggleStart);
 $(".start-screen__tile").click(toggleStart);
 
 // ALL APPS DRAW
-document.getElementById("all-appsBTN").onclick = () => {
+document.getElementById("allAppsButton").onclick = () => {
   $("#all-apps").show();
 };
 
@@ -137,7 +155,7 @@ document.getElementById("allAppsCloseBTN").onclick = () => {
 
 // Prevent "open" class on start
 $(() => {
-  $(".startIcon").click(() => {
+  $("#superButton").click(() => {
     $(this).removeClass("taskbar__item--open taskbar__item--active");
   });
 });
@@ -190,12 +208,12 @@ $("#currentUser").text($.urlParam("usr"));
 
 /* LOOP */
 // countdown timer till screensaver will be activated
-let screensaverTimeout: number = 480; // seconds (8) miniutes default
+let screensaverTimeout: number = 480; // seconds (8) minutes default
 function loop(): void {
   getTime();
   setTimeout(loop, 1000);
   screensaverTimeout -= 1;
   if (screensaverTimeout < 1)
-    window.location.href = "./NeonX/screensaver.html?usr=" + $.urlParam("usr");
+    window.location.href = "./NeonX/sys/screensaver/screensaver.html?usr=" + $.urlParam("usr");
 }
 loop();

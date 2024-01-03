@@ -1,27 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notepad</title>
   <link rel="stylesheet" href="./dist/style.css">
-  <link href="https://fonts.googleapis.com/css?family=Dosis:700" rel="stylesheet">
+  <script src="./dist/script.js"></script>
 </head>
 
 <body>
-  <input id="loadBTN" class="text" type="file" onchange="readfile(this.files)">
-  <div class="boxes">
-    <input class="boxes" type="checkbox" id="spellcheck" onchange="toggleSpelling();" checked>
-    <label class="boxes" for="spellcheck">Spellcheck</label>
+  <div class="menubar">
+    <input id="fileInput" class="text" type="file" onchange="readFile(event)">
   </div>
-
-  <input id="save" type="button" value="save on disk" onclick="download()">
-  <textarea class="text" id="mainInput" spellcheck="true"
-  onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;
-    this.value=v.substring(0, s)+'\t'+v.substring(e);
-    this.selectionStart=this.selectionEnd=s+1;return false;}" autofocus></textarea>
+  
+  <div class="appContent">
+    <textarea id="textInput" spellcheck="false"></textarea>
+  </div>
 </body>
-
-<footer>
-  <script src="./dist/script.js" charset="utf-8"></script>
-</footer>
 </html>

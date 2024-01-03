@@ -14,11 +14,11 @@ let addFile = (): void => {
   let uniqueLinkID: string = generateRandomString(8);
   let iconContainer = document.createElement("div");
   iconContainer.id = uniqueLinkID;
-  iconContainer.className = "desktop__item";
+  iconContainer.className = "desktopItem";
   $("#desktopBG").append(iconContainer);
 
   let iconPicture = document.createElement("img");
-  iconPicture.className = "desktop_icons";
+  iconPicture.className = "desktopItemIcon";
   iconPicture.id = uniqueLinkID + "__icon";
   iconPicture.src = "./NeonX/icons/file_icon.png";
   $("#" + uniqueLinkID).append(iconPicture);
@@ -211,20 +211,14 @@ function minimize(app): void {
 }
 
 function fullscreenProgram(app: string): void {
+  const fullscreenClass = "fullscreen";
   const appElement = $(`#${app}`);
+  const isFullscreen = appElement.hasClass(fullscreenClass);
 
-  if (appElement.width() === $(window).width()) {
-    document.getElementById(app).style.top = "100px";
-    document.getElementById(app).style.left = "150px";
-    document.getElementById(app).style.opacity = "0.95";
-    appElement.height($(window).height() * 0.6);
-    appElement.width($(window).width() * 0.45);
+  if (isFullscreen) {
+    appElement.removeClass(fullscreenClass);
   } else {
-    document.getElementById(app).style.top = "0px";
-    document.getElementById(app).style.left = "0px";
-    document.getElementById(app).style.opacity = "1";
-    appElement.height($(window).height() - 45);
-    appElement.width($(window).width());
+    appElement.addClass(fullscreenClass);
   }
 }
 
@@ -286,7 +280,7 @@ function addApp(file: any) {
       let iconID = generateRandomString(8);
       let iconContainer = document.createElement("div");
       iconContainer.id = iconID;
-      iconContainer.className = "desktop__item";
+      iconContainer.className = "desktopItem";
       iconContainer.ondblclick = function () {
         startProgram(appName, "");
       };
@@ -294,14 +288,14 @@ function addApp(file: any) {
 
       let drawIcon = document.createElement("div");
       drawIcon.id = iconID;
-      drawIcon.className = "draw__item";
+      drawIcon.className = "drawItem";
       drawIcon.onclick = function () {
         startProgram(appName, "");
       };
       $("#all-apps").append(drawIcon);
 
       let iconPicture = document.createElement("img");
-      iconPicture.className = "desktop_icons";
+      iconPicture.className = "desktopItemIcon";
       iconPicture.src = "./applications/" + appName + "/favicon.png";
       $("#" + iconID).append(iconPicture);
 
@@ -317,16 +311,93 @@ function addApp(file: any) {
   reader.readAsText(file[0]);
 }
 
+// creates a blue bounding box element when dragging on the desktop
+let desktopHighlighting: boolean = false;
+function bindDesktopHighlight(): void {
+  const desktopElement = document.getElementById("desktopBG") as HTMLDivElement;
+
+  desktopElement.addEventListener("mousemove", (event: MouseEvent) => {
+    mousePosition = [event.clientX, event.clientY];
+  });
+
+  desktopElement.addEventListener("mousedown", (event: MouseEvent) => {
+    // only create the highlight if we are left clicking
+    if (event.which !== 1) {
+      return;
+    }
+
+    // exit if we are touching any other child element
+    // we have to do this because most elements are contained within the desktop
+    if (event.target !== desktopElement) {
+      return;
+    }
+
+    var interval = setInterval(() => resizeDesktopHighlight(event), 0);
+    desktopElement.addEventListener("mouseup", () => {
+      clearInterval(interval);
+      removeDesktopHighlight();
+    });
+  });
+}
+
+let mousePosition: number[] = [0, 0];
+let dragStartPosition: number[] = [0, 0];
+function resizeDesktopHighlight(event: MouseEvent): void {
+  const highlightClass = "cursorHighlight";
+
+  const desktopElement = document.getElementById("desktopBG") as HTMLDivElement;
+  let highlightElement = document.getElementsByClassName(highlightClass)[0] as HTMLDivElement;
+
+  if (!highlightElement) {
+    // create a new one
+    const newHighlightElement = document.createElement("div");
+    newHighlightElement.className = highlightClass;
+
+    newHighlightElement.style.left = `${event.clientX}px`;
+    newHighlightElement.style.top = `${event.clientY}px`;
+
+    dragStartPosition = [event.clientX, event.clientY];
+
+    desktopElement.appendChild(newHighlightElement);
+
+    highlightElement = newHighlightElement;
+  }
+  
+  const highlightWidth = mousePosition[0] - dragStartPosition[0];
+  const highlightHeight = mousePosition[1] - dragStartPosition[1];
+
+  highlightElement.style.width = `${Math.abs(highlightWidth)}px`;
+  highlightElement.style.height = `${Math.abs(highlightHeight)}px`;
+
+  if (highlightWidth < 0) {
+    highlightElement.style.left = `${mousePosition[0]}px`;
+  }
+
+  if (highlightHeight < 0) {
+    highlightElement.style.top = `${mousePosition[1]}px`;
+  }
+}
+
+function removeDesktopHighlight(): void {
+  const highlightElement = document.getElementsByClassName("cursorHighlight")[0] as HTMLDivElement;
+
+  if (highlightElement) {
+    highlightElement.remove();
+  }
+}
+
 // used for initialization of desktop and refreshes
 let initializeDesktop = (): void => {
   // desktop icons init
-  let p = $(".desktop__item").draggable();
+  let p = $(".desktopItem").draggable();
 
-  const desktopItems = $(".desktop__item");
+  const desktopItems = $(".desktopItem");
   desktopItems.each((i) => {
     desktopItems[i].onmousedown = () => editDesktop(desktopItems[i], true);
     desktopItems[i].onmouseup = () => editDesktop(desktopItems[i], false);
   });
+
+  bindDesktopHighlight();
 
   // taskbar initilization
   $(".taskbarItem").click(function (e) {
