@@ -27,7 +27,7 @@ function user(status) {
             break;
         case "sleep":
             window.location.href =
-                "./NeonX/screensaver.html?usr=" + $.urlParam("usr");
+                "./NeonX/sys/screensaver/screensaver.html?usr=" + $.urlParam("usr");
             break;
         default:
             console.error("status update failed...");
@@ -40,12 +40,31 @@ function resizeStart() {
         width: startRound
     });
 }
+var startToggled = false;
 function toggleStart() {
-    $(".start-menu-fade").fadeToggle(500);
+    var desktopFadeClass = "desktopFade";
+    startToggled = !startToggled;
     $(".start-menu").fadeToggle(250).toggleClass("start-menu--open");
-    $(".startIcon").toggleClass("start--open");
+    $("#superButton").toggleClass("start--open");
     $("#search__input").val("");
     $("#search__input").focus();
+    if (startToggled) {
+        var newDesktopFadeElement = document.createElement("div");
+        var desktopElement = document.getElementById("desktopBG");
+        newDesktopFadeElement.className = desktopFadeClass;
+        if (!desktopElement) {
+            throw new Error("Could not find desktop element");
+        }
+        desktopElement.appendChild(newDesktopFadeElement);
+    }
+    else {
+        var desktopFadeElement = document.getElementsByClassName(desktopFadeClass)[0];
+        if (!desktopFadeClass) {
+            throw new Error("Could not find desktopFadeClass");
+        }
+        desktopFadeElement.remove();
+    }
+    $(".desktopFade").fadeToggle(250);
 }
 // Current time
 function getTime() {
@@ -85,11 +104,6 @@ $(document).on("keyup", function () {
 });
 // webpage init
 $(window).load(function () {
-    var container = $(".start-screen");
-    container.masonry({
-        itemSelector: ".masonry-item",
-        columnWidth: 128
-    });
     $(".start-menu").hide().css("opacity", 1);
 });
 // Unfocus windows when desktop is clicked
@@ -98,11 +112,11 @@ $(".desktop").click(function (e) {
         desktopContextMenu(event.clientX, event.clientY, false);
     }
 });
-$(".startIcon").click(toggleStart);
+$("#superButton").click(toggleStart);
 $(".start-menu__recent li a").click(toggleStart);
 $(".start-screen__tile").click(toggleStart);
 // ALL APPS DRAW
-document.getElementById("all-appsBTN").onclick = function () {
+document.getElementById("allAppsButton").onclick = function () {
     $("#all-apps").show();
 };
 document.getElementById("allAppsCloseBTN").onclick = function () {
@@ -110,7 +124,7 @@ document.getElementById("allAppsCloseBTN").onclick = function () {
 };
 // Prevent "open" class on start
 $(function () {
-    $(".startIcon").click(function () {
+    $("#superButton").click(function () {
         $(_this).removeClass("taskbar__item--open taskbar__item--active");
     });
 });
@@ -149,12 +163,12 @@ $(document).mouseup(function (e) {
 $("#currentUser").text($.urlParam("usr"));
 /* LOOP */
 // countdown timer till screensaver will be activated
-var screensaverTimeout = 480; // seconds (8) miniutes default
+var screensaverTimeout = 480; // seconds (8) minutes default
 function loop() {
     getTime();
     setTimeout(loop, 1000);
     screensaverTimeout -= 1;
     if (screensaverTimeout < 1)
-        window.location.href = "./NeonX/screensaver.html?usr=" + $.urlParam("usr");
+        window.location.href = "./NeonX/sys/screensaver/screensaver.html?usr=" + $.urlParam("usr");
 }
 loop();

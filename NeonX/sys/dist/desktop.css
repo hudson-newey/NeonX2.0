@@ -3,7 +3,7 @@
 }
 
 /* DESKTOP */
-.desktop__item {
+.desktopItem {
   display: inline-block;
   position: static;
   margin-right: 4px;
@@ -19,11 +19,11 @@
   margin-top: 4px;
   border-width: thin;
 }
-.desktop__item:hover {
+.desktopItem:hover {
   background-color: rgba(120, 144, 156, 0.15);
 }
 
-.desktop_icons {
+.desktopItemIcon {
   position: relative;
   height: 56px;
   width: 56px;
@@ -46,20 +46,15 @@ img.icons {
   background-color: transparent;
 }
 
-#editDesktopBTN {
+#editDesktopButton {
   position: absolute;
   right: 5px;
   top: 2.5px;
   font-size: 22px;
   color: white;
 }
-#editDesktopBTN:hover {
+#editDesktopButton:hover {
   color: var(--accent-color);
-}
-
-#superButton {
-  display: block;
-  font-size: 30px;
 }
 
 .contextMenu {
@@ -79,13 +74,14 @@ img.icons {
   opacity: 0.95;
   z-index: 2;
 }
-.contextMenu a {
+.contextMenu li {
+  list-style-type: none;
   cursor: pointer;
 }
-.contextMenu a:visited {
+.contextMenu li:visited {
   color: #282c34;
 }
-.contextMenu a:hover {
+.contextMenu li:hover {
   position: relative;
   background-color: #eee;
   border-left: groove medium var(--accent-color);
@@ -96,16 +92,25 @@ img.icons {
   font-size: 20px;
 }
 
+.cursorHighlight {
+  position: absolute;
+  background-color: var(--accent-color);
+  border: solid medium var(--accent-color);
+  border-radius: 0.5rem;
+  z-index: 1;
+  opacity: 0.3;
+}
+
 .media {
   display: flex;
 }
 
-.media__img,
-.media__body {
+.media__img {
   flex: 0 1 auto;
 }
 
-.media__body {
+.accountImage {
+  flex: 0 1 auto;
   padding-left: 10px;
 }
 

@@ -12,10 +12,10 @@ var addFile = function () {
     var uniqueLinkID = generateRandomString(8);
     var iconContainer = document.createElement("div");
     iconContainer.id = uniqueLinkID;
-    iconContainer.className = "desktop__item";
+    iconContainer.className = "desktopItem";
     $("#desktopBG").append(iconContainer);
     var iconPicture = document.createElement("img");
-    iconPicture.className = "desktop_icons";
+    iconPicture.className = "desktopItemIcon";
     iconPicture.id = uniqueLinkID + "__icon";
     iconPicture.src = "./NeonX/icons/file_icon.png";
     $("#" + uniqueLinkID).append(iconPicture);
@@ -178,20 +178,14 @@ function minimize(app) {
     $("#" + app).css("display", "none");
 }
 function fullscreenProgram(app) {
+    var fullscreenClass = "fullscreen";
     var appElement = $("#" + app);
-    if (appElement.width() === $(window).width()) {
-        document.getElementById(app).style.top = "100px";
-        document.getElementById(app).style.left = "150px";
-        document.getElementById(app).style.opacity = "0.95";
-        appElement.height($(window).height() * 0.6);
-        appElement.width($(window).width() * 0.45);
+    var isFullscreen = appElement.hasClass(fullscreenClass);
+    if (isFullscreen) {
+        appElement.removeClass(fullscreenClass);
     }
     else {
-        document.getElementById(app).style.top = "0px";
-        document.getElementById(app).style.left = "0px";
-        document.getElementById(app).style.opacity = "1";
-        appElement.height($(window).height() - 45);
-        appElement.width($(window).width());
+        appElement.addClass(fullscreenClass);
     }
 }
 function showDesktop() {
@@ -251,20 +245,20 @@ function addApp(file) {
             var iconID = generateRandomString(8);
             var iconContainer = document.createElement("div");
             iconContainer.id = iconID;
-            iconContainer.className = "desktop__item";
+            iconContainer.className = "desktopItem";
             iconContainer.ondblclick = function () {
                 startProgram(appName_1, "");
             };
             $("#desktopBG").append(iconContainer);
             var drawIcon = document.createElement("div");
             drawIcon.id = iconID;
-            drawIcon.className = "draw__item";
+            drawIcon.className = "drawItem";
             drawIcon.onclick = function () {
                 startProgram(appName_1, "");
             };
             $("#all-apps").append(drawIcon);
             var iconPicture = document.createElement("img");
-            iconPicture.className = "desktop_icons";
+            iconPicture.className = "desktopItemIcon";
             iconPicture.src = "./applications/" + appName_1 + "/favicon.png";
             $("#" + iconID).append(iconPicture);
             var iconText = document.createElement("text");
@@ -278,15 +272,73 @@ function addApp(file) {
     };
     reader.readAsText(file[0]);
 }
+// creates a blue bounding box element when dragging on the desktop
+var desktopHighlighting = false;
+function bindDesktopHighlight() {
+    var desktopElement = document.getElementById("desktopBG");
+    desktopElement.addEventListener("mousemove", function (event) {
+        mousePosition = [event.clientX, event.clientY];
+    });
+    desktopElement.addEventListener("mousedown", function (event) {
+        // only create the highlight if we are left clicking
+        if (event.which !== 1) {
+            return;
+        }
+        // exit if we are touching any other child element
+        // we have to do this because most elements are contained within the desktop
+        if (event.target !== desktopElement) {
+            return;
+        }
+        var interval = setInterval(function () { return resizeDesktopHighlight(event); }, 0);
+        desktopElement.addEventListener("mouseup", function () {
+            clearInterval(interval);
+            removeDesktopHighlight();
+        });
+    });
+}
+var mousePosition = [0, 0];
+var dragStartPosition = [0, 0];
+function resizeDesktopHighlight(event) {
+    var highlightClass = "cursorHighlight";
+    var desktopElement = document.getElementById("desktopBG");
+    var highlightElement = document.getElementsByClassName(highlightClass)[0];
+    if (!highlightElement) {
+        // create a new one
+        var newHighlightElement = document.createElement("div");
+        newHighlightElement.className = highlightClass;
+        newHighlightElement.style.left = event.clientX + "px";
+        newHighlightElement.style.top = event.clientY + "px";
+        dragStartPosition = [event.clientX, event.clientY];
+        desktopElement.appendChild(newHighlightElement);
+        highlightElement = newHighlightElement;
+    }
+    var highlightWidth = mousePosition[0] - dragStartPosition[0];
+    var highlightHeight = mousePosition[1] - dragStartPosition[1];
+    highlightElement.style.width = Math.abs(highlightWidth) + "px";
+    highlightElement.style.height = Math.abs(highlightHeight) + "px";
+    if (highlightWidth < 0) {
+        highlightElement.style.left = mousePosition[0] + "px";
+    }
+    if (highlightHeight < 0) {
+        highlightElement.style.top = mousePosition[1] + "px";
+    }
+}
+function removeDesktopHighlight() {
+    var highlightElement = document.getElementsByClassName("cursorHighlight")[0];
+    if (highlightElement) {
+        highlightElement.remove();
+    }
+}
 // used for initialization of desktop and refreshes
 var initializeDesktop = function () {
     // desktop icons init
-    var p = $(".desktop__item").draggable();
-    var desktopItems = $(".desktop__item");
+    var p = $(".desktopItem").draggable();
+    var desktopItems = $(".desktopItem");
     desktopItems.each(function (i) {
         desktopItems[i].onmousedown = function () { return editDesktop(desktopItems[i], true); };
         desktopItems[i].onmouseup = function () { return editDesktop(desktopItems[i], false); };
     });
+    bindDesktopHighlight();
     // taskbar initilization
     $(".taskbarItem").click(function (e) {
         bringToFront($(this).attr("app"));
