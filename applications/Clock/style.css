@@ -1,0 +1,38 @@
+:root {
+    --background-color: #222;
+    --font-color: #ffffff;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--font-color);
+    margin: 0px;
+}
+
+nav {
+    position: relative;
+    color: var(--font-color);
+    background-color: #444;
+    padding: 0.1rem;
+    width: 100%;
+
+    ul > li {
+        display: inline-block;
+        margin-right: 1rem;
+        list-style-type: none;
+    }
+
+    a {
+        color: var(--font-color);
+        text-decoration: none;
+    }
+
+    .selectedMenuItem {
+        font-weight: bold;
+    }
+}
+
+.content, h1 {
+    padding: 1rem;
+    text-align: center;
+}

@@ -1,34 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./dist/style.css">
-    <link rel="stylesheet" href="./dist/clock.css">
-    <script src="./dist/script.js"></script>
-</head>
+    <link rel="stylesheet" href="./style.css" />
 
-<body>
-    <nav>
-        <ul>
-            <li>
-                <a href="#" class="selectedMenuItem">Digital Clock</a>
-            </li>
-            <li>
-                <a href="./pages/worldClock.html">World Clock</a>
-            </li>
-            <li>
-                <a href="./pages/stopwatch.html">Stopwatch</a>
-            </li>
-            <li>
-                <a href="./pages/timer.html">Timer</a>
-            </li>
-        </ul>
-    </nav>
+    <script src="../../NeonX/lib/2.mjs"></script>
+    <script src="./pages/digitalClock.js"></script>
+    <script src="./pages/stopwatch.js"></script>
+    <script src="./pages/timer.js"></script>
+    <script src="./pages/worldClock.js"></script>
+  </head>
 
-    <div class="content">
-        <time id="timeOutlet">Loading...</time>
-    </div>
-</body>
+  <body>
+    <main>
+      <clock-navbar @navbar></clock-navbar>
+
+      <clock-router-outlet @pageTemplate></clock-router-outlet>
+    </main>
+
+    <script>
+      let currentPage = digitalClockPage;
+
+      const app = new Component({
+        pageLayout: (component) => `
+                <h1>${component.title}</h1>    
+
+                <div class="content">
+                    ${component.template}
+                </div>
+            `,
+        pageTemplate: (component) => {
+          currentPage = component;
+          return app.pageLayout(component);
+        },
+        render: () => (app.pageTemplate = currentPage),
+      });
+
+      app.pageTemplate = digitalClockPage;
+
+      // this is terrible and I should probably fix flow dependencies in upstream 2.js
+      setInterval(() => app.render(), 1000);
+    </script>
+
+    <script src="./components/navbar.js"></script>
+  </body>
 </html>
