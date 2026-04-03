@@ -15,7 +15,7 @@
   "author": "hudson-newey",
   "license": "unlicense",
   "dependencies": {
-    "electron": "^25.8.4",
+    "electron": "^38.8.6",
     "jquery": "^3.7.0",
     "jquery-ui": "^1.13.2",
     "typescript": "^5.1.3"
